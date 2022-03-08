@@ -10,6 +10,7 @@ import './i18n';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 toast.configure({
   autoClose: 3000,
