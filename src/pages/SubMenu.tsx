@@ -3,15 +3,14 @@
 import React from 'react';
 import {ContentHeader} from '@components';
 import SearchBox from '@app/components/searchbox/SearchBox';
-import Table from '@app/components/table/Table';
-import {Pagination} from 'antd';
 import PlusIcon from '../static/icon/plus.svg';
 import '../styles/pages/sub-menu.scss';
 import {Link} from 'react-router-dom';
+import TableCustom from '@app/components/table/Table';
 
 const SubMenu = () => {
   return (
-    <div>
+    <div className="sub-menu">
       <ContentHeader title="Danh sách kiểu người dùng" />
       <section className="content">
         <div className="container-fluid">
@@ -29,13 +28,7 @@ const SubMenu = () => {
           </div>
         </div>
         <div className="mt-2">
-          <Table />
-        </div>
-        <div className="d-flex flex-row justify-content-between px-3">
-          <div>
-            <p>Tổng: 2 kiểu người dùng</p>
-          </div>
-          <Pagination defaultCurrent={1} total={2} />
+          <TableCustom />
         </div>
       </section>
     </div>
