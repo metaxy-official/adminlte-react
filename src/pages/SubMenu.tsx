@@ -19,7 +19,7 @@ const SubMenu = () => {
               <SearchBox placeholder="Nhập tên kiểu người dùng" />
             </div>
             <Link
-              to="/quan-li-nguoi-dung-1/tao-kieu-nguoi-dung"
+              to="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
               className="header-box__btn"
             >
               <img src={PlusIcon} alt="icon" />
