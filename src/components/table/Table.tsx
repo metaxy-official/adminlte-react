@@ -21,34 +21,34 @@ interface DataType {
   createdDate: string;
 }
 
-// const data: DataType[] = [
-//   {
-//     key: '1',
-//     name: 'John Brown',
-//     creator: 'LongTT',
-//     createdDate: '01/01/2022'
-//   },
-//   {
-//     key: '2',
-//     name: 'Jim Green',
-//     creator: 'LongTT',
-//     createdDate: '01/01/2022'
-//   },
-//   {
-//     key: '3',
-//     name: 'Joe Black',
-//     creator: 'LongTT',
-//     createdDate: '01/01/2022'
-//   },
-//   {
-//     key: '4',
-//     name: 'Disabled User',
-//     creator: 'LongTT',
-//     createdDate: '01/01/2022'
-//   }
-// ];
+const data: DataType[] = [
+  {
+    key: '1',
+    name: 'John Brown',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  },
+  {
+    key: '4',
+    name: 'Disabled User',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  }
+];
 
-const data: DataType[] = [];
+// const data: DataType[] = [];
 const TableCustom = () => {
   // const {data = []} = props;
   const ref = useRef(null);
@@ -81,7 +81,7 @@ const TableCustom = () => {
       render: (key: any) => (
         <div onClick={() => handleShowModal(key)} className="btn">
           <img src={threeDotIcon} alt="icon" />
-          <div ref={ref}>{isShowModal === key && <MoreAction />}</div>
+          {isShowModal === key && <MoreAction ref={ref} />}
         </div>
       )
     }
