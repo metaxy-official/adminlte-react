@@ -1,0 +1,33 @@
+.modal-delete-user {
+    .ant-modal-content {
+        border-radius: 20px;
+        overflow: hidden;
+        .ant-modal-header {
+            .ant-modal-title {
+                padding-top: 10px;
+                text-align: center;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 25px;
+                letter-spacing: -0.05em;
+            }
+        }
+    }
+    &__body {
+        margin: 0 auto;
+        p {
+            font-size: 16px;
+            line-height: 20px;
+            color: #404b50;
+            span {
+                font-size: 16px;
+                color: red;
+            }
+        }
+        .btn-control {
+            margin: 30px auto 0;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

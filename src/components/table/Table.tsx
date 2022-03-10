@@ -2,12 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
-import React, { useRef, useState } from 'react';
-import { Table } from 'antd';
-import useOnClickOutside from '@app/hooks/useClickOutside';
-import threeDotIcon from '../../static/icon/threedot.svg';
-import MoreAction from '../moreAction/MoreAction';
-import EmptyImg from '../../static/img/404.png';
+import React, {useRef, useState} from "react";
+import {Table} from "antd";
+import useOnClickOutside from "@app/hooks/useClickOutside";
+import threeDotIcon from "../../static/icon/threedot.svg";
+import MoreAction from "../moreAction/MoreAction";
+import DeleteUserModal from "../modal/DeleteUser";
+import EmptyData from "../emptyData";
 
 interface DataType {
   key: number | string;
@@ -16,34 +17,34 @@ interface DataType {
   createdDate: string;
 }
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '4',
-    name: 'Disabled User',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  }
-];
+// const data: DataType[] = [
+//   {
+//     key: "1",
+//     name: "John Brown",
+//     creator: "LongTT",
+//     createdDate: "01/01/2022"
+//   },
+//   {
+//     key: "2",
+//     name: "Jim Green",
+//     creator: "LongTT",
+//     createdDate: "01/01/2022"
+//   },
+//   {
+//     key: "3",
+//     name: "Joe Black",
+//     creator: "LongTT",
+//     createdDate: "01/01/2022"
+//   },
+//   {
+//     key: "4",
+//     name: "Disabled User",
+//     creator: "LongTT",
+//     createdDate: "01/01/2022"
+//   }
+// ];
 
-// const data: DataType[] = [];
+const data: DataType[] = [];
 const TableCustom = () => {
   // const {data = []} = props;
   const ref = useRef(null);
@@ -58,25 +59,27 @@ const TableCustom = () => {
   // );
   const columns = [
     {
-      title: 'Kiểu người dùng',
-      dataIndex: 'name',
+      title: "Kiểu người dùng",
+      dataIndex: "name",
       render: (text: string) => <p>{text}</p>
     },
     {
-      title: 'Người tạo',
-      dataIndex: 'creator'
+      title: "Người tạo",
+      dataIndex: "creator"
     },
     {
-      title: 'Ngày tạo',
-      dataIndex: 'createdDate'
+      title: "Ngày tạo",
+      dataIndex: "createdDate"
     },
     {
-      title: '',
-      dataIndex: 'key',
+      title: "",
+      dataIndex: "key",
       render: (key: any) => (
-        <div className="btn" onClick={() => handleShowModal(key)} >
+        <div className="btn" onClick={() => handleShowModal(key)}>
           <img src={threeDotIcon} alt="icon" />
-          {isShowModal === key && <MoreAction ref={ref} />}
+          {isShowModal === key && (
+            <MoreAction ref={ref} openDeleteModal={handleOpenModalDelete} />
+          )}
         </div>
       )
     }
@@ -86,22 +89,41 @@ const TableCustom = () => {
     onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,
-        'selectedRows: ',
+        "selectedRows: ",
         selectedRows
       );
     },
     getCheckboxProps: (record: DataType) => ({
-      disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      disabled: record.name === "Disabled User", // Column configuration not to be checked
       name: record.name
     })
   };
+
+  const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
+
+  const handleOk = () => {
+    setIsShowModalDelete(false);
+  };
+
+  const handleCancel = () => {
+    setIsShowModalDelete(false);
+  };
+
+  const handleOpenModalDelete = () => {
+    setIsShowModalDelete(true);
+  };
   return (
     <>
+      <DeleteUserModal
+        isModalVisible={isShowModalDelete}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
       {data.length > 0 ? (
         <>
           <Table
             rowSelection={{
-              type: 'checkbox',
+              type: "checkbox",
               ...rowSelection
             }}
             columns={columns}
@@ -109,19 +131,7 @@ const TableCustom = () => {
           />
         </>
       ) : (
-        <>
-          <div className="box-overview">
-            <p>
-              Tổng: <span>{data.length} kiểu người dùng</span>
-            </p>
-          </div>
-          <div className="container-nodata">
-            <div className="box-nodata">
-              <img src={EmptyImg} alt="empty-user" />
-              <p>Chưa có kiểu người dùng nào trong hệ thống</p>
-            </div>
-          </div>
-        </>
+        <EmptyData dataTable={data} />
       )}
     </>
   );

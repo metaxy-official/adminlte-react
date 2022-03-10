@@ -1,26 +1,25 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react';
-import './styles/main.scss';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from '@modules/main/Main';
-import Login from '@modules/login/Login';
-import ForgetPassword from '@modules/forgot-password/ForgotPassword';
-import RecoverPassword from '@modules/recover-password/RecoverPassword';
-import { useWindowSize } from '@app/hooks/useWindowSize';
-import { calculateWindowSize } from '@app/utils/helpers';
-import { useDispatch, useSelector } from 'react-redux';
-import { setWindowSize } from '@app/store/reducers/ui';
+import React, {useEffect} from "react";
+import "./styles/main.scss";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Main from "@modules/main/Main";
+import Login from "@modules/login/Login";
+import ForgetPassword from "@modules/forgot-password/ForgotPassword";
+import RecoverPassword from "@modules/recover-password/RecoverPassword";
+import {useWindowSize} from "@app/hooks/useWindowSize";
+import {calculateWindowSize} from "@app/utils/helpers";
+import {useDispatch, useSelector} from "react-redux";
+import {setWindowSize} from "@app/store/reducers/ui";
 
-import Dashboard from '@pages/Dashboard';
-import Blank from '@pages/Blank';
-import SubMenu from '@pages/SubMenu';
-import Profile from '@pages/profile/Profile';
+import Dashboard from "@pages/Dashboard";
+import Blank from "@pages/Blank";
+import Profile from "@pages/profile/Profile";
 
-import PublicRoute from './routes/PublicRoute';
-import PrivateRoute from './routes/PrivateRoute';
-import CreateTypeUser from './pages/createTypeUser';
-import DetailUser from './pages/detailUser';
-
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
+import CreateTypeUser from "./pages/createTypeUser";
+import DetailUser from "./pages/detailUser";
+import ManagerUser from "./pages/managerUser";
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -50,7 +49,7 @@ const App = () => {
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Main />}>
             <Route path="/nguoi-dung" element={<Blank />} />
-            <Route path="/kieu-nguoi-dung" element={<SubMenu />} />
+            <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
             <Route
               path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
               element={<CreateTypeUser />}
