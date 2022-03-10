@@ -1,13 +1,12 @@
-/* eslint-disable import/order */
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {ContentHeader} from '@components';
+import { ContentHeader } from '@components';
 import SearchBox from '@app/components/searchbox/SearchBox';
 import Table from '@app/components/table/Table';
-import {Pagination} from 'antd';
+import { Pagination } from 'antd';
+import { Link } from 'react-router-dom';
 import PlusIcon from '../static/icon/plus.svg';
-import '../styles/pages/sub-menu.scss';
-import {Link} from 'react-router-dom';
+// import '../styles/pages/sub-menu.scss';
 
 const SubMenu = () => {
   return (

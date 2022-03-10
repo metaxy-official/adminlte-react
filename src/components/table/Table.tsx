@@ -1,10 +1,10 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, {useRef, useState} from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable prettier/prettier */
+import React, { useRef, useState } from 'react';
 import useOnClickOutside from '@app/hooks/useClickOutside';
 import threeDotIcon from '../../static/icon/threedot.svg';
 import MoreAction from '../moreAction/MoreAction';
-import '../../styles/components/table.scss';
 
 const dataTable = [
   {

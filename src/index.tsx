@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {toast} from 'react-toastify';
-import {Gatekeeper} from 'gatekeeper-client-sdk';
+import { Provider } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Gatekeeper } from 'gatekeeper-client-sdk';
 import App from '@app/App';
 import store from '@store/store';
 

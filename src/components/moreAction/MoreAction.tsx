@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import watchmoreIcon from '../../static/icon/watch-more.svg';
 import editIcon from '../../static/icon/edit.svg';
-import deleteIcon from '../../static/icon/delete.svg';
-import '../../styles/components/more-action.scss';
+import deleteIcon from "../../static/icon/delete.svg";
+// import '../../styles/components/more-action.scss';
 
 function MoreAction() {
   return (

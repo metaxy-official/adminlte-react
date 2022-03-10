@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from '@app/components';
-import {Checkbox, Input} from 'antd';
+/* eslint-disable prettier/prettier */
+import { ContentHeader } from '@app/components';
+import { Checkbox, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react';
-import '../../styles/pages/create-new-user.scss';
+// import '../../styles/pages/create-new-user.scss';
 
 function CreateTypeUser() {
   function onChange(checkedValues: any) {
@@ -11,12 +12,12 @@ function CreateTypeUser() {
   }
 
   const optionsWithDisabled = [
-    {label: 'Quản lí người dùng', value: 'Apple'},
-    {label: 'Quản lí người chơi', value: 'Pear'},
-    {label: 'Quản lí thông tin game', value: 'Orange'},
-    {label: 'Quản lí thông báo', value: 'Orange'},
-    {label: 'Quản lí báo cáo', value: 'Orange'},
-    {label: 'Quản lí FAQ', value: 'Orange', disabled: false}
+    { label: 'Quản lí người dùng', value: 'Apple' },
+    { label: 'Quản lí người chơi', value: 'Pear' },
+    { label: 'Quản lí thông tin game', value: 'Orange' },
+    { label: 'Quản lí thông báo', value: 'Orange' },
+    { label: 'Quản lí báo cáo', value: 'Orange' },
+    { label: 'Quản lí FAQ', value: 'Orange', disabled: false }
   ];
   return (
     <div className="container-type-user">
