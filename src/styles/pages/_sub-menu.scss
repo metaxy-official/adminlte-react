@@ -1,26 +1,65 @@
-.header-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &__search {
-        min-width: 800px;
-    }
-    &__btn {
-        background: #2d7ff9;
-        border-radius: 8px;
-        padding: 9px 15px;
-        height: 34px;
+.sub-menu {
+    .header-box {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        cursor: pointer;
+        &__search {
+            min-width: 800px;
+        }
+        &__btn {
+            background: #2d7ff9;
+            border-radius: 8px;
+            padding: 9px 15px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            p {
+                margin: 0;
+                padding-left: 5px;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 20px;
+                color: #ffffff;
+            }
+        }
+    }
+    .box-overview {
+        padding-left: 10px;
+        margin-top: 10px;
         p {
-            margin: 0;
-            padding-left: 5px;
             font-style: normal;
-            font-weight: 600;
+            font-weight: normal;
             font-size: 16px;
             line-height: 20px;
-            color: #ffffff;
+            letter-spacing: -0.05em;
+            color: #8b9aa2;
+            span {
+                color: #000000;
+            }
+        }
+    }
+    .container-nodata {
+        display: flex;
+        justify-content: center;
+        .box-nodata {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            p {
+                margin-top: 20px;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 25px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                letter-spacing: -0.05em;
+                color: #404b50;
+            }
         }
     }
 }

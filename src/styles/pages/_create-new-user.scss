@@ -7,6 +7,9 @@
         margin-top: 10px;
 
         span {
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
             color: rgb(212, 78, 78);
         }
     }
@@ -36,5 +39,11 @@
         .more {
             color: rgb(212, 78, 78);
         }
+    }
+
+    .btn-control {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
     }
 }

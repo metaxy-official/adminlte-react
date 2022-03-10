@@ -19,13 +19,13 @@ export const MENU: IMenuItem[] = [
       {
         name: 'Người dùng',
         logo: <i className="ml-3 fas fa-user" />,
-        path: '/quan-li-nguoi-dung-1'
+        path: '/nguoi-dung'
       },
 
       {
         name: 'Kiểu người dùng',
         logo: <i className="ml-3 fas fa-users" />,
-        path: '/quan-li-nguoi-dung-2'
+        path: '/kieu-nguoi-dung'
       }
     ]
   },

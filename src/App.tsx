@@ -19,6 +19,7 @@ import Profile from '@pages/profile/Profile';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import CreateTypeUser from './pages/createTypeUser';
+import DetailUser from './pages/detailUser';
 
 
 const App = () => {
@@ -48,11 +49,15 @@ const App = () => {
         </Route>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Main />}>
-            <Route path="/quan-li-nguoi-dung-2" element={<Blank />} />
-            <Route path="/quan-li-nguoi-dung-1" element={<SubMenu />} />
+            <Route path="/nguoi-dung" element={<Blank />} />
+            <Route path="/kieu-nguoi-dung" element={<SubMenu />} />
             <Route
-              path="/quan-li-nguoi-dung-1/tao-kieu-nguoi-dung"
+              path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
               element={<CreateTypeUser />}
+            />
+            <Route
+              path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
+              element={<DetailUser />}
             />
             <Route path="/blank" element={<Blank />} />
             <Route path="/profile" element={<Profile />} />

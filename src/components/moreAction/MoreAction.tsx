@@ -1,27 +1,27 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { Link } from 'react-router-dom';
 import watchmoreIcon from '../../static/icon/watch-more.svg';
 import editIcon from '../../static/icon/edit.svg';
-import deleteIcon from "../../static/icon/delete.svg";
-// import '../../styles/components/more-action.scss';
+import deleteIcon from '../../static/icon/delete.svg';
 
-function MoreAction() {
+const MoreAction = (props: any, ref: any) => {
   return (
-    <div className="more-action">
-      <div>
+    <div ref={ref} className="more-action">
+      <Link to="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung">
         <img src={watchmoreIcon} alt="icon" />
         <p>Xem chi tiết</p>
-      </div>
-      <div>
+      </Link>
+      <Link to="/">
         <img src={editIcon} alt="icon" />
         <p>Chỉnh sửa</p>
-      </div>
-      <div>
+      </Link>
+      <Link to="/">
         <img src={deleteIcon} alt="icon" />
         <p>Xóa</p>
-      </div>
+      </Link>
     </div>
   );
-}
+};
 
-export default MoreAction;
+export default forwardRef(MoreAction);
