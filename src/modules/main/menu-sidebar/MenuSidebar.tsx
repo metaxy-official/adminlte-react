@@ -1,7 +1,8 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {MenuItem} from '@components';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { MenuItem } from '@components';
 
 export interface IMenuItem {
   name: string;
@@ -73,7 +74,7 @@ const MenuSidebar = () => {
           src="/img/logo-metaxy.png"
           alt="Metaxy Logo"
           className="pl-4"
-          style={{opacity: '.8'}}
+          style={{ opacity: '.8' }}
         />
       </Link>
       <div className="sidebar">
@@ -91,11 +92,10 @@ const MenuSidebar = () => {
             </Link>
           </div>
         </div>
-        <nav className="mt-2" style={{overflowY: 'hidden'}}>
+        <nav className="mt-2" style={{ overflowY: 'hidden' }}>
           <ul
-            className={`nav nav-pills nav-sidebar flex-column${
-              menuItemFlat ? ' nav-flat' : ''
-            }${menuChildIndent ? ' nav-child-indent' : ''}`}
+            className={`nav nav-pills nav-sidebar flex-column${menuItemFlat ? ' nav-flat' : ''
+              }${menuChildIndent ? ' nav-child-indent' : ''}`}
             role="menu"
           >
             {MENU.map((menuItem: IMenuItem) => (

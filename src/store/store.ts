@@ -1,8 +1,9 @@
-import {configureStore} from '@reduxjs/toolkit';
+/* eslint-disable prettier/prettier */
+import { configureStore } from '@reduxjs/toolkit';
 
-import {authSlice} from '@app/store/reducers/auth';
-import {uiSlice} from '@app/store/reducers/ui';
-import {createLogger} from 'redux-logger';
+import { authSlice } from '@app/store/reducers/auth';
+import { uiSlice } from '@app/store/reducers/ui';
+import { createLogger } from 'redux-logger';
 
 const store = configureStore({
   reducer: {

@@ -2,8 +2,10 @@
     .content {
         padding-left: 150px;
     }
+
     .name-user-box {
         margin-top: 10px;
+
         span {
             font-weight: normal;
             font-size: 16px;
@@ -11,11 +13,14 @@
             color: rgb(212, 78, 78);
         }
     }
+
     .note-box {
         margin-top: 10px;
     }
+
     .permission-box {
         margin-top: 10px;
+
         .ant-checkbox-group {
             border: 1px solid #d3d9dc;
             box-sizing: border-box;
@@ -23,16 +28,19 @@
             padding: 10px;
             display: flex;
             flex-direction: column;
+
             span {
                 font-weight: normal;
                 font-size: 16px;
                 line-height: 20px;
             }
         }
+
         .more {
             color: rgb(212, 78, 78);
         }
     }
+
     .btn-control {
         margin-top: 30px;
         display: flex;

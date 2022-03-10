@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 // import {useTranslation} from 'react-i18next';
-import {DateTime} from 'luxon';
+import { DateTime } from 'luxon';
 
 const Footer = () => {
   // const [t] = useTranslation();

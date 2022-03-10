@@ -1,21 +1,16 @@
-/* eslint-disable import/order */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable no-undef */
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable prettier/prettier */
+import React, { useRef, useState } from 'react';
+import { Table } from 'antd';
 import useOnClickOutside from '@app/hooks/useClickOutside';
 import threeDotIcon from '../../static/icon/threedot.svg';
 import MoreAction from '../moreAction/MoreAction';
-import '../../styles/components/table.scss';
-import {Table} from 'antd';
-import {useRef, useState} from 'react';
 import EmptyImg from '../../static/img/404.png';
 
 interface DataType {
-  key: React.Key;
+  key: number | string;
   name: string;
   creator: string;
   createdDate: string;
@@ -54,18 +49,18 @@ const TableCustom = () => {
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsShowModal(-1));
   const [isShowModal, setIsShowModal] = useState<number>(-1);
-  const handleShowModal = (index: number) => {
-    setIsShowModal(index);
+  const handleShowModal = (key: number) => {
+    setIsShowModal(key);
   };
 
-  const [selectionType, setSelectionType] = useState<'checkbox' | 'radio'>(
-    'checkbox'
-  );
+  // const [selectionType, setSelectionType] = useState<'checkbox' | 'radio'>(
+  //   'checkbox'
+  // );
   const columns = [
     {
       title: 'Kiểu người dùng',
       dataIndex: 'name',
-      render: (text: string) => <a>{text}</a>
+      render: (text: string) => <p>{text}</p>
     },
     {
       title: 'Người tạo',
@@ -79,7 +74,7 @@ const TableCustom = () => {
       title: '',
       dataIndex: 'key',
       render: (key: any) => (
-        <div onClick={() => handleShowModal(key)} className="btn">
+        <div className="btn" onClick={() => handleShowModal(key)} >
           <img src={threeDotIcon} alt="icon" />
           {isShowModal === key && <MoreAction ref={ref} />}
         </div>
@@ -106,7 +101,7 @@ const TableCustom = () => {
         <>
           <Table
             rowSelection={{
-              type: selectionType,
+              type: 'checkbox',
               ...rowSelection
             }}
             columns={columns}

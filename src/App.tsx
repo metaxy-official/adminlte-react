@@ -1,14 +1,15 @@
-import React, {useEffect} from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+/* eslint-disable prettier/prettier */
+import React, { useEffect } from 'react';
+import './styles/main.scss';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@modules/main/Main';
 import Login from '@modules/login/Login';
-import Register from '@modules/register/Register';
 import ForgetPassword from '@modules/forgot-password/ForgotPassword';
 import RecoverPassword from '@modules/recover-password/RecoverPassword';
-import {useWindowSize} from '@app/hooks/useWindowSize';
-import {calculateWindowSize} from '@app/utils/helpers';
-import {useDispatch, useSelector} from 'react-redux';
-import {setWindowSize} from '@app/store/reducers/ui';
+import { useWindowSize } from '@app/hooks/useWindowSize';
+import { calculateWindowSize } from '@app/utils/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { setWindowSize } from '@app/store/reducers/ui';
 
 import Dashboard from '@pages/Dashboard';
 import Blank from '@pages/Blank';
@@ -19,6 +20,7 @@ import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import CreateTypeUser from './pages/createTypeUser';
 import DetailUser from './pages/detailUser';
+
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -38,9 +40,7 @@ const App = () => {
         <Route path="/login" element={<PublicRoute />}>
           <Route path="/login" element={<Login />} />
         </Route>
-        <Route path="/register" element={<PublicRoute />}>
-          <Route path="/register" element={<Register />} />
-        </Route>
+        <Route path="/register" element={<PublicRoute />} />
         <Route path="/forgot-password" element={<PublicRoute />}>
           <Route path="/forgot-password" element={<ForgetPassword />} />
         </Route>

@@ -1,9 +1,9 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from '@app/components';
-import {Button, Checkbox} from 'antd';
+import { ContentHeader } from '@app/components';
+import { Button, Checkbox } from 'antd';
 import React from 'react';
-import {ReactComponent as EditIcon} from '../../static/icon/edit.svg';
-import '../../styles/pages/detail-user.scss';
+import { ReactComponent as EditIcon } from '../../static/icon/edit.svg';
 
 function DetailUser() {
   function onChange(checkedValues: any) {
@@ -11,12 +11,12 @@ function DetailUser() {
   }
 
   const optionsWithDisabled = [
-    {label: 'Quản lí người dùng', value: 'Apple'},
-    {label: 'Quản lí người chơi', value: 'Pear'},
-    {label: 'Quản lí thông tin game', value: 'Orange'},
-    {label: 'Quản lí thông báo', value: 'Orang'},
-    {label: 'Quản lí báo cáo', value: 'Oran'},
-    {label: 'Quản lí FAQ', value: 'Ora', disabled: false}
+    { label: 'Quản lí người dùng', value: 'Apple' },
+    { label: 'Quản lí người chơi', value: 'Pear' },
+    { label: 'Quản lí thông tin game', value: 'Orange' },
+    { label: 'Quản lí thông báo', value: 'Orang' },
+    { label: 'Quản lí báo cáo', value: 'Oran' },
+    { label: 'Quản lí FAQ', value: 'Ora', disabled: false }
   ];
   return (
     <div className="container-detail-user">

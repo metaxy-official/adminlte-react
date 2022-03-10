@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/order */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, {forwardRef} from 'react';
+/* eslint-disable prettier/prettier */
+import React, { forwardRef } from 'react';
+import { Link } from 'react-router-dom';
 import watchmoreIcon from '../../static/icon/watch-more.svg';
 import editIcon from '../../static/icon/edit.svg';
 import deleteIcon from '../../static/icon/delete.svg';
-import '../../styles/components/more-action.scss';
-import {Link, useNavigate} from 'react-router-dom';
 
 const MoreAction = (props: any, ref: any) => {
   return (
