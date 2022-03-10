@@ -1,14 +1,17 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { ContentHeader } from '@components';
-import SearchBox from '@app/components/searchbox/SearchBox';
-import { Link } from 'react-router-dom';
-import TableCustom from '@app/components/table/Table';
-import PlusIcon from '../static/icon/plus.svg';
+/* eslint-disable import/order */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React from "react";
+import {ContentHeader} from "@components";
+import SearchBox from "@app/components/searchbox/SearchBox";
+import PlusIcon from "../../static/icon/plus.svg";
+import {Link} from "react-router-dom";
+import TableCustom from "@app/components/table/Table";
 
-const SubMenu = () => {
+const ManagerUser = () => {
   return (
-    <div className="sub-menu">
+    <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />
       <section className="content">
         <div className="container-fluid">
@@ -33,4 +36,4 @@ const SubMenu = () => {
   );
 };
 
-export default SubMenu;
+export default ManagerUser;
