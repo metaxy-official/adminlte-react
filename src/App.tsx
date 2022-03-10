@@ -15,6 +15,7 @@ import Dashboard from '@pages/Dashboard';
 import Blank from '@pages/Blank';
 import SubMenu from '@pages/SubMenu';
 import Profile from '@pages/profile/Profile';
+import GameInfoSub1 from './pages/gameInfoManager/GameInfoSub1';
 
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
@@ -51,6 +52,8 @@ const App = () => {
           <Route path="/" element={<Main />}>
             <Route path="/nguoi-dung" element={<Blank />} />
             <Route path="/kieu-nguoi-dung" element={<SubMenu />} />
+            <Route path="/gameinfo-manager-sub1" element={<GameInfoSub1 />} />
+            <Route path="/gameinfo-manager-sub2" element={<GameInfoSub1 />} />
             <Route
               path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
               element={<CreateTypeUser />}

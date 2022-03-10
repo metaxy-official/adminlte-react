@@ -40,12 +40,12 @@ export const MENU: IMenuItem[] = [
     children: [
       {
         name: 'Quản lí 1',
-        path: '/sub-1'
+        path: '/gameinfo-manager-sub1'
       },
 
       {
         name: 'Quản lí 2',
-        path: '/sub-2'
+        path: '/gameinfo-manager-sub2'
       }
     ]
   },
