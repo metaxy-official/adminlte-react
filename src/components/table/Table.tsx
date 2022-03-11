@@ -1,32 +1,30 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable prettier/prettier */
 import React from "react";
-import {Table} from "antd";
+import { Table } from "antd";
 import EmptyData from "../emptyData";
 
 interface TableCustomProps {
   data: any[];
   columns: any;
+  dataSelection?: boolean
 }
 
 const TableCustom = (props: TableCustomProps) => {
-  const {data, columns} = props;
+  const { data, columns, dataSelection } = props;
+  console.log("🚀 ~ file: Table.tsx ~ line 13 ~ TableCustom ~ dataSelection", dataSelection)
 
   return (
     <>
       {data.length > 0 ? (
-        <>
+        <div className="table-custom">
           <Table
             className="table-ant"
-            rowSelection={{
-              type: "checkbox"
-            }}
+            rowSelection={dataSelection ? {} : undefined}
             columns={columns}
             dataSource={data}
+
           />
-        </>
+          <p className="total-number">Tổng: {data.length} người chơi</p>
+        </div>
       ) : (
         <EmptyData dataTable={data} />
       )}

@@ -12,3 +12,15 @@ export interface DataListUserProp {
     dateActived: string;
     status: boolean;
 }
+export interface DataHeaderInfo {
+    name: string;
+    address: string;
+    nation: string;
+    role: string;
+}
+export interface DataBasicInfo {
+    name: string;
+    address: string;
+    nation: string;
+    role: string;
+}

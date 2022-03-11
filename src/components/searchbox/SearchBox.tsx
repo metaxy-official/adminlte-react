@@ -8,7 +8,7 @@ interface SearchboxProps {
 }
 
 const SearchBox = (props: SearchboxProps) => {
-  const {placeholder} = props;
+  const { placeholder } = props;
 
   const handleSubmit = () => {
     console.log("value");

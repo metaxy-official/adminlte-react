@@ -32,7 +32,19 @@ export const MENU: IMenuItem[] = [
   {
     name: 'Quản lí người chơi',
     logo: <i className="nav-icon fas fa-users" />,
-    path: '/m'
+    children: [
+      {
+        name: 'Người chơi',
+        logo: <i className="ml-3 fas fa-user" />,
+        path: '/nguoi-choi'
+      },
+
+      {
+        name: 'Nghi vấn vi phạm',
+        logo: <i className="ml-3 fas fa-exclamation-triangle" />,
+        path: '/Nghi-van-vi-pham'
+      }
+    ]
   },
   {
     name: 'Quản lí thông tin game',

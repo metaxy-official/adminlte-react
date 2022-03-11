@@ -6,11 +6,11 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/order */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {ContentHeader} from "@components";
+import { ContentHeader } from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
-import {DataManagerUserProp} from "@app/utils/types";
+import { DataManagerUserProp } from "@app/utils/types";
 import ThreeDot from "@app/components/btnThreeDot";
 
 const ManagerUser = () => {
@@ -77,7 +77,7 @@ const ManagerUser = () => {
             />
           </div>
           <div className="mt-2">
-            <TableCustom columns={columns} data={data} />
+            <TableCustom columns={columns} data={data} dataSelection={true} />
           </div>
         </div>
       </section>
