@@ -8,8 +8,17 @@ import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 
-const MoreAction = (props: any, ref: any) => {
-  const {openDeleteModal} = props;
+interface LinkProps {
+  title: string;
+  path: string;
+}
+interface MoreActionProps {
+  icon?: string;
+  content?: string | LinkProps;
+  handleModal?: () => void;
+}
+const MoreAction = (props: MoreActionProps, ref: any) => {
+  const {handleModal, icon, content} = props;
   return (
     <>
       <div ref={ref} className="more-action">
@@ -21,7 +30,7 @@ const MoreAction = (props: any, ref: any) => {
           <img src={editIcon} alt="icon" />
           <p>Chỉnh sửa</p>
         </Link>
-        <div onClick={openDeleteModal}>
+        <div onClick={handleModal}>
           <img src={deleteIcon} alt="icon" />
           <p>Xóa</p>
         </div>

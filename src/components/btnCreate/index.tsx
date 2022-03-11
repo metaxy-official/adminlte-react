@@ -2,11 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PlusIcon from "../../static/icon/plus.svg";
 
-interface BtnCreateNewUserProps {
+interface BtnCreateProps {
   path: string;
   content: string;
 }
-function BtnCreateNewUser(props: BtnCreateNewUserProps) {
+function BtnCreate(props: BtnCreateProps) {
   const {path, content} = props;
   return (
     <Link to={path} className="btn-create">
@@ -16,4 +16,4 @@ function BtnCreateNewUser(props: BtnCreateNewUserProps) {
   );
 }
 
-export default BtnCreateNewUser;
+export default BtnCreate;
