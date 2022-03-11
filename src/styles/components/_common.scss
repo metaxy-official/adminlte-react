@@ -6,3 +6,15 @@
         min-width: 800px;
     }
 }
+.ant-select-selector {
+    border-radius: 8px !important;
+}
+.ant-table-thead {
+    .ant-table-cell {
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 15px;
+        text-transform: capitalize;
+        color: #000000;
+    }
+}
