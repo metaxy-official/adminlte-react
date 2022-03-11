@@ -8,7 +8,7 @@ interface SearchboxProps {
 }
 
 const SearchBox = (props: SearchboxProps) => {
-  const {placeholder} = props;
+  const { placeholder } = props;
 
   const handleSubmit = () => {
     console.log('value');
@@ -28,7 +28,7 @@ const SearchBox = (props: SearchboxProps) => {
           type="button"
           className="btn btn-outline-primary"
         >
-          search
+          Tìm kiếm
         </button>
       </div>
     </div>

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
 import './styles/main.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -20,6 +19,8 @@ import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import CreateTypeUser from './pages/createTypeUser';
 import DetailUser from './pages/detailUser';
+
+import ManagePlayer from './pages/managePlayer';
 
 
 const App = () => {
@@ -59,6 +60,8 @@ const App = () => {
               path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
               element={<DetailUser />}
             />
+            <Route path="/nguoi-choi" element={<ManagePlayer />} />
+            <Route path="/nghi-van-vi-pham" element={<Blank />} />
             <Route path="/blank" element={<Blank />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Dashboard />} />

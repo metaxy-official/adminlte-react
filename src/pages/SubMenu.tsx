@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import { ContentHeader } from '@components';
 import SearchBox from '@app/components/searchbox/SearchBox';
@@ -6,6 +5,39 @@ import { Link } from 'react-router-dom';
 import TableCustom from '@app/components/table/Table';
 import PlusIcon from '../static/icon/plus.svg';
 
+interface DataType {
+  key: number | string;
+  name: string;
+  creator: string;
+  createdDate: string;
+}
+
+const dataSource: DataType[] = [
+  {
+    key: '1',
+    name: 'John Brown',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  },
+  {
+    key: '4',
+    name: 'Disabled User',
+    creator: 'LongTT',
+    createdDate: '01/01/2022'
+  }
+];
 const SubMenu = () => {
   return (
     <div className="sub-menu">
@@ -26,7 +58,7 @@ const SubMenu = () => {
           </div>
         </div>
         <div className="mt-2">
-          <TableCustom />
+          <TableCustom dataSource={dataSource} />
         </div>
       </section>
     </div>

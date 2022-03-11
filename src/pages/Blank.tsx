@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {ContentHeader} from '@components';
+import { ContentHeader } from '@components';
 
 const Blank = () => {
   return (

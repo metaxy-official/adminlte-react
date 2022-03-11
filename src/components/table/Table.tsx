@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable prettier/prettier */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useRef, useState } from 'react';
 import { Table } from 'antd';
 import useOnClickOutside from '@app/hooks/useClickOutside';
@@ -16,36 +14,11 @@ interface DataType {
   createdDate: string;
 }
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '4',
-    name: 'Disabled User',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  }
-];
 
 // const data: DataType[] = [];
-const TableCustom = () => {
+const TableCustom = (props: any) => {
   // const {data = []} = props;
+  const { data } = props
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsShowModal(-1));
   const [isShowModal, setIsShowModal] = useState<number>(-1);
