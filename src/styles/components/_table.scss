@@ -1,4 +1,7 @@
-.big-checkbox {
-    width: 20px;
-    height: 20px;
+.table-ant {
+    .ant-table-cell {
+        p {
+            margin: 0;
+        }
+    }
 }

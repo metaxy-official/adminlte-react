@@ -1,6 +1,6 @@
 /* eslint-disable import/order */
 /* eslint-disable prettier/prettier */
-import EmptyImg from "../../static/img/404.png";
+import EmptyImg from "../../static/images/404.png";
 import React from "react";
 
 interface EmptyDataProps {

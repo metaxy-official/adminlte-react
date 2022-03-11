@@ -1,0 +1,8 @@
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__search {
+        min-width: 800px;
+    }
+}
