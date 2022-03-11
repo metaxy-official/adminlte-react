@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setWindowSize } from '@app/store/reducers/ui';
 
 import Dashboard from "@pages/Dashboard";
-import ListUser from "@app/pages/users";
+import ListUser from "@app/pages/listUsers";
 import Profile from "@pages/profile/Profile";
 
 import ManagePlayer from './pages/managePlayer';
@@ -53,6 +53,10 @@ const App = () => {
         <Route path="/" element={<Main />}>
           <Route path="/nguoi-dung" element={<ListUser />} />
           <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+          <Route
+            path="/kieu-nguoi-dung/tao-nguoi-dung"
+            element={<CreateTypeUser />}
+          />
           <Route
             path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
             element={<CreateTypeUser />}

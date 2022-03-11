@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
-import { DataBasicInfo, DataHeaderInfo } from '@app/utils/types';
-import { Button, Tabs } from 'antd';
 import React from 'react';
+import { DataBasicInfo, DataHeaderInfo } from '@app/utils/types';
+import { Tabs } from 'antd';
 import BoxInfoBasic from './BoxInfoBasic';
 import BoxInfoHeader from './BoxInfoHeader';
 
@@ -32,14 +32,6 @@ function DetailPlayer() {
     return (
         <div className="container-fuild detail-player">
             <BoxInfoHeader data={fakeData1} />
-            <div className="btn-control">
-                <Button className="mr-2" shape="round">
-                    Thông tin
-                </Button>
-                <Button className="ml-2" shape="round" type="primary">
-                    Nhóm người dùng
-                </Button>
-            </div>
             <div className="tabs tabs--outbox">
                 <Tabs defaultActiveKey="1" onChange={callback}>
                     <TabPane tab="Thông tin cơ bản" key="1">
@@ -49,9 +41,6 @@ function DetailPlayer() {
                         Content of Tab Pane 2
                     </TabPane>
                 </Tabs>
-            </div>
-            <div className="permission-box">
-                <p>Thông tin quyền cơ bản</p>
             </div>
         </div>
     );

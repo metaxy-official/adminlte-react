@@ -108,7 +108,7 @@ const ManagePlayer = () => {
                 <div className="btn" onClick={() => handleShowModal(key)}>
                     <img src={threeDotIcon} alt="icon" />
                     {isShowModal === key && (
-                        <MoreAction ref={ref} openDeleteModal={handleOpenModalDelete} />
+                        <MoreAction ref={ref} handleModal={handleOpenModalDelete} />
                     )}
                 </div>
             )

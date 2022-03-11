@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -5,16 +6,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/order */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef, useState } from "react";
 import { ContentHeader } from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
 import { DataManagerUserProp } from "@app/utils/types";
-import useOnClickOutside from "@app/hooks/useClickOutside";
-import threeDotIcon from "../../static/icon/threedot.svg";
-import MoreAction from "@app/components/moreAction/MoreAction";
-import DeleteUserModal from "@app/components/modal/DeleteUser";
+import ThreeDot from "@app/components/btnThreeDot";
 
 const ManagerUser = () => {
   const data: DataManagerUserProp[] = [
@@ -44,13 +41,6 @@ const ManagerUser = () => {
     }
   ];
 
-  const ref = useRef(null);
-  useOnClickOutside(ref, () => setIsShowModal(-1));
-  const [isShowModal, setIsShowModal] = useState<number>(-1);
-  const handleShowModal = (key: number) => {
-    setIsShowModal(key);
-  };
-
   const columns = [
     {
       title: "Kiểu người dùng",
@@ -68,35 +58,12 @@ const ManagerUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: (key: any) => (
-        <div className="btn" onClick={() => handleShowModal(key)}>
-          <img src={threeDotIcon} alt="icon" />
-          {isShowModal === key && (
-            <MoreAction ref={ref} openDeleteModal={handleOpenModalDelete} />
-          )}
-        </div>
-      )
+      render: () => <ThreeDot />
     }
   ];
-  const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
-  const handleOpenModalDelete = () => {
-    setIsShowModalDelete(true);
-  };
 
-  const handleOk = () => {
-    setIsShowModalDelete(false);
-  };
-
-  const handleCancel = () => {
-    setIsShowModalDelete(false);
-  };
   return (
     <div className="manager-user">
-      <DeleteUserModal
-        isModalVisible={isShowModalDelete}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
       <ContentHeader title="Danh sách kiểu người dùng" />
       <section className="content">
         <div className="container-fluid">

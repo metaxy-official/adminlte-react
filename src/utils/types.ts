@@ -4,11 +4,13 @@ export interface DataManagerUserProp {
     creator: string;
     createdDate: string;
 }
-export interface DataType {
+export interface DataListUserProp {
     key: number | string;
     name: string;
-    creator: string;
-    createdDate: string;
+    email: string;
+    role: string;
+    dateActived: string;
+    status: boolean;
 }
 export interface DataHeaderInfo {
     name: string;
