@@ -10,9 +10,15 @@ export interface DataType {
     creator: string;
     createdDate: string;
 }
+export interface DataHeaderInfo {
+    name: string;
+    address: string;
+    nation: string;
+    role: string;
+}
 export interface DataBasicInfo {
     name: string;
-    AddressWallet: string;
-    Nation: string;
-    Role: string;
+    address: string;
+    nation: string;
+    role: string;
 }

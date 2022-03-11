@@ -1,12 +1,13 @@
-import { DataHeaderInfo } from '@app/utils/types';
+import { DataHeaderInfo } from '@app/utils/types'
 import React from 'react'
 import { ReactComponent as EditIcon } from '../../static/icon/edit.svg';
 
-interface BoxInfoHeaderProps {
+
+interface DataHeaderInfoProps {
     data: DataHeaderInfo
 }
 
-const BoxInfoHeader = (props: BoxInfoHeaderProps) => {
+const BoxInfoBasic = (props: DataHeaderInfoProps) => {
     const { data } = props
     return (
         <div className="box-information">
@@ -35,4 +36,4 @@ const BoxInfoHeader = (props: BoxInfoHeaderProps) => {
     )
 }
 
-export default BoxInfoHeader
+export default BoxInfoBasic
