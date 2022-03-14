@@ -23,6 +23,7 @@ import DetailUser from "./pages/detailUser";
 import ManagerUser from "./pages/managerUser";
 import Blank from './pages/Blank';
 import DetailPlayer from './pages/detailPlayer';
+import CreateUser from './pages/createUser';
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -55,7 +56,7 @@ const App = () => {
           <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
           <Route
             path="/kieu-nguoi-dung/tao-nguoi-dung"
-            element={<CreateTypeUser />}
+            element={<CreateUser />}
           />
           <Route
             path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"

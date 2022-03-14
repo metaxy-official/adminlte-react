@@ -120,7 +120,7 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={data} columns={columns} />
+            <TableCustom data={data} columns={columns} dataSelection />
           </div>
         </div>
       </section>

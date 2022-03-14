@@ -1,49 +1,37 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import {Select, Modal, Button} from "antd";
+import { Modal, Button} from "antd";
+import WarningIcon from '../../static/icon/warning.svg'
 
-const {Option} = Select;
 interface propsDeleteModal {
   isModalVisible: boolean;
   handleOk?: () => void;
   handleCancel?: () => void;
 }
 const DeleteUserModal = (props: propsDeleteModal) => {
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
 
   const {isModalVisible, handleOk, handleCancel} = props;
   return (
     <Modal
       className="modal-delete-user"
-      title="Thay đổi thay thế kiểu người dùng"
+      title=""
       visible={isModalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
       footer={null}
       width={450}
     >
-      <div className="modal-delete-user__body">
-        <p>
-          Kiểu người dùng thay thế <span>(*)</span>
-        </p>
-        <Select
-          defaultValue="lucy"
-          style={{width: "100%"}}
-          onChange={handleChange}
-        >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="Yiminghe">yiminghe</Option>
-        </Select>
+        <div className="modal-delete-user__body">
+            <img src={WarningIcon} alt="icon-warning" />
+            <p className="title">Đồng ý</p>
+            <p className="des">Bạn có muốn xóa người dùng này không?</p>
+        </div>
         <div className="btn-control">
           <Button className="mr-2">Huỷ</Button>
           <Button className="ml-2" type="primary">
-            Lưu
+          Đồng ý
           </Button>
         </div>
-      </div>
     </Modal>
   );
 };

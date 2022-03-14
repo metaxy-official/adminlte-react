@@ -16,7 +16,7 @@ const ChangeStatusModal = (props: propsDeleteModal) => {
     const { isModalVisible, handleOk, handleCancel } = props;
     return (
         <Modal
-            className="modal-delete-user"
+            className="modal-delete-type-user"
             title="Thay đổi thay thế kiểu người dùng"
             visible={isModalVisible}
             onOk={handleOk}
@@ -24,7 +24,7 @@ const ChangeStatusModal = (props: propsDeleteModal) => {
             footer={null}
             width={450}
         >
-            <div className="modal-delete-user__body">
+            <div className="modal-delete-type-user__body">
                 <p>
                     Kiểu người dùng thay thế <span>(*)</span>
                 </p>
