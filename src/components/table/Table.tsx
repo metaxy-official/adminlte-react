@@ -10,7 +10,6 @@ interface TableCustomProps {
 
 const TableCustom = (props: TableCustomProps) => {
   const { data, columns, dataSelection } = props;
-  console.log("🚀 ~ file: Table.tsx ~ line 13 ~ TableCustom ~ dataSelection", dataSelection)
 
   return (
     <>
@@ -23,7 +22,7 @@ const TableCustom = (props: TableCustomProps) => {
             dataSource={data}
 
           />
-          <p className="total-number">Tổng: {data.length} người chơi</p>
+           <p className="total-record">Tổng:&nbsp;&nbsp;<span>{data.length} người chơi</span></p>
         </div>
       ) : (
         <EmptyData dataTable={data} />
