@@ -22,7 +22,7 @@ const TableCustom = (props: TableCustomProps) => {
             dataSource={data}
 
           />
-           <p className="total-record">Tổng:&nbsp;&nbsp;<span>{data.length} người chơi</span></p>
+          <p className="total-record">Tổng:&nbsp;&nbsp;<span>{data.length} người chơi</span></p>
         </div>
       ) : (
         <EmptyData dataTable={data} />

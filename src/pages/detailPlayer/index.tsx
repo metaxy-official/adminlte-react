@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/jsx-no-bind */
+
 import React from 'react';
 import { DataBasicInfo, DataHeaderInfo } from '@app/utils/types';
 import { Tabs } from 'antd';
