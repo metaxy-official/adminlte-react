@@ -2,10 +2,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {useRef, useState} from "react";
 import useOnClickOutside from "@app/hooks/useClickOutside";
-import DeleteUserTypeModal from "../modal/DeleteTypeUser";
+// import DeleteUserTypeModal from "../modal/DeleteTypeUser";
 import threeDotIcon from "../../static/icon/threedot.svg";
 import MoreAction from "../moreAction/MoreAction";
-import DeleteUserModal from "../modal/DeleteUser";
+import WarningChangePassModal from "../modal/WarningChangePassword";
+// import DeleteUserModal from "../modal/DeleteUser";
+
 
 function ThreeDot() {
   const ref = useRef(null);
@@ -31,12 +33,17 @@ function ThreeDot() {
           <MoreAction ref={ref} handleModal={handleOpenModalDelete} />
         )}
       </div>
-      <DeleteUserTypeModal
+      {/* <DeleteUserTypeModal
         isModalVisible={isShowModalDelete}
         handleOk={handleOk}
         handleCancel={handleCancel}
-      />
-      <DeleteUserModal
+      /> */}
+      {/* <DeleteUserModal
+        isModalVisible={isShowModalDelete}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      /> */}
+      <WarningChangePassModal
         isModalVisible={isShowModalDelete}
         handleOk={handleOk}
         handleCancel={handleCancel}
