@@ -18,15 +18,11 @@ export interface DataHeaderInfo {
     nation: string;
     role: string;
 }
-export interface DataHeaderInfo {
-    name: string;
-    address: string;
-    nation: string;
-    role: string;
-}
+
 export interface DataBasicInfo {
-    name: string;
-    address: string;
-    nation: string;
-    role: string;
+    timeActive: string;
+    latestInGame: string;
+    statusActive: boolean;
+    note: string;
+    date: string;
 }

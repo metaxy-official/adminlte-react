@@ -96,7 +96,7 @@ const ManagePlayer = () => {
                         <SearchBox placeholder="Nhập tên trong game hoặc địa chỉ ví của người dùng" />
                     </div>
                 </div>
-                <div className="table-custom">
+                <div className="table-custom my-5">
                     <Table dataSource={dataSource} columns={columns} />
                 </div>
             </div>

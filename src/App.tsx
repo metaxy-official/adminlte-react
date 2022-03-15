@@ -17,7 +17,7 @@ import Profile from "@pages/profile/Profile";
 import ManagePlayer from './pages/managePlayer';
 
 import PublicRoute from "./routes/PublicRoute";
-// import PrivateRoute from "./routes/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import CreateTypeUser from "./pages/createTypeUser";
 import DetailUser from "./pages/detailUser";
 import ManagerUser from "./pages/managerUser";
@@ -50,33 +50,33 @@ const App = () => {
         <Route path="/recover-password" element={<PublicRoute />}>
           <Route path="/recover-password" element={<RecoverPassword />} />
         </Route>
-        {/* <Route path="/" element={<PrivateRoute />}> */}
-        <Route path="/" element={<Main />}>
-          <Route path="/nguoi-dung" element={<ListUser />} />
-          <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
-          <Route
-            path="/kieu-nguoi-dung/tao-nguoi-dung"
-            element={<CreateUser />}
-          />
-          <Route
-            path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
-            element={<CreateTypeUser />}
-          />
-          <Route
-            path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
-            element={<DetailUser />}
-          />
-          <Route path="/nguoi-choi" element={<ManagePlayer />} />
-          <Route
-            path="/nguoi-choi/chi-tiet-nguoi-choi"
-            element={<DetailPlayer />}
-          />
-          <Route path="/nghi-van-vi-pham" element={<Blank />} />
-          <Route path="/blank" element={<ListUser />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/" element={<Main />}>
+            <Route path="/nguoi-dung" element={<ListUser />} />
+            <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+            <Route
+              path="/kieu-nguoi-dung/tao-nguoi-dung"
+              element={<CreateUser />}
+            />
+            <Route
+              path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
+              element={<CreateTypeUser />}
+            />
+            <Route
+              path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
+              element={<DetailUser />}
+            />
+            <Route path="/nguoi-choi" element={<ManagePlayer />} />
+            <Route
+              path="/nguoi-choi/chi-tiet-nguoi-choi"
+              element={<DetailPlayer />}
+            />
+            <Route path="/nghi-van-vi-pham" element={<Blank />} />
+            <Route path="/blank" element={<ListUser />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/" element={<Dashboard />} />
+          </Route>
         </Route>
-        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );
