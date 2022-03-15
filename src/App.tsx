@@ -10,7 +10,7 @@ import { calculateWindowSize } from '@app/utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWindowSize } from '@app/store/reducers/ui';
 
-import Dashboard from "@pages/Dashboard";
+// import Dashboard from "@pages/Dashboard";
 import ListUser from "@app/pages/listUsers";
 import Profile from "@pages/profile/Profile";
 
@@ -21,7 +21,6 @@ import PrivateRoute from "./routes/PrivateRoute";
 import CreateTypeUser from "./pages/createTypeUser";
 import DetailUser from "./pages/detailUser";
 import ManagerUser from "./pages/managerUser";
-import Blank from './pages/Blank';
 import DetailPlayer from './pages/detailPlayer';
 import CreateUser from './pages/createUser';
 
@@ -71,10 +70,10 @@ const App = () => {
               path="/nguoi-choi/chi-tiet-nguoi-choi"
               element={<DetailPlayer />}
             />
-            <Route path="/nghi-van-vi-pham" element={<Blank />} />
+            <Route path="/nghi-van-vi-pham" element={<div>something here</div>} />
             <Route path="/blank" element={<ListUser />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<ListUser />} />
           </Route>
         </Route>
       </Routes>

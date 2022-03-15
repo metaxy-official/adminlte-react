@@ -1,46 +1,43 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {useRef, useState} from "react";
 import useOnClickOutside from "@app/hooks/useClickOutside";
-import DeleteUserTypeModal from "../modal/DeleteTypeUser";
 import threeDotIcon from "../../static/icon/threedot.svg";
-import MoreAction from "../moreAction/MoreAction";
-import DeleteUserModal from "../modal/DeleteUser";
 
-function ThreeDot() {
+export interface ItemMoreOption {
+  key?: string;
+  icon: string;
+  name: string;
+  onClick: (value?: string) => void;
+}
+interface Props {
+listItem : ItemMoreOption[]
+modals: any
+}
+
+function ThreeDot(props: Props) {
+  const {listItem, modals} = props
+
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsShowModal(false));
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-  // state for modal detail
-  const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
-  const handleOpenModalDelete = () => {
-    setIsShowModalDelete(true);
-  };
-  const handleOk = () => {
-    setIsShowModalDelete(false);
-  };
-  const handleCancel = () => {
-    setIsShowModalDelete(false);
-  };
   return (
     <>
       <div className="btn" onClick={() => setIsShowModal(true)}>
         <img src={threeDotIcon} alt="icon" />
         {isShowModal && (
-          <MoreAction ref={ref} handleModal={handleOpenModalDelete} />
+          <div ref={ref} className="more-action">
+          {listItem.map((item) =>
+          <div onClick={() => item.onClick(item.key)} key={item.key}>
+            <img src={item.icon} alt="icon" />
+            <p>{item.name}</p>
+          </div>)}
+        </div>
         )}
       </div>
-      <DeleteUserTypeModal
-        isModalVisible={isShowModalDelete}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
-      <DeleteUserModal
-        isModalVisible={isShowModalDelete}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
+      {modals}
     </>
   );
 }

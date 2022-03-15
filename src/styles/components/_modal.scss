@@ -67,3 +67,18 @@
         }
     }
 }
+// modal-confirm-change-pass
+.modal-confirm-change-pass {
+    &__body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .input-pass {
+        margin-top: 15px;
+    }
+    .btn-control {
+        margin: 15px auto;
+    }
+}

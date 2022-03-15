@@ -18,7 +18,6 @@ export interface DataHeaderInfo {
     nation: string;
     role: string;
 }
-
 export interface DataBasicInfo {
     timeActive: string;
     latestInGame: string;
