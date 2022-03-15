@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MenuItem } from '@components';
+import BugIcon from '../../../static/icon/bug.svg'
 
 export interface IMenuItem {
   name: string;
@@ -67,8 +68,13 @@ export const MENU: IMenuItem[] = [
     path: '/a'
   },
   {
+    name: 'Quản lí báo cáo lỗi',
+    logo:  <img src={BugIcon} alt="icon-bug" className="mr-1" />,
+    path: '/quan-li-bao-cao-loi'
+  },
+  {
     name: 'Quản lí FAQ',
-    logo: <i className="nav-icon fas fa-question" />,
+    logo: <i className="nav-icon" />,
     path: '/x'
   }
 ];

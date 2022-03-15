@@ -7,7 +7,16 @@ import SearchBox from "@app/components/searchbox/SearchBox";
 import BtnCreate from "@app/components/btnCreate";
 import {DataListUserProp} from "@app/utils/types";
 import {Select} from "antd";
-import ThreeDot from "@app/components/btnThreeDot";
+import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
+import { useNavigate } from "react-router-dom";
+import DeleteUserModal from "@app/components/modal/DeleteUser";
+import { useState } from "react";
+import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
+import watchmoreIcon from "../../static/icon/watch-more.svg";
+import editIcon from "../../static/icon/edit.svg";
+import deleteIcon from "../../static/icon/delete.svg";
+import resetPassIcon from "../../static/icon/reset-pass.svg";
+import changeStatusIcon from "../../static/icon/change-status.svg";
 
 const {Option} = Select;
 
@@ -43,6 +52,33 @@ const ListUser = () => {
     }
   ];
 
+  const navigate = useNavigate();
+  // state for modal detail
+  const [isShowModal, setIsShowModal] = useState<string>();
+  const handleOpenModal = (value?: string) => {
+    setIsShowModal(value);
+  };
+  const handleOk = () => {
+    setIsShowModal('');
+  };
+  const handleCancel = () => {
+    setIsShowModal('');
+  };
+  // status warning change password
+
+const listItem: ItemMoreOption[] = [
+  {key: 'detailInfo' ,name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
+    navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+  }},
+  {key: 'editInfo', name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
+    navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+  }},
+  {key: 'resetPass', name: 'Cấp mật khẩu', icon: resetPassIcon, onClick: handleOpenModal},
+  {name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
+    navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+  }},
+  {key: 'delete',name: 'Xóa', icon: deleteIcon, onClick: handleOpenModal}
+]
   const columns = [
     {
       title: "Họ và tên",
@@ -77,7 +113,21 @@ const ListUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot />
+      render: () => <ThreeDot listItem= {listItem} modals={
+          <>
+          <DeleteUserModal
+            isModalVisible={isShowModal === 'delete'}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          /> 
+           <WarningChangePassModal
+            isModalVisible={isShowModal === 'resetPass'}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          /> 
+          </>
+    } 
+    />
     }
   ];
   return (

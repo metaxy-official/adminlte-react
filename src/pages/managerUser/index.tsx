@@ -6,12 +6,18 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/order */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ContentHeader } from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
 import { DataManagerUserProp } from "@app/utils/types";
-import ThreeDot from "@app/components/btnThreeDot";
+import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
+import watchmoreIcon from "../../static/icon/watch-more.svg";
+import editIcon from "../../static/icon/edit.svg";
+import deleteIcon from "../../static/icon/delete.svg";
+import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
 
 const ManagerUser = () => {
   const data: DataManagerUserProp[] = [
@@ -58,9 +64,41 @@ const ManagerUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot />
+      render: () => <ThreeDot listItem= {listItem} modals={
+          <DeleteUserTypeModal
+          isModalVisible={isShowModalDelete}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        /> 
+      } 
+      />
     }
   ];
+
+  const navigate = useNavigate();
+    // state for modal detail
+    const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
+    const handleOpenModalDelete = () => {
+      setIsShowModalDelete(true);
+    };
+    const handleOk = () => {
+      setIsShowModalDelete(false);
+    };
+    const handleCancel = () => {
+      setIsShowModalDelete(false);
+    };
+
+  const listItem: ItemMoreOption[] = [
+    {name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
+      navigate('/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung')
+    }},
+    {name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
+      navigate('/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung')
+    }},
+    {name: 'Xóa', icon: deleteIcon, onClick: handleOpenModalDelete}
+  ]
+
+
 
   return (
     <div className="manager-user">
