@@ -16,3 +16,31 @@ ul {
 ul li {
     list-style-type: none;
 }
+
+.status-actived {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 13px;
+    color: #187c0a;
+    background: #93e088;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.status-not-active {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 13px;
+    color: #969117;
+    background: #ffdc61;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.content-wrapper {
+    background-color: #ffffff !important;
+}

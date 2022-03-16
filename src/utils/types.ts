@@ -22,13 +22,14 @@ export interface DataListItemGoldProp {
     totalGold: string,
     status: boolean,
 }
-export interface DataHeaderInfo {
-    name: string;
-    address: string;
-    nation: string;
-    role: string;
-}
 export interface DataBasicInfo {
+    timeActive: string;
+    latestInGame: string;
+    statusActive: boolean;
+    note: string;
+    date: string;
+}
+export interface DataHeaderInfo {
     name: string;
     address: string;
     nation: string;
