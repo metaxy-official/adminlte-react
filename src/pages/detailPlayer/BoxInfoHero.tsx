@@ -41,19 +41,19 @@ const dataSource = [
 
 const columns = [
     {
-        title: 'Level',
-        dataIndex: 'Level',
-        key: 'Level',
+        title: 'Hero ID',
+        dataIndex: 'heroId',
+        key: 'heroId',
     },
     {
-        title: 'Số sao đạt được',
-        dataIndex: 'NameInGame',
-        key: 'NameInGame',
+        title: 'Hero',
+        dataIndex: 'hero',
+        key: 'hero',
     },
     {
-        title: 'Tổng lần chơi',
-        dataIndex: 'Nation',
-        key: 'Nation',
+        title: 'Rank',
+        dataIndex: 'rank',
+        key: 'rank',
     },
     {
         title: 'số Token kiếm được',
