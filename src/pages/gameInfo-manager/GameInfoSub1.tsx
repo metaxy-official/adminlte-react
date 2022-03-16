@@ -4,7 +4,6 @@ import {ContentHeader} from '@components';
 import '../../styles/pages/gameinfo.scss';
 import TableCustom from '@app/components/table/Table';
 import SearchBox from '@app/components/searchbox/SearchBox';
-import {DataListItemGoldProp} from "@app/utils/types";
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
 import DeleteUserModal from '@app/components/modal/DeleteUser';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +17,7 @@ function callback(key: any) {
   console.log(key);
 }
 const GameInfoSub1 = () => {
-  const data: DataListItemGoldProp[] = [
+  const data: any[] = [
     {
       key: "1",
       name: "Nguyễn Văn A",
