@@ -12,11 +12,15 @@ export interface DataListUserProp {
     dateActived: string;
     status: boolean;
 }
-export interface DataHeaderInfo {
+export interface DataListItemGoldProp {
+    key: number | string;
     name: string;
-    address: string;
-    nation: string;
+    email: string;
     role: string;
+    dateActived: string;
+    percent: string;
+    totalGold: string,
+    status: boolean,
 }
 export interface DataBasicInfo {
     timeActive: string;
@@ -24,4 +28,10 @@ export interface DataBasicInfo {
     statusActive: boolean;
     note: string;
     date: string;
+}
+export interface DataHeaderInfo {
+    name: string;
+    address: string;
+    nation: string;
+    role: string;
 }

@@ -53,12 +53,12 @@ export const MENU: IMenuItem[] = [
     children: [
       {
         name: 'Quản lí 1',
-        path: '/sub-1'
+        path: '/gameinfo-manager-sub1'
       },
 
       {
         name: 'Quản lí 2',
-        path: '/sub-2'
+        path: '/gameinfo-manager-sub2'
       }
     ]
   },
@@ -69,13 +69,8 @@ export const MENU: IMenuItem[] = [
   },
   {
     name: 'Quản lí báo cáo lỗi',
-    logo:  <img src={BugIcon} alt="icon-bug" className="mr-1" />,
+    logo:  <img src={BugIcon} alt="icon-bug" className="mx-1" />,
     path: '/quan-li-bao-cao-loi'
-  },
-  {
-    name: 'Quản lí FAQ',
-    logo: <i className="nav-icon" />,
-    path: '/x'
   }
 ];
 

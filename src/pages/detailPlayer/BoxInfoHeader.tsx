@@ -1,5 +1,5 @@
-import { DataHeaderInfo } from '@app/utils/types';
 import React from 'react'
+import { DataHeaderInfo } from '@app/utils/types';
 import { ReactComponent as EditIcon } from '../../static/icon/edit.svg';
 
 interface BoxInfoHeaderProps {

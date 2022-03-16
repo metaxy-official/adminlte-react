@@ -4,7 +4,7 @@ import { ContentHeader } from '@app/components';
 import { Button, Checkbox, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react';
-// import '../../styles/pages/create-new-user.scss';
+// import ErrorIcon from '../../static/icon/error.svg'
 
 function CreateTypeUser() {
   function onChange(checkedValues: any) {
