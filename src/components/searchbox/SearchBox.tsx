@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React from "react";
 
 interface SearchboxProps {
   placeholder?: string;
 }
 
 const SearchBox = (props: SearchboxProps) => {
-  const {placeholder} = props;
+  const { placeholder } = props;
 
   const handleSubmit = () => {
-    console.log('value');
+    console.log("value");
   };
   return (
     <div className="flex justify-content items-center">
@@ -28,7 +28,7 @@ const SearchBox = (props: SearchboxProps) => {
           type="button"
           className="btn btn-outline-primary"
         >
-          search
+          Tìm kiếm
         </button>
       </div>
     </div>

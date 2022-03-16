@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
 import './styles/main.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -11,17 +10,19 @@ import { calculateWindowSize } from '@app/utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWindowSize } from '@app/store/reducers/ui';
 
-import Dashboard from '@pages/Dashboard';
-import Blank from '@pages/Blank';
-import SubMenu from '@pages/SubMenu';
-import Profile from '@pages/profile/Profile';
+// import Dashboard from "@pages/Dashboard";
+import ListUser from "@app/pages/listUsers";
+import Profile from "@pages/profile/Profile";
 import GameInfoSub1 from './pages/gameInfoManager/GameInfoSub1';
+import ManagePlayer from './pages/managePlayer';
 
-import PublicRoute from './routes/PublicRoute';
-import PrivateRoute from './routes/PrivateRoute';
-import CreateTypeUser from './pages/createTypeUser';
-import DetailUser from './pages/detailUser';
-
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
+import CreateTypeUser from "./pages/createTypeUser";
+import DetailUser from "./pages/detailUser";
+import ManagerUser from "./pages/managerUser";
+import DetailPlayer from './pages/detailPlayer';
+import CreateUser from './pages/createUser';
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -49,23 +50,33 @@ const App = () => {
           <Route path="/recover-password" element={<RecoverPassword />} />
         </Route>
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/" element={<Main />}>
-            <Route path="/nguoi-dung" element={<Blank />} />
-            <Route path="/kieu-nguoi-dung" element={<SubMenu />} />
-            <Route path="/gameinfo-manager-sub1" element={<GameInfoSub1 />} />
-            <Route path="/gameinfo-manager-sub2" element={<GameInfoSub1 />} />
-            <Route
-              path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
-              element={<CreateTypeUser />}
-            />
-            <Route
-              path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
-              element={<DetailUser />}
-            />
-            <Route path="/blank" element={<Blank />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/" element={<Dashboard />} />
-          </Route>
+        <Route path="/" element={<Main />}>
+          <Route path="/nguoi-dung" element={<ListUser />} />
+          <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+          <Route path="/gameinfo-manager-sub1" element={<GameInfoSub1 />} />
+          <Route path="/gameinfo-manager-sub2" element={<GameInfoSub1 />} />
+          <Route
+            path="/kieu-nguoi-dung/tao-nguoi-dung"
+            element={<CreateUser />}
+          />
+          <Route
+            path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
+            element={<CreateTypeUser />}
+          />
+          <Route
+            path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
+            element={<DetailUser />}
+          />
+          <Route path="/nguoi-choi" element={<ManagePlayer />} />
+          <Route
+            path="/nguoi-choi/chi-tiet-nguoi-choi"
+            element={<DetailPlayer />}
+          />
+          <Route path="/nghi-van-vi-pham" element={<div>something here</div>} />
+          <Route path="/blank" element={<ListUser />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<ListUser />} />
+        </Route>
         </Route>
       </Routes>
     </BrowserRouter>

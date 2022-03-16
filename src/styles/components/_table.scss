@@ -1,4 +1,26 @@
-.big-checkbox {
-    width: 20px;
-    height: 20px;
+.table-ant {
+    .ant-table-cell {
+        p {
+            margin: 0;
+        }
+    }
 }
+
+.table-custom {
+    .ant-table {
+    }
+}
+
+.total-record {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.05em;
+    color: #8b9aa2;
+    span {
+        color: #000000;
+    }
+}
+
+.table-custom {}

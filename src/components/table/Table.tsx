@@ -1,127 +1,31 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable prettier/prettier */
-import React, { useRef, useState } from 'react';
-import { Table } from 'antd';
-import useOnClickOutside from '@app/hooks/useClickOutside';
-import threeDotIcon from '../../static/icon/threedot.svg';
-import MoreAction from '../moreAction/MoreAction';
-import EmptyImg from '../../static/img/404.png';
+import React from "react";
+import { Table } from "antd";
+import EmptyData from "../emptyData";
 
-interface DataType {
-  key: number | string;
-  name: string;
-  creator: string;
-  createdDate: string;
+interface TableCustomProps {
+  data: any[];
+  columns: any;
+  dataSelection?: boolean
 }
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  },
-  {
-    key: '4',
-    name: 'Disabled User',
-    creator: 'LongTT',
-    createdDate: '01/01/2022'
-  }
-];
+const TableCustom = (props: TableCustomProps) => {
+  const { data, columns, dataSelection } = props;
 
-// const data: DataType[] = [];
-const TableCustom = () => {
-  // const {data = []} = props;
-  const ref = useRef(null);
-  useOnClickOutside(ref, () => setIsShowModal(-1));
-  const [isShowModal, setIsShowModal] = useState<number>(-1);
-  const handleShowModal = (key: number) => {
-    setIsShowModal(key);
-  };
-
-  // const [selectionType, setSelectionType] = useState<'checkbox' | 'radio'>(
-  //   'checkbox'
-  // );
-  const columns = [
-    {
-      title: 'Kiểu người dùng',
-      dataIndex: 'name',
-      render: (text: string) => <p>{text}</p>
-    },
-    {
-      title: 'Người tạo',
-      dataIndex: 'creator'
-    },
-    {
-      title: 'Ngày tạo',
-      dataIndex: 'createdDate'
-    },
-    {
-      title: '',
-      dataIndex: 'key',
-      render: (key: any) => (
-        <div className="btn" onClick={() => handleShowModal(key)} >
-          <img src={threeDotIcon} alt="icon" />
-          {isShowModal === key && <MoreAction ref={ref} />}
-        </div>
-      )
-    }
-  ];
-
-  const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        'selectedRows: ',
-        selectedRows
-      );
-    },
-    getCheckboxProps: (record: DataType) => ({
-      disabled: record.name === 'Disabled User', // Column configuration not to be checked
-      name: record.name
-    })
-  };
   return (
     <>
       {data.length > 0 ? (
-        <>
+        <div className="table-custom">
           <Table
-            rowSelection={{
-              type: 'checkbox',
-              ...rowSelection
-            }}
+            className="table-ant"
+            rowSelection={dataSelection ? {} : undefined}
             columns={columns}
             dataSource={data}
+
           />
-        </>
+          <p className="total-record">Tổng:&nbsp;&nbsp;<span>{data.length} người chơi</span></p>
+        </div>
       ) : (
-        <>
-          <div className="box-overview">
-            <p>
-              Tổng: <span>{data.length} kiểu người dùng</span>
-            </p>
-          </div>
-          <div className="container-nodata">
-            <div className="box-nodata">
-              <img src={EmptyImg} alt="empty-user" />
-              <p>Chưa có kiểu người dùng nào trong hệ thống</p>
-            </div>
-          </div>
-        </>
+        <EmptyData dataTable={data} />
       )}
     </>
   );
