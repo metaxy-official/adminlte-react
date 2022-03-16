@@ -1,9 +1,9 @@
 import React from 'react'
-import { DataHeaderInfo } from '@app/utils/types';
+import { DataHeaderInfo1 } from '@app/utils/types';
 import { ReactComponent as EditIcon } from '../../static/icon/edit.svg';
 
 interface BoxInfoHeaderProps {
-    data: DataHeaderInfo
+    data: DataHeaderInfo1
 }
 
 const BoxInfoHeader = (props: BoxInfoHeaderProps) => {

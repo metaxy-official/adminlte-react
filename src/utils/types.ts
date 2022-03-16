@@ -14,6 +14,17 @@ export interface DataListUserProp {
 }
 export interface DataListItemGoldProp {
     key: number | string;
+}
+export interface DataListBugProp {
+    id: string;
+    type: string;
+    brief: string;
+    address: string;
+    nameInGame: string;
+    datePublished: string;
+    status: boolean;
+}
+export interface DataHeaderInfo {
     name: string;
     email: string;
     role: string;
@@ -29,7 +40,7 @@ export interface DataBasicInfo {
     note: string;
     date: string;
 }
-export interface DataHeaderInfo {
+export interface DataHeaderInfo1 {
     name: string;
     address: string;
     nation: string;
