@@ -69,13 +69,8 @@ export const MENU: IMenuItem[] = [
   },
   {
     name: 'Quản lí báo cáo lỗi',
-    logo:  <img src={BugIcon} alt="icon-bug" className="mr-1" />,
+    logo:  <img src={BugIcon} alt="icon-bug" className="mx-1" />,
     path: '/quan-li-bao-cao-loi'
-  },
-  {
-    name: 'Quản lí FAQ',
-    logo: <i className="nav-icon" />,
-    path: '/x'
   }
 ];
 
