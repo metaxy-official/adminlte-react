@@ -4,7 +4,7 @@
 import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
 import {DataListBugProp} from "@app/utils/types";
-import {Select} from "antd";
+import {DatePicker, Input, Select} from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
@@ -98,18 +98,20 @@ const listItem: ItemMoreOption[] = [
     }
   ];
   return (
-    <div className="list-user-page">
+    <div className="list-bug-report">
       <ContentHeader title="Danh sách báo cáo lỗi" />
 
       <section className="content">
         <div className="container-fluid">
-          <div className="header-box">
-            a
-          </div>
           <div className="box-filter">
-            <div className="box-filter__left">
+            <div className="box-filter__date">
+            <Input.Group compact>
+              <DatePicker.RangePicker style={{ width: '100%', borderRadius: '8px', marginRight: '10px' }} />
+            </Input.Group>
+            </div>
+            <div className="box-filter__type-bug">
               <Select
-                defaultValue="Vai trò người dùng"
+                defaultValue="Thể loại lỗi"
                 style={{width: 180}}
                 onChange={handleChange}
               >
@@ -118,7 +120,7 @@ const listItem: ItemMoreOption[] = [
                 <Option value="Yiminghe">yiminghe</Option>
               </Select>
             </div>
-            <div className="box-filter__right">
+            <div className="box-filter__status">
               <Select
                 defaultValue="Trạng thái"
                 style={{width: 120}}
