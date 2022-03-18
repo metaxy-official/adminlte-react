@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DataBasicInfo, DataHeaderInfo } from '@app/utils/types';
+import { DataBasicInfo, DataHeaderInfo1 } from '@app/utils/types';
 import { Tabs } from 'antd';
 import BoxInfoBasic from './BoxInfoBasic';
 import BoxInfoHeader from './BoxInfoHeader';
@@ -14,7 +14,7 @@ function callback(key: any) {
 
 function DetailPlayer() {
 
-    const DataHeaderInfo: DataHeaderInfo =
+    const DataHeaderInfo: DataHeaderInfo1 =
     {
         name: 'Ltrannnn',
         address: '0x7ef6c419ecabcmdksc9ee',
