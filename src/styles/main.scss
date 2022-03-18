@@ -41,6 +41,22 @@ ul li {
     text-align: center;
 }
 
+.status-error {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 13px;
+    color: #7C330A;
+    background: #FF7875;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
 .content-wrapper {
     background-color: #ffffff !important;
+}
+
+.ant-modal-mask {
+    background-color: rgba(196, 196, 196, 0.6) !important;
 }
