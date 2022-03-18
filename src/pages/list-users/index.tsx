@@ -1,12 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@components";
+import { ContentHeader } from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import BtnCreate from "@app/components/btnCreate";
-import {DataListUserProp} from "@app/utils/types";
-import {Select} from "antd";
+import { DataListUserProp } from "@app/utils/types";
+import { Select } from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
@@ -18,7 +18,7 @@ import deleteIcon from "../../static/icon/delete.svg";
 import resetPassIcon from "../../static/icon/reset-pass.svg";
 import changeStatusIcon from "../../static/icon/change-status.svg";
 
-const {Option} = Select;
+const { Option } = Select;
 
 const ListUser = () => {
   function handleChange(value: string) {
@@ -66,19 +66,25 @@ const ListUser = () => {
   };
   // status warning change password
 
-const listItem: ItemMoreOption[] = [
-  {key: 'detailInfo' ,name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-    navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-  }},
-  {key: 'editInfo', name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
-    navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-  }},
-  {key: 'resetPass', name: 'Cấp mật khẩu', icon: resetPassIcon, onClick: handleOpenModal},
-  {name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
-    navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-  }},
-  {key: 'delete',name: 'Xóa', icon: deleteIcon, onClick: handleOpenModal}
-]
+  const listItem: ItemMoreOption[] = [
+    {
+      key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
+        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      }
+    },
+    {
+      key: 'editInfo', name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
+        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      }
+    },
+    { key: 'resetPass', name: 'Cấp mật khẩu', icon: resetPassIcon, onClick: handleOpenModal },
+    {
+      name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
+        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      }
+    },
+    { key: 'delete', name: 'Xóa', icon: deleteIcon, onClick: handleOpenModal }
+  ]
   const columns = [
     {
       title: "Họ và tên",
@@ -113,21 +119,21 @@ const listItem: ItemMoreOption[] = [
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} modals={
-          <>
+      render: () => <ThreeDot listItem={listItem} modals={
+        <>
           <DeleteUserModal
             isModalVisible={isShowModal === 'delete'}
             handleOk={handleOk}
             handleCancel={handleCancel}
-          /> 
-           <WarningChangePassModal
+          />
+          <WarningChangePassModal
             isModalVisible={isShowModal === 'resetPass'}
             handleOk={handleOk}
             handleCancel={handleCancel}
-          /> 
-          </>
-    } 
-    />
+          />
+        </>
+      }
+      />
     }
   ];
   return (
@@ -149,7 +155,7 @@ const listItem: ItemMoreOption[] = [
             <div className="box-filter__left">
               <Select
                 defaultValue="Vai trò người dùng"
-                style={{width: 180}}
+                style={{ width: 180 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -160,7 +166,7 @@ const listItem: ItemMoreOption[] = [
             <div className="box-filter__right">
               <Select
                 defaultValue="Trạng thái"
-                style={{width: 120}}
+                style={{ width: 120 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
