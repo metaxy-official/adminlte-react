@@ -46,3 +46,13 @@ export interface DataHeaderInfo1 {
     nation: string;
     role: string;
 }
+export interface DataNotificationInGame {
+    id: string;
+    title: string;
+    type: string;
+    to: string;
+    reporter: string;
+    note: string;
+    createdAt: string;
+    status: boolean;
+}
