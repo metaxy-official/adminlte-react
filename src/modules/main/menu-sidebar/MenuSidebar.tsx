@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MenuItem } from '@components';
 import BugIcon from '../../../static/icon/bug.svg'
+import NotiIngameIcon from '../../../static/icon/noti-ingame.svg'
+import NotiTypeIcon from '../../../static/icon/noti-type.svg'
+import NotiUserIcon from '../../../static/icon/noti-user.svg'
 
 export interface IMenuItem {
   name: string;
@@ -65,7 +68,25 @@ export const MENU: IMenuItem[] = [
   {
     name: 'Quản lí thông báo',
     logo: <i className="nav-icon fas fa-envelope" />,
-    path: '/a'
+    path: '/quan-li-thong-bao',
+    children: [
+      {
+        name: 'Thông báo trong game',
+        logo:  <img src={NotiIngameIcon} alt="icon-notification" className="ml-3" />,
+        path: '/quan-li-thong-bao/trong-game'
+      },
+
+      {
+        name: 'Thể loại thông báo',
+        logo:  <img src={NotiTypeIcon} alt="icon-notification" className="ml-3" />,
+        path: '/quan-li-thong-bao/the-loai'
+      },
+      {
+        name: 'Thông báo người chơi',
+        logo:  <img src={NotiUserIcon} alt="icon-notification" className="ml-3" />,
+        path: '/quan-li-thong-bao/nguoi-choi'
+      }
+    ]
   },
   {
     name: 'Quản lí báo cáo lỗi',

@@ -25,6 +25,9 @@ import DetailPlayer from './pages/detail-player';
 import CreateUser from './pages/create-user';
 import ListBugReport from './pages/list-bug-report';
 import BugDetailsReport from './pages/bug-details-report';
+import NotificationInGame from './pages/notification-manager/ingame';
+import NotificationType from './pages/notification-manager/type';
+import NotificationUsers from './pages/notification-manager/users';
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -55,30 +58,20 @@ const App = () => {
         <Route path="/" element={<Main />}>
           <Route path="/nguoi-dung" element={<ListUser />} />
           <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+          <Route path="/kieu-nguoi-dung/tao-nguoi-dung" element={<CreateUser />}/>
+          <Route path="/kieu-nguoi-dung/tao-kieu-nguoi-dung" element={<CreateTypeUser />}/>
+          <Route path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"element={<DetailUser />}/>
           <Route path="/gameinfo-manager-sub1" element={<GameInfoSub1 />} />
-            <Route path="/gameinfo-manager-sub2" element={<GameInfoSub1 />} />
-          <Route
-            path="/kieu-nguoi-dung/tao-nguoi-dung"
-            element={<CreateUser />}
-          />
-          <Route
-            path="/kieu-nguoi-dung/tao-kieu-nguoi-dung"
-            element={<CreateTypeUser />}
-          />
-          <Route
-            path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
-            element={<DetailUser />}
-          />
+          <Route path="/gameinfo-manager-sub2" element={<GameInfoSub1 />} />
           <Route path="/nguoi-choi" element={<ManagePlayer />} />
+          <Route path="/nguoi-choi/chi-tiet-nguoi-choi" element={<DetailPlayer />}/>
+          <Route path="/quan-li-thong-bao/trong-game" element={<NotificationInGame/>} />
+          <Route path="/quan-li-thong-bao/the-loai" element={<NotificationType/>} />
+          <Route path="/quan-li-thong-bao/nguoi-choi" element={<NotificationUsers/>} />
           <Route path="/quan-li-bao-cao-loi" element={<ListBugReport />} />
           <Route path="/quan-li-bao-cao-loi/xem-chi-tiet" element={<BugDetailsReport />} />
-          <Route
-            path="/nguoi-choi/chi-tiet-nguoi-choi"
-            element={<DetailPlayer />}
-          />
-          <Route path="/nghi-van-vi-pham" element={<div>something here</div>} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<ListUser />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         </Route>
       </Routes>
