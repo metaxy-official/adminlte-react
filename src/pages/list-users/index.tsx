@@ -129,27 +129,22 @@ const ListUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} modals={
-        <>
-          <DeleteUserModal
-            isModalVisible={isShowModal === 'delete'}
-            handleOk={handleOk}
-            handleCancel={handleCancel}
-          />
-          <WarningChangePassModal
-            isModalVisible={isShowModal === 'resetPass'}
-            handleOk={handleOk}
-            handleCancel={handleCancel}
-          />
-        </>
-      }
-      />
+      render: () => <ThreeDot listItem={listItem} />
     }
   ];
   return (
     <div className="list-user-page">
       <ContentHeader title="Danh sách người dùng" />
-
+      <DeleteUserModal
+        isModalVisible={isShowModal === 'delete'}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
+      <WarningChangePassModal
+        isModalVisible={isShowModal === 'resetPass'}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
       <section className="content">
         <div className="container-fluid">
           <div className="header-box">

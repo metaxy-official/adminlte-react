@@ -96,21 +96,17 @@ const GameInfoSub1 = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} modals={
-          <>
-          <DeleteUserModal
-            isModalVisible={isShowModal === 'delete'}
-            handleOk={handleOk}
-            handleCancel={handleCancel}
-          /> 
-          </>
-    } 
-    />
+      render: () => <ThreeDot listItem= {listItem} />
     }
   ];
   return (
     <div className="gameinfo">
       <ContentHeader title="Vật phẩm trong game" />
+      <DeleteUserModal
+        isModalVisible={isShowModal === 'delete'}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      /> 
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Tab 1" key="1">
           <div>
