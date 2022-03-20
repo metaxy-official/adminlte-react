@@ -13,11 +13,10 @@ export interface ItemMoreOption {
 }
 interface Props {
 listItem : ItemMoreOption[]
-modals: any
 }
 
 function ThreeDot(props: Props) {
-  const {listItem, modals} = props
+  const {listItem} = props
 
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsShowModal(false));
@@ -37,7 +36,6 @@ function ThreeDot(props: Props) {
         </div>
         )}
       </div>
-      {modals}
     </>
   );
 }

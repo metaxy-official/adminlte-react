@@ -163,16 +163,7 @@ const BoxDetectError = () => {
         {
             title: "",
             dataIndex: "key",
-            render: () => <ThreeDot listItem={listItem} modals={
-                <>
-                    <DetailErrorModal
-                        isModalVisible={isShowModal === 'detailError'}
-                        handleOk={handleOk}
-                        handleCancel={handleCancel}
-                    />
-                </>
-            }
-            />
+            render: () => <ThreeDot listItem={listItem} />
         }
     ];
 
@@ -186,6 +177,11 @@ const BoxDetectError = () => {
     return (
         <div className="detail-box-player">
             <BoxComponent title='Thông tin nghi vấn vi phạm' listInfo={fakeDataInfoHero} />
+            <DetailErrorModal
+                isModalVisible={isShowModal === 'detailError'}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách nghi vấn vi phạm của người chơi</h3>
                 <div className="table-filter">

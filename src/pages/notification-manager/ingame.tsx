@@ -98,13 +98,12 @@ const listItem: ItemMoreOption[] = [
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} modals={null}/>
+      render: () => <ThreeDot listItem= {listItem} />
     }
   ];
   return (
     <div className="list-bug-report">
       <ContentHeader title="Danh sách thông báo" />
-
       <section className="content">
         <div className="container-fluid">
           <div className='list-bug-report__header'>
