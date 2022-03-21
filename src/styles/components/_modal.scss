@@ -2,6 +2,7 @@
 .ant-modal-content {
     border-radius: 20px !important;
     overflow: hidden;
+
     .ant-modal-header {
         .ant-modal-title {
             padding-top: 10px;
@@ -12,6 +13,7 @@
             letter-spacing: -0.05em;
         }
     }
+
     .ant-modal-body {
         display: flex;
         flex-direction: column;
@@ -19,20 +21,24 @@
         justify-content: center;
     }
 }
+
 // spread modal css
 // delete type user modal
 .modal-delete-type-user {
     &__body {
         margin: 0 auto;
+
         p {
             font-size: 16px;
             line-height: 20px;
             color: #404b50;
+
             span {
                 font-size: 16px;
                 color: red;
             }
         }
+
         .btn-control {
             margin: 30px auto 0;
             display: flex;
@@ -40,6 +46,7 @@
         }
     }
 }
+
 // modal-delete-user
 .modal-delete-user {
     &__body {
@@ -57,6 +64,7 @@
             color: #404b50;
             margin: 10px 0;
         }
+
         .des {
             font-style: normal;
             font-weight: normal;
@@ -67,6 +75,7 @@
         }
     }
 }
+
 // modal-confirm-change-pass
 .modal-confirm-change-pass {
     &__body {
@@ -75,13 +84,16 @@
         align-items: center;
         justify-content: center;
     }
+
     .input-pass {
         margin-top: 15px;
     }
+
     .btn-control {
         margin: 15px auto;
     }
 }
+
 // modal-confirm-change-pass
 .modal-edit-bug-report {
     &__body {
@@ -92,11 +104,14 @@
                     color: red;
                 }
             }
+
             display: flex;
             flex-direction: column;
         }
+
         &--method {
             margin-top: 15px;
+
             label {
                 span {
                     font-weight: 600;
@@ -104,11 +119,52 @@
                 }
             }
         }
+
         &--note {
             margin-top: 15px;
         }
     }
+
     .btn-control {
         margin: 15px auto;
+    }
+}
+
+.modal__wrapper {
+    min-width: 600px;
+
+    .modal-detail-error {
+        &__body {
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        &__title {
+            text-align: center;
+            font-size: 20px;
+            line-height: 25px;
+        }
+
+        &__sub-title {
+            text-align: center;
+            font-style: italic;
+        }
+
+        &__content {
+            display: flex;
+            justify-content: space-between;
+
+            .title {
+                font-weight: 600;
+                color: #404B50;
+            }
+        }
+    }
+
+    .button-custom {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        border-radius: 8px;
     }
 }

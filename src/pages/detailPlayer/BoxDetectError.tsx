@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import { DatePicker, Table } from 'antd'
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
-import DetailErrorModal from '@app/components/modal/DetailErrorModal';
-import EditErrorModal from '@app/components/modal/EditErrorModal';
+import { useNavigate } from 'react-router-dom';
+import DeleteUserModal from '@app/components/modal/DeleteUser';
 import watchmoreIcon from "../../static/icon/watch-more.svg";
-import changeStatusIcon from "../../static/icon/change-status.svg";
+import resetPassIcon from "../../static/icon/reset-pass.svg";
 
 const { RangePicker } = DatePicker;
 
@@ -28,15 +27,20 @@ const BoxDetectError = () => {
 
     const listItem: ItemMoreOption[] = [
         {
-            key: 'detailError', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: handleOpenModal
+            key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
+                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+            }
         },
         {
             key: 'editInfo', name: 'Xem Lịch sử thay đổi', icon: watchmoreIcon, onClick: () => {
                 navigate('/nguoi-dung/chi-tiet-nguoi-dung')
             }
         },
+        { key: 'resetPass', name: 'Cấp mật khẩu', icon: '', onClick: handleOpenModal },
         {
-            key: 'editError', name: 'Chỉnh sửa', icon: changeStatusIcon, onClick: handleOpenModal
+            name: 'Đổi Trạng thái', icon: resetPassIcon, onClick: () => {
+                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+            }
         },
     ]
 
@@ -163,13 +167,8 @@ const BoxDetectError = () => {
             dataIndex: "key",
             render: () => <ThreeDot listItem={listItem} modals={
                 <>
-                    <DetailErrorModal
-                        isModalVisible={isShowModal === 'detailError'}
-                        handleOk={handleOk}
-                        handleCancel={handleCancel}
-                    />
-                    <EditErrorModal
-                        isModalVisible={isShowModal === 'editError'}
+                    <DeleteUserModal
+                        isModalVisible={isShowModal === 'delete'}
                         handleOk={handleOk}
                         handleCancel={handleCancel}
                     />

@@ -1,15 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@components";
+import { ContentHeader } from "@components";
 import TableCustom from "@app/components/table/Table";
-import {DataListBugProp} from "@app/utils/types";
-import {DatePicker, Input, Select} from "antd";
+import { DataListBugProp } from "@app/utils/types";
+import { DatePicker, Input, Select } from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
-const {Option} = Select;
+const { Option } = Select;
 const ListBugReport = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
@@ -20,7 +20,7 @@ const ListBugReport = () => {
       id: '#001',
       type: 'Tải Game',
       brief: 'Tải game lỗi',
-      address:'0x7ef6c419ecabcmdksc9ee',
+      address: '0x7ef6c419ecabcmdksc9ee',
       nameInGame: 'Ltrannn',
       datePublished: '13:00 - 01/01/2022',
       status: true
@@ -29,7 +29,7 @@ const ListBugReport = () => {
       id: '#002',
       type: 'Tải Game',
       brief: 'Tải game lỗi',
-      address:'0x7ef6c419ecabcmdksc9ee',
+      address: '0x7ef6c419ecabcmdksc9ee',
       nameInGame: 'Ltrannn',
       datePublished: '13:00 - 01/01/2022',
       status: false
@@ -38,7 +38,7 @@ const ListBugReport = () => {
       id: '#003',
       type: 'Tải Game',
       brief: 'Tải game lỗi',
-      address:'0x7ef6c419ecabcmdksc9ee',
+      address: '0x7ef6c419ecabcmdksc9ee',
       nameInGame: 'Ltrannn',
       datePublished: '13:00 - 01/01/2022',
       status: false
@@ -47,11 +47,13 @@ const ListBugReport = () => {
 
   const navigate = useNavigate();
 
-const listItem: ItemMoreOption[] = [
-  {key: 'detailInfo' ,name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-    navigate('/quan-li-bao-cao-loi/xem-chi-tiet')
-  }},
-]
+  const listItem: ItemMoreOption[] = [
+    {
+      key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
+        navigate('/quan-li-bao-cao-loi/xem-chi-tiet')
+      }
+    },
+  ]
   const columns = [
     {
       title: "Mã lỗi",
@@ -94,7 +96,7 @@ const listItem: ItemMoreOption[] = [
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} modals={null}/>
+      render: () => <ThreeDot listItem={listItem} modals={null} />
     }
   ];
   return (
@@ -105,14 +107,14 @@ const listItem: ItemMoreOption[] = [
         <div className="container-fluid">
           <div className="box-filter">
             <div className="box-filter__date">
-            <Input.Group compact>
-              <DatePicker.RangePicker style={{ width: '100%', borderRadius: '8px', marginRight: '10px' }} />
-            </Input.Group>
+              <Input.Group compact>
+                <DatePicker.RangePicker style={{ width: '100%', borderRadius: '8px', marginRight: '10px' }} />
+              </Input.Group>
             </div>
             <div className="box-filter__type-bug">
               <Select
                 defaultValue="Thể loại lỗi"
-                style={{width: 180}}
+                style={{ width: 180 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -123,7 +125,7 @@ const listItem: ItemMoreOption[] = [
             <div className="box-filter__status">
               <Select
                 defaultValue="Trạng thái"
-                style={{width: 120}}
+                style={{ width: 120 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -133,7 +135,7 @@ const listItem: ItemMoreOption[] = [
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={data} columns={columns}  />
+            <TableCustom data={data} columns={columns} />
           </div>
         </div>
       </section>

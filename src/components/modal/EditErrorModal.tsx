@@ -6,7 +6,7 @@ interface propsDeleteModal {
     handleOk?: () => void;
     handleCancel?: () => void;
 }
-const DetailErrorModal = (props: propsDeleteModal) => {
+const EditErrorModal = (props: propsDeleteModal) => {
 
     const { isModalVisible, handleOk, handleCancel } = props;
     return (
@@ -20,7 +20,7 @@ const DetailErrorModal = (props: propsDeleteModal) => {
             width={450}
         >
             <div className="modal-detail-error__body">
-                <h3 className="modal-detail-error__title">Chi tiết nghi vấn</h3>
+                <h3 className="modal-detail-error__title">Chỉnh sửa nghi vấn</h3>
                 <p className="modal-detail-error__sub-title">Thông tin cơ bản</p>
                 <div className="modal-detail-error__content">
                     <p className="title">Tên in-game:</p>
@@ -71,4 +71,4 @@ const DetailErrorModal = (props: propsDeleteModal) => {
     );
 };
 
-export default DetailErrorModal;
+export default EditErrorModal;
