@@ -10,8 +10,9 @@ import { Select } from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
+import { getListUsers } from "@app/utils/helpers";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
@@ -64,7 +65,16 @@ const ListUser = () => {
   const handleCancel = () => {
     setIsShowModal('');
   };
-  // status warning change password
+  // get data users
+  const [dataUsers, setDataUsers] = useState<any[]>()
+  useEffect(() => {
+    const getDataUsers = async () => {
+      const data: any = await getListUsers();
+      setDataUsers(data)
+    }
+    getDataUsers();
+  }, [])
+  console.log('dataUsers', dataUsers)
 
   const listItem: ItemMoreOption[] = [
     {
@@ -119,27 +129,22 @@ const ListUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} modals={
-        <>
-          <DeleteUserModal
-            isModalVisible={isShowModal === 'delete'}
-            handleOk={handleOk}
-            handleCancel={handleCancel}
-          />
-          <WarningChangePassModal
-            isModalVisible={isShowModal === 'resetPass'}
-            handleOk={handleOk}
-            handleCancel={handleCancel}
-          />
-        </>
-      }
-      />
+      render: () => <ThreeDot listItem={listItem} />
     }
   ];
   return (
     <div className="list-user-page">
       <ContentHeader title="Danh sách người dùng" />
-
+      <DeleteUserModal
+        isModalVisible={isShowModal === 'delete'}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
+      <WarningChangePassModal
+        isModalVisible={isShowModal === 'resetPass'}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
       <section className="content">
         <div className="container-fluid">
           <div className="header-box">

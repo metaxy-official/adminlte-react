@@ -124,14 +124,7 @@ const ManagePlayer = () => {
 
             title: "",
             dataIndex: "key",
-            render: () => <ThreeDot listItem={listItem} modals={
-                <DeleteUserTypeModal
-                    isModalVisible={isShowModalDelete}
-                    handleOk={handleOk}
-                    handleCancel={handleCancel}
-                />
-            }
-            />
+            render: () => <ThreeDot listItem={listItem} />
         }
     ]
 
@@ -139,6 +132,11 @@ const ManagePlayer = () => {
         <section className="content">
             <div className="container-fluid">
                 <ContentHeader title="Danh sách người chơi" />
+                <DeleteUserTypeModal
+                    isModalVisible={isShowModalDelete}
+                    handleOk={handleOk}
+                    handleCancel={handleCancel}
+                />
                 <div className="header-box">
                     <div className="header-box__search">
                         <SearchBox placeholder="Nhập tên trong game hoặc địa chỉ ví của người dùng" />

@@ -96,7 +96,7 @@ const ListBugReport = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} modals={null} />
+      render: () => <ThreeDot listItem={listItem} />
     }
   ];
   return (

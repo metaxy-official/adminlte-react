@@ -64,14 +64,7 @@ const ManagerUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} modals={
-          <DeleteUserTypeModal
-          isModalVisible={isShowModalDelete}
-          handleOk={handleOk}
-          handleCancel={handleCancel}
-        /> 
-      } 
-      />
+      render: () => <ThreeDot listItem= {listItem} />
     }
   ];
 
@@ -103,6 +96,11 @@ const ManagerUser = () => {
   return (
     <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />
+      <DeleteUserTypeModal
+          isModalVisible={isShowModalDelete}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        /> 
       <section className="content">
         <div className="container-fluid">
           <div className="header-box">

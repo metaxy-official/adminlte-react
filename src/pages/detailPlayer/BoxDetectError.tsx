@@ -2,17 +2,15 @@ import React, { useState } from 'react'
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import { DatePicker, Table } from 'antd'
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
-import { useNavigate } from 'react-router-dom';
-import DeleteUserModal from '@app/components/modal/DeleteUser';
+import DetailErrorModal from '@app/components/modal/DetailErrorModal';
+import EditErrorModal from '@app/components/modal/EditErrorModal';
 import watchmoreIcon from "../../static/icon/watch-more.svg";
-import resetPassIcon from "../../static/icon/reset-pass.svg";
 
 const { RangePicker } = DatePicker;
 
 
 const BoxDetectError = () => {
 
-    const navigate = useNavigate();
     // state for modal detail
     const [isShowModal, setIsShowModal] = useState<string>();
     const handleOpenModal = (value?: string) => {
@@ -27,21 +25,10 @@ const BoxDetectError = () => {
 
     const listItem: ItemMoreOption[] = [
         {
-            key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-            }
+            key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: handleOpenModal
         },
-        {
-            key: 'editInfo', name: 'Xem Lịch sử thay đổi', icon: watchmoreIcon, onClick: () => {
-                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-            }
-        },
-        { key: 'resetPass', name: 'Cấp mật khẩu', icon: '', onClick: handleOpenModal },
-        {
-            name: 'Đổi Trạng thái', icon: resetPassIcon, onClick: () => {
-                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-            }
-        },
+        { key: 'editInfo', name: 'Xem Lịch sử thay đổi', icon: '', onClick: handleOpenModal },
+        { key: 'resetPass', name: 'Cấp mật khẩu', icon: 'resetPassIcon', onClick: handleOpenModal },
     ]
 
     const dataSource = [
@@ -165,15 +152,7 @@ const BoxDetectError = () => {
         {
             title: "",
             dataIndex: "key",
-            render: () => <ThreeDot listItem={listItem} modals={
-                <>
-                    <DeleteUserModal
-                        isModalVisible={isShowModal === 'delete'}
-                        handleOk={handleOk}
-                        handleCancel={handleCancel}
-                    />
-                </>
-            }
+            render: () => <ThreeDot listItem={listItem}
             />
         }
     ];
@@ -188,6 +167,16 @@ const BoxDetectError = () => {
     return (
         <div className="detail-box-player">
             <BoxComponent title='Thông tin nghi vấn vi phạm' listInfo={fakeDataInfoHero} />
+            <DetailErrorModal
+                isModalVisible={isShowModal === 'detailInfo'}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
+            <EditErrorModal
+                isModalVisible={isShowModal === 'EditlInfo'}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách nghi vấn vi phạm của người chơi</h3>
                 <div className="table-filter">

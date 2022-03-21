@@ -4,7 +4,6 @@ import BoxComponent, { Info } from '@app/components/boxComponent'
 import { DatePicker, Table } from 'antd'
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
 import DetailErrorModal from '@app/components/modal/DetailErrorModal';
-import EditErrorModal from '@app/components/modal/EditErrorModal';
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import changeStatusIcon from "../../static/icon/change-status.svg";
 
@@ -35,8 +34,11 @@ const BoxDetectError = () => {
                 navigate('/nguoi-dung/chi-tiet-nguoi-dung')
             }
         },
+        { key: 'resetPass', name: 'Cấp mật khẩu', icon: '', onClick: handleOpenModal },
         {
-            key: 'editError', name: 'Chỉnh sửa', icon: changeStatusIcon, onClick: handleOpenModal
+            name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
+                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+            }
         },
     ]
 
@@ -161,21 +163,7 @@ const BoxDetectError = () => {
         {
             title: "",
             dataIndex: "key",
-            render: () => <ThreeDot listItem={listItem} modals={
-                <>
-                    <DetailErrorModal
-                        isModalVisible={isShowModal === 'detailError'}
-                        handleOk={handleOk}
-                        handleCancel={handleCancel}
-                    />
-                    <EditErrorModal
-                        isModalVisible={isShowModal === 'editError'}
-                        handleOk={handleOk}
-                        handleCancel={handleCancel}
-                    />
-                </>
-            }
-            />
+            render: () => <ThreeDot listItem={listItem} />
         }
     ];
 
@@ -189,6 +177,11 @@ const BoxDetectError = () => {
     return (
         <div className="detail-box-player">
             <BoxComponent title='Thông tin nghi vấn vi phạm' listInfo={fakeDataInfoHero} />
+            <DetailErrorModal
+                isModalVisible={isShowModal === 'detailError'}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách nghi vấn vi phạm của người chơi</h3>
                 <div className="table-filter">
