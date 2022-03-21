@@ -16,7 +16,7 @@ const {TabPane} = Tabs;
 function callback(key: any) {
   console.log(key);
 }
-const GameInfoSub1 = () => {
+const ItemManager = () => {
   const data: any[] = [
     {
       key: "1",
@@ -130,4 +130,4 @@ const GameInfoSub1 = () => {
   );
 };
 
-export default GameInfoSub1;
+export default ItemManager;

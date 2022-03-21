@@ -7,6 +7,10 @@ import BugIcon from '../../../static/icon/bug.svg'
 import NotiIngameIcon from '../../../static/icon/noti-ingame.svg'
 import NotiTypeIcon from '../../../static/icon/noti-type.svg'
 import NotiUserIcon from '../../../static/icon/noti-user.svg'
+import ItemIcon from '../../../static/icon/item-icon.svg'
+import Rank from '../../../static/icon/rank.svg'
+import User from '../../../static/icon/user.svg'
+import DeveloperBoard from '../../../static/icon/developer_board.svg'
 
 export interface IMenuItem {
   name: string;
@@ -55,13 +59,25 @@ export const MENU: IMenuItem[] = [
     logo: <i className="nav-icon fas fa-wrench" />,
     children: [
       {
-        name: 'Quản lí 1',
+        name: 'Vật phẩm trong game',
+        logo: <img src={ItemIcon} alt="icon-notification" className="ml-3" />,
         path: '/gameinfo-manager-sub1'
       },
 
       {
-        name: 'Quản lí 2',
+        name: 'Rank',
+        logo: <img src={Rank} alt="icon-notification" className="ml-3" />,
         path: '/gameinfo-manager-sub2'
+      },
+      {
+        name: 'Level Story',
+        logo: <img src={DeveloperBoard} alt="icon-notification" className="ml-3" />,
+        path: '/gameinfo-manager-sub3'
+      },
+      {
+        name: 'Hero',
+        logo: <img src={User} alt="icon-notification" className="ml-3" />,
+        path: '/gameinfo-manager-sub4'
       }
     ]
   },
