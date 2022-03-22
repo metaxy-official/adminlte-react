@@ -56,3 +56,19 @@ export interface DataNotificationInGame {
     createdAt: string;
     status: boolean;
 }
+export interface ListDataNotification {
+    id: string;
+    type: string;
+    description: string;
+    note: string;
+    createdAt: string;
+}
+export interface DataListNotifyUser {
+    key: number | string;
+    title: string;
+    type: string;
+    address: string;
+    reporter: string;
+    from: string;
+    createdAt: string;
+}
