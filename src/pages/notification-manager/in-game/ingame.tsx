@@ -3,12 +3,12 @@
 /* eslint-disable react/jsx-no-bind */
 import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
-import { DataNotificationInGame} from "@app/utils/types";
+import {DataNotificationInGame} from "@app/utils/types";
 import {DatePicker, Input, Select} from "antd";
-import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
-import { useNavigate } from "react-router-dom";
+import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
+import {useNavigate} from "react-router-dom";
 import BtnCreate from "@app/components/btnCreate";
-import watchmoreIcon from "../../static/icon/watch-more.svg";
+import watchmoreIcon from "../../../static/icon/watch-more.svg";
 
 const {Option} = Select;
 const NotificationInGame = () => {
@@ -18,44 +18,49 @@ const NotificationInGame = () => {
 
   const data: DataNotificationInGame[] = [
     {
-      id:'1',
-      title: 'Bản cập nhật mới',
-      type: 'Cập Nhật',
-      to: 'Tất cả',
-      reporter: 'Ltrannn',
-      note: '',
-      createdAt: '13:00 - 01/01/2022',
+      id: "1",
+      title: "Bản cập nhật mới",
+      type: "Cập Nhật",
+      to: "Tất cả",
+      reporter: "Ltrannn",
+      note: "",
+      createdAt: "13:00 - 01/01/2022",
       status: true
     },
     {
-      id:'2',
-      title: 'Bản cập nhật mới',
-      type: 'Cập Nhật',
-      to: 'Tất cả',
-      reporter: 'Ltrannn',
-      note: '',
-      createdAt: '13:00 - 01/01/2022',
+      id: "2",
+      title: "Bản cập nhật mới",
+      type: "Cập Nhật",
+      to: "Tất cả",
+      reporter: "Ltrannn",
+      note: "",
+      createdAt: "13:00 - 01/01/2022",
       status: false
     },
     {
-      id:'3',
-      title: 'Bản cập nhật mới',
-      type: 'Cập Nhật',
-      to: 'Tất cả',
-      reporter: 'Ltrannn',
-      note: '',
-      createdAt: '13:00 - 01/01/2022',
+      id: "3",
+      title: "Bản cập nhật mới",
+      type: "Cập Nhật",
+      to: "Tất cả",
+      reporter: "Ltrannn",
+      note: "",
+      createdAt: "13:00 - 01/01/2022",
       status: true
     }
   ];
 
   const navigate = useNavigate();
 
-const listItem: ItemMoreOption[] = [
-  {key: 'detailInfo' ,name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-    navigate('/quan-li-bao-cao-loi/xem-chi-tiet')
-  }},
-]
+  const listItem: ItemMoreOption[] = [
+    {
+      key: "detailInfo",
+      name: "Xem chi tiết",
+      icon: watchmoreIcon,
+      onClick: () => {
+        navigate("/quan-li-thong-bao/trong-game/chi-tiet-thong-bao");
+      }
+    }
+  ];
   const columns = [
     {
       title: "Tiêu đề",
@@ -98,7 +103,7 @@ const listItem: ItemMoreOption[] = [
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} />
+      render: () => <ThreeDot listItem={listItem} />
     }
   ];
   return (
@@ -106,12 +111,18 @@ const listItem: ItemMoreOption[] = [
       <ContentHeader title="Danh sách thông báo" />
       <section className="content">
         <div className="container-fluid">
-          <div className='list-bug-report__header'>
+          <div className="list-bug-report__header">
             <div className="box-filter">
               <div className="box-filter__date">
-              <Input.Group compact>
-                <DatePicker.RangePicker style={{ width: '100%', borderRadius: '8px', marginRight: '10px' }} />
-              </Input.Group>
+                <Input.Group compact>
+                  <DatePicker.RangePicker
+                    style={{
+                      width: "100%",
+                      borderRadius: "8px",
+                      marginRight: "10px"
+                    }}
+                  />
+                </Input.Group>
               </div>
               <div className="box-filter__type-bug">
                 <Select
@@ -137,11 +148,11 @@ const listItem: ItemMoreOption[] = [
               </div>
             </div>
             <div>
-              <BtnCreate path='/' content='Tạo thông báo' />
+              <BtnCreate path="/" content="Tạo thông báo" />
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={data} columns={columns}  />
+            <TableCustom data={data} columns={columns} />
           </div>
         </div>
       </section>
