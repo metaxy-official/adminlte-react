@@ -13,7 +13,10 @@ import { setWindowSize } from '@app/store/reducers/ui';
 // import Dashboard from "@pages/Dashboard";
 import ListUser from "@app/pages/list-users";
 import Profile from "@pages/profile/Profile";
-import GameInfoSub1 from './pages/gameInfo-manager/GameInfoSub1';
+import ItemManager from './pages/gameInfo-manager/ItemManager';
+import RankManager from './pages/gameInfo-manager/RankManager';
+import LevelStoryManager from './pages/gameInfo-manager/LevelStoryManager';
+import HeroManager from './pages/gameInfo-manager/HeroManager';
 import ManagePlayer from './pages/manage-player';
 
 import PublicRoute from "./routes/PublicRoute";
@@ -61,8 +64,10 @@ const App = () => {
           <Route path="/kieu-nguoi-dung/tao-nguoi-dung" element={<CreateUser />}/>
           <Route path="/kieu-nguoi-dung/tao-kieu-nguoi-dung" element={<CreateTypeUser />}/>
           <Route path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"element={<DetailUser />}/>
-          <Route path="/gameinfo-manager-sub1" element={<GameInfoSub1 />} />
-          <Route path="/gameinfo-manager-sub2" element={<GameInfoSub1 />} />
+          <Route path="/gameinfo-manager-sub1" element={<ItemManager />} />
+          <Route path="/gameinfo-manager-sub2" element={<RankManager />} />
+          <Route path="/gameinfo-manager-sub3" element={<LevelStoryManager />} />
+          <Route path="/gameinfo-manager-sub4" element={<HeroManager />} />
           <Route path="/nguoi-choi" element={<ManagePlayer />} />
           <Route path="/nguoi-choi/chi-tiet-nguoi-choi" element={<DetailPlayer />}/>
           <Route path="/quan-li-thong-bao/trong-game" element={<NotificationInGame/>} />
