@@ -29,7 +29,7 @@ import CreateUser from "./pages/create-user";
 import ListBugReport from "./pages/list-bug-report";
 import BugDetailsReport from "./pages/bug-details-report";
 import NotificationInGame from "./pages/notification-manager/in-game/ingame";
-import NotificationType from "./pages/notification-manager/type/type";
+import NotificationType from "./pages/notification-manager/list-type-notify/list-type";
 import NotificationUsers from "./pages/notification-manager/users/users";
 import CreateNotification from "./pages/create-notification";
 import DetailNotificationInGame from "./pages/notification-manager/in-game/details-notification";
