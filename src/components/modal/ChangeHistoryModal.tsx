@@ -1,14 +1,29 @@
 import React from "react";
-import { Modal, Button } from "antd";
+import { Modal, Table } from "antd";
 
-interface propsDeleteModal {
+export interface dataHistoryItem {
+    key: string;
+    numberChange: string;
+    title: string;
+    statusSolution: boolean;
+    action: string;
+    note: string;
+    lastUpdate: string;
+    userChange: string;
+}
+
+
+interface propsChangeHistoryModal {
     isModalVisible: boolean;
     handleOk?: () => void;
     handleCancel?: () => void;
-}
-const DetailErrorModal = (props: propsDeleteModal) => {
+    dataHistory: dataHistoryItem[];
+    columnHistory: any;
 
-    const { isModalVisible, handleOk, handleCancel } = props;
+}
+const ChangeHistoryModal = (props: propsChangeHistoryModal) => {
+
+    const { isModalVisible, handleOk, handleCancel, dataHistory, columnHistory } = props;
     return (
         <Modal
             className="modal__wrapper modal-detail-error"
@@ -20,7 +35,7 @@ const DetailErrorModal = (props: propsDeleteModal) => {
             width={450}
         >
             <div className="modal-detail-error__body">
-                <h3 className="modal-detail-error__title">Chi tiết nghi vấn</h3>
+                <h3 className="modal-detail-error__title">Lịch sử thay đổi</h3>
                 <p className="modal-detail-error__sub-title">Thông tin cơ bản</p>
                 <div className="modal-detail-error__content">
                     <p className="title">Tên in-game:</p>
@@ -47,28 +62,13 @@ const DetailErrorModal = (props: propsDeleteModal) => {
                     <p className="title">Thời gian phát hiện:</p>
                     <p className="content">13:00 - 01/01/2022</p>
                 </div>
-                <div className="modal-detail-error__content">
-                    <p className="title">Giá trị giao dịch:</p>
-                    <p className="content">100000 MXY</p>
-                </div>
-                <div className="modal-detail-error__content">
-                    <p className="title">Đánh giá nghi vấn:</p>
-                    <p className="content">0x7ca7e8...572af33f</p>
-                </div>
-                <div className="modal-detail-error__content">
-                    <p className="title">Lần cuối sửa:</p>
-                    <p className="content">Chưa cập nhật</p>
-                </div>
-
             </div>
-            <div className="btn-control">
-                <Button className="mr-2 button-custom" onClick={handleCancel}>Huỷ</Button>
-                <Button className="ml-2 button-custom" type="primary">
-                    Đồng ý
-                </Button>
+            <p className="modal-detail-error__sub-title">Thông tin cơ bản</p>
+            <div className="modal-detail-error__table">
+                <Table dataSource={dataHistory} columns={columnHistory} pagination={false} />
             </div>
         </Modal>
     );
 };
 
-export default DetailErrorModal;
+export default ChangeHistoryModal;

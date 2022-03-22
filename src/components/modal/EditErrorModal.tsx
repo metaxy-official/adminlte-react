@@ -1,12 +1,18 @@
+/* eslint-disable react/jsx-no-bind */
 import React from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, Select, Input } from "antd";
 
 interface propsDeleteModal {
     isModalVisible: boolean;
     handleOk?: () => void;
     handleCancel?: () => void;
 }
-const DetailErrorModal = (props: propsDeleteModal) => {
+const EditErrorModal = (props: propsDeleteModal) => {
+    const { Option } = Select;
+
+    function handleChange(value: any) {
+        console.log(`selected ${value}`);
+    }
 
     const { isModalVisible, handleOk, handleCancel } = props;
     return (
@@ -20,7 +26,7 @@ const DetailErrorModal = (props: propsDeleteModal) => {
             width={450}
         >
             <div className="modal-detail-error__body">
-                <h3 className="modal-detail-error__title">Chi tiết nghi vấn</h3>
+                <h3 className="modal-detail-error__title">Chỉnh sửa nghi vấn</h3>
                 <p className="modal-detail-error__sub-title">Thông tin cơ bản</p>
                 <div className="modal-detail-error__content">
                     <p className="title">Tên in-game:</p>
@@ -59,7 +65,29 @@ const DetailErrorModal = (props: propsDeleteModal) => {
                     <p className="title">Lần cuối sửa:</p>
                     <p className="content">Chưa cập nhật</p>
                 </div>
-
+                <div className="modal-detail-error__content modal-detail-error--select">
+                    <p className="title">Đánh giá nghi vấn (*)</p>
+                    <Select onChange={handleChange} placeholder="Chọn đánh giá nghi vấn">
+                        <Option value="1">An toàn</Option>
+                        <Option value="2">Bug</Option>
+                        <Option value="3">Vi phạm</Option>
+                    </Select>
+                </div>
+                <div className="modal-detail-error__content modal-detail-error--select">
+                    <p className="title">Trạng thái xử lí (*) </p>
+                    <Select onChange={handleChange} placeholder="Chọn trạng thái xử lí">
+                        <Option value="1">Đã xử lí</Option>
+                        <Option value="2">Chưa xử lí</Option>
+                    </Select>
+                </div>
+                <div className="modal-detail-error__content modal-detail-error--select">
+                    <p className="title">Phương án xử lí (*) </p>
+                    <Input placeholder="Nhập phương án xử lí" />
+                </div>
+                <div className="modal-detail-error__content modal-detail-error--select">
+                    <p className="title">Ghi chú </p>
+                    <Input placeholder="Nhập ghi chú" />
+                </div>
             </div>
             <div className="btn-control">
                 <Button className="mr-2 button-custom" onClick={handleCancel}>Huỷ</Button>
@@ -67,8 +95,8 @@ const DetailErrorModal = (props: propsDeleteModal) => {
                     Đồng ý
                 </Button>
             </div>
-        </Modal>
+        </Modal >
     );
 };
 
-export default DetailErrorModal;
+export default EditErrorModal;

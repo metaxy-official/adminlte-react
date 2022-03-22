@@ -33,7 +33,7 @@ function DetailPlayer() {
     return (
         <div className="container-fuild detail-player">
             <BoxInfoHeader data={DataHeaderInfo} />
-            <div className="tabs">
+            <div className="tabs detail-player__content">
                 <Tabs defaultActiveKey="1" onChange={callback} className="tabs--outbox">
                     <TabPane tab="Thông tin cơ bản" key="1">
                         <BoxInfoBasic data={DataBasicInfo} />

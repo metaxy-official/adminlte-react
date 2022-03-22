@@ -69,7 +69,7 @@ const ListUser = () => {
   const [dataUsers, setDataUsers] = useState<any[]>()
   useEffect(() => {
     const getDataUsers = async () => {
-      const data:any = await getListUsers();
+      const data: any = await getListUsers();
       setDataUsers(data)
     }
     getDataUsers();
