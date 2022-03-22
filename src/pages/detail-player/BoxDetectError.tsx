@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import { DatePicker, Table } from 'antd'
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
 import DetailErrorModal from '@app/components/modal/DetailErrorModal';
+import EditErrorModal from '@app/components/modal/EditErrorModal';
+import ChangeHistoryModal, { dataHistoryItem } from '@app/components/modal/ChangeHistoryModal';
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import changeStatusIcon from "../../static/icon/change-status.svg";
 
@@ -12,7 +13,6 @@ const { RangePicker } = DatePicker;
 
 const BoxDetectError = () => {
 
-    const navigate = useNavigate();
     // state for modal detail
     const [isShowModal, setIsShowModal] = useState<string>();
     const handleOpenModal = (value?: string) => {
@@ -30,15 +30,87 @@ const BoxDetectError = () => {
             key: 'detailError', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: handleOpenModal
         },
         {
-            key: 'editInfo', name: 'Xem Lịch sử thay đổi', icon: watchmoreIcon, onClick: () => {
-                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-            }
+            key: 'changeHistory', name: 'Xem Lịch sử thay đổi', icon: watchmoreIcon, onClick: handleOpenModal
         },
-        { key: 'resetPass', name: 'Cấp mật khẩu', icon: '', onClick: handleOpenModal },
+        { key: 'editError', name: 'Chỉnh sửa', icon: changeStatusIcon, onClick: handleOpenModal },
+
+    ]
+
+    const dataHistory: dataHistoryItem[] = [
         {
-            name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
-                navigate('/nguoi-dung/chi-tiet-nguoi-dung')
-            }
+            key: '1',
+            numberChange: '1',
+            title: ' bug',
+            statusSolution: true,
+            action: 'Đã cảnh Báo user',
+            note: '',
+            lastUpdate: '13:00 - 01/01/2022',
+            userChange: 'Long Tran Thanh',
+        },
+        {
+            key: '2',
+            numberChange: '2',
+            title: ' notConfirm',
+            statusSolution: false,
+            action: '',
+            note: 'Chờ đánh giá',
+            lastUpdate: '13:00 - 01/01/2022',
+            userChange: 'Long Tran Thanh',
+        },
+    ]
+
+    const columnHistory = [
+        {
+            title: 'Lần thay đổi',
+            dataIndex: 'numberChange',
+            key: 'numberChange',
+        },
+        {
+            title: 'đánh giá nghi vấn',
+            dataIndex: 'title',
+            key: 'title',
+            render: (title: string) => {
+                if (title === 'notConfirm') {
+                    return <div className="status-not-active">Chưa đánh giá</div>
+                }
+                if (title === 'bug') {
+                    return <div className="status-error">Chưa đánh giá</div>
+                }
+                return <div className="status-actived">An toàn</div>
+
+            },
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'statusSolution',
+            key: 'statusSolution',
+            render: (event: boolean) => {
+                if (event) {
+                    return <div className="status-actived">Đã xử lí</div>
+                }
+                return <div className="status-not-active">Chưa xử lí</div>
+
+            },
+        },
+        {
+            title: 'Phương án xử lí',
+            dataIndex: 'action',
+            key: 'action',
+        },
+        {
+            title: 'Ghi chú',
+            dataIndex: 'note',
+            key: 'note',
+        },
+        {
+            title: 'Thời gian thay đổi',
+            dataIndex: 'lastUpdate',
+            key: 'lastUpdate',
+        },
+        {
+            title: 'Người thay đổi',
+            dataIndex: 'userChange',
+            key: 'userChange',
         },
     ]
 
@@ -181,6 +253,18 @@ const BoxDetectError = () => {
                 isModalVisible={isShowModal === 'detailError'}
                 handleOk={handleOk}
                 handleCancel={handleCancel}
+            />
+            <EditErrorModal
+                isModalVisible={isShowModal === 'editError'}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
+            <ChangeHistoryModal
+                isModalVisible={isShowModal === 'changeHistory'}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+                dataHistory={dataHistory}
+                columnHistory={columnHistory}
             />
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách nghi vấn vi phạm của người chơi</h3>

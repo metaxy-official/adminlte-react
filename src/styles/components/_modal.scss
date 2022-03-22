@@ -159,6 +159,16 @@
                 color: #404B50;
             }
         }
+
+        &--select {
+            flex-direction: column;
+
+            .ant-select {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 20px;
+            }
+        }
     }
 
     .button-custom {
