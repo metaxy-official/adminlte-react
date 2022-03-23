@@ -7,7 +7,7 @@ import { IToken, ITokens } from '../store/userToken/constants'
 
 const baseURL = process.env.REACT_APP_GATEKEEPER_URL;
 
-const axios = createService(baseURL);
+export const axios = createService(baseURL);
 
 export const loginByAuth = async (email: string, password: string) => {
   const token = await Gatekeeper.loginByAuth(email, password);

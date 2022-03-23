@@ -5,14 +5,14 @@ import { ContentHeader } from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import BtnCreate from "@app/components/btnCreate";
-import { DataListUserProp } from "@app/utils/types";
+import { DataListUserProp, ItemRole } from "@app/utils/types";
 import { Select } from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
 import { useEffect, useState } from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
-import { getListUsers } from "@app/utils/helpers";
+import { formatTime, getListUsers } from "@app/utils";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
@@ -25,33 +25,6 @@ const ListUser = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
-
-  const data: DataListUserProp[] = [
-    {
-      key: "1",
-      name: "Nguyễn Văn A",
-      email: "nguyenvana@gmail.com",
-      role: "Marketing",
-      dateActived: "01/01/2022",
-      status: true
-    },
-    {
-      key: "2",
-      name: "Nguyễn Văn A",
-      email: "nguyenvana@gmail.com",
-      role: "Marketing",
-      dateActived: "01/01/2022",
-      status: true
-    },
-    {
-      key: "3",
-      name: "Nguyễn Văn A",
-      email: "nguyenvana@gmail.com",
-      role: "Marketing",
-      dateActived: "01/01/2022",
-      status: false
-    }
-  ];
 
   const navigate = useNavigate();
   // state for modal detail
@@ -66,10 +39,11 @@ const ListUser = () => {
     setIsShowModal('');
   };
   // get data users
-  const [dataUsers, setDataUsers] = useState<any[]>()
+  const [dataUsers, setDataUsers] = useState<DataListUserProp[]>([])
+
   useEffect(() => {
     const getDataUsers = async () => {
-      const data: any = await getListUsers();
+      const data = await getListUsers();
       setDataUsers(data)
     }
     getDataUsers();
@@ -98,24 +72,27 @@ const ListUser = () => {
   const columns = [
     {
       title: "Họ và tên",
-      dataIndex: "name",
+      dataIndex: "fullName",
       render: (text: string) => <p>{text}</p>
     },
     {
+      key: 'email',
       title: "Email",
       dataIndex: "email"
     },
     {
       title: "Vai trò",
-      dataIndex: "role"
+      dataIndex: "roles",
+      render: (role:ItemRole[]) => role.map((item:ItemRole)=><p key = 'fullName'>{item.name}</p>)
     },
     {
       title: "Ngày tham gia",
-      dataIndex: "dateActived"
+      dataIndex: "createdAt",
+      render: (date:string)=><p>{formatTime(date)}</p>
     },
     {
       title: "Trạng thái",
-      dataIndex: "status",
+      dataIndex: "isActive",
       render: (status: boolean) => (
         <>
           {status ? (
@@ -181,7 +158,7 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={data} columns={columns} dataSelection />
+            <TableCustom data={dataUsers.map((item, index) => {return {...item, key: index}})} columns={columns} dataSelection />
           </div>
         </div>
       </section>
