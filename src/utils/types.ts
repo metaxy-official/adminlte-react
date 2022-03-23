@@ -4,13 +4,18 @@ export interface DataManagerUserProp {
     creator: string;
     createdDate: string;
 }
+
+export interface ItemRole {
+    name: string;
+    id: string;
+}
 export interface DataListUserProp {
-    key: number | string;
+    id: string;
     name: string;
     email: string;
-    role: string;
-    dateActived: string;
-    status: boolean;
+    roles: ItemRole[];
+    createdAt: string;
+    isActive: boolean;
 }
 export interface DataListItemGoldProp {
     key: number | string;

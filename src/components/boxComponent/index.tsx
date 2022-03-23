@@ -28,7 +28,7 @@ const BoxComponent = (props: BoxComponentProps) => {
             <div className="infor-body">
                 {listInfo.map((item) => {
                     return (
-                        <div className="infor-body-box">
+                        <div key={item.name} className="infor-body-box">
                             <p className="infor-body-box__title">{item.name}</p>
                             <p className="infor-body-box__des">{item.value}</p>
                         </div>

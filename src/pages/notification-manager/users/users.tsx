@@ -10,9 +10,8 @@ import { Select, DatePicker } from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
-import { getListUsers } from "@app/utils/helpers";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
 import editIcon from "../../../static/icon/edit.svg";
 import deleteIcon from "../../../static/icon/delete.svg";
@@ -22,6 +21,7 @@ import changeStatusIcon from "../../../static/icon/change-status.svg";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const NotificationUsers = () => {
+
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
@@ -68,16 +68,7 @@ const NotificationUsers = () => {
   const handleCancel = () => {
     setIsShowModal('');
   };
-  // get data users
-  const [dataUsers, setDataUsers] = useState<any[]>()
-  useEffect(() => {
-    const getDataUsers = async () => {
-      const data: any = await getListUsers();
-      setDataUsers(data)
-    }
-    getDataUsers();
-  }, [])
-  console.log('dataUsers', dataUsers)
+
 
   const listItem: ItemMoreOption[] = [
     {
