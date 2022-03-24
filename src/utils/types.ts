@@ -4,13 +4,18 @@ export interface DataManagerUserProp {
     creator: string;
     createdDate: string;
 }
+
+export interface ItemRole {
+    name: string;
+    id: string;
+}
 export interface DataListUserProp {
-    key: number | string;
+    id: string;
     name: string;
     email: string;
-    role: string;
-    dateActived: string;
-    status: boolean;
+    roles: ItemRole[];
+    createdAt: string;
+    isActive: boolean;
 }
 export interface DataListItemGoldProp {
     key: number | string;
@@ -55,4 +60,20 @@ export interface DataNotificationInGame {
     note: string;
     createdAt: string;
     status: boolean;
+}
+export interface ListDataNotification {
+    id: string;
+    type: string;
+    description: string;
+    note: string;
+    createdAt: string;
+}
+export interface DataListNotifyUser {
+    key: number | string;
+    title: string;
+    type: string;
+    address: string;
+    reporter: string;
+    from: string;
+    createdAt: string;
 }

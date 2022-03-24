@@ -1,30 +1,60 @@
+
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
 import { ContentHeader } from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
-import BtnCreate from "@app/components/btnCreate";
-import { DataListUserProp, ItemRole } from "@app/utils/types";
-import { Select } from "antd";
+import { DataListNotifyUser } from "@app/utils/types";
+import { Select, DatePicker } from "antd";
 import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
 import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
-import { formatTime, getListUsers } from "@app/utils";
-import watchmoreIcon from "../../static/icon/watch-more.svg";
-import editIcon from "../../static/icon/edit.svg";
-import deleteIcon from "../../static/icon/delete.svg";
-import resetPassIcon from "../../static/icon/reset-pass.svg";
-import changeStatusIcon from "../../static/icon/change-status.svg";
+import watchmoreIcon from "../../../static/icon/watch-more.svg";
+import editIcon from "../../../static/icon/edit.svg";
+import deleteIcon from "../../../static/icon/delete.svg";
+import resetPassIcon from "../../../static/icon/reset-pass.svg";
+import changeStatusIcon from "../../../static/icon/change-status.svg";
 
 const { Option } = Select;
+const { RangePicker } = DatePicker;
+const NotificationUsers = () => {
 
-const ListUser = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
+
+  const data: DataListNotifyUser[] = [
+    {
+      key: "1",
+      title: "bản cập nhật mới",
+      type: "Cập Nhật",
+      address: "0x28890a71...afd8feba4d",
+      reporter: "Ltrannn",
+      from: "CMS",
+      createdAt: "13:00 - 01/01/2022"
+    },
+    {
+      key: "2",
+      title: "bản cập nhật mới",
+      type: "Cập Nhật",
+      address: "0x28890a71...afd8feba4d",
+      reporter: "Ltrannn",
+      from: "CMS",
+      createdAt: "13:00 - 01/01/2022"
+    },
+    {
+      key: "3",
+      title: "bản cập nhật mới",
+      type: "Cập Nhật",
+      address: "0x28890a71...afd8feba4d",
+      reporter: "Ltrannn",
+      from: "CMS",
+      createdAt: "13:00 - 01/01/2022"
+    }
+  ];
 
   const navigate = useNavigate();
   // state for modal detail
@@ -38,17 +68,7 @@ const ListUser = () => {
   const handleCancel = () => {
     setIsShowModal('');
   };
-  // get data users
-  const [dataUsers, setDataUsers] = useState<DataListUserProp[]>([])
 
-  useEffect(() => {
-    const getDataUsers = async () => {
-      const data = await getListUsers();
-      setDataUsers(data)
-    }
-    getDataUsers();
-  }, [])
-  console.log('dataUsers', dataUsers)
 
   const listItem: ItemMoreOption[] = [
     {
@@ -71,37 +91,29 @@ const ListUser = () => {
   ]
   const columns = [
     {
-      title: "Họ và tên",
-      dataIndex: "fullName",
+      title: "Tiêu đề",
+      dataIndex: "title",
       render: (text: string) => <p>{text}</p>
     },
     {
-      key: 'email',
-      title: "Email",
-      dataIndex: "email"
+      title: "Thể loại Thông báo",
+      dataIndex: "type"
     },
     {
-      title: "Vai trò",
-      dataIndex: "roles",
-      render: (role:ItemRole[]) => role.map((item:ItemRole)=><p key = 'fullName'>{item.name}</p>)
+      title: "Địa chỉ ví",
+      dataIndex: "address"
     },
     {
-      title: "Ngày tham gia",
-      dataIndex: "createdAt",
-      render: (date:string)=><p>{formatTime(date)}</p>
+      title: "Người đăng",
+      dataIndex: "reporter"
     },
     {
-      title: "Trạng thái",
-      dataIndex: "isActive",
-      render: (status: boolean) => (
-        <>
-          {status ? (
-            <div className="status-actived">Đang hoạt động</div>
-          ) : (
-            <div className="status-not-active">Dừng hoạt động</div>
-          )}
-        </>
-      )
+      title: "Đến từ",
+      dataIndex: "from"
+    },
+    {
+      title: "Thời gian tạo",
+      dataIndex: "createdAt"
     },
     {
       title: "",
@@ -128,16 +140,15 @@ const ListUser = () => {
             <div className="header-box__search">
               <SearchBox placeholder="Nhập họ tên hoặc email của người dùng" />
             </div>
-            <BtnCreate
-              path="/kieu-nguoi-dung/tao-nguoi-dung"
-              content="Tạo người dùng"
-            />
           </div>
           <div className="box-filter">
+            <div className='box-filter__date'>
+              <RangePicker />
+            </div>
             <div className="box-filter__left">
               <Select
-                defaultValue="Vai trò người dùng"
-                style={{ width: 180 }}
+                placeholder="Nền tảng"
+                style={{ width: 180, marginLeft: '20px' }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -147,8 +158,19 @@ const ListUser = () => {
             </div>
             <div className="box-filter__right">
               <Select
-                defaultValue="Trạng thái"
-                style={{ width: 120 }}
+                placeholder="Thể loại thông báo"
+                style={{ width: 200 }}
+                onChange={handleChange}
+              >
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="Yiminghe">yiminghe</Option>
+              </Select>
+            </div>
+            <div className="box-filter__right">
+              <Select
+                placeholder="Trạng thái"
+                style={{ width: 120, marginLeft: '20px' }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -158,7 +180,7 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={dataUsers.map((item, index) => {return {...item, key: index}})} columns={columns} dataSelection />
+            <TableCustom data={data} columns={columns} />
           </div>
         </div>
       </section>
@@ -166,4 +188,4 @@ const ListUser = () => {
   );
 };
 
-export default ListUser;
+export default NotificationUsers;
