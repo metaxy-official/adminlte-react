@@ -13,11 +13,11 @@ import { setWindowSize } from "@app/store/reducers/ui";
 // import Dashboard from "@pages/Dashboard";
 import ListUser from "@app/pages/list-users";
 import Profile from "@pages/profile/Profile";
-import ItemManager from './pages/gameInfo-manager/ItemManager';
-import RankManager from './pages/gameInfo-manager/RankManager';
-import LevelStoryManager from './pages/gameInfo-manager/LevelStoryManager';
-import HeroManager from './pages/gameInfo-manager/HeroManager';
-import ManagePlayer from './pages/manage-player';
+import ItemManager from "./pages/gameInfo-manager/ItemManager";
+import RankManager from "./pages/gameInfo-manager/RankManager";
+import LevelStoryManager from "./pages/gameInfo-manager/LevelStoryManager";
+import HeroManager from "./pages/gameInfo-manager/HeroManager";
+import ManagePlayer from "./pages/manage-player";
 
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -64,6 +64,10 @@ const App = () => {
           <Route path="/" element={<Main />}>
             <Route path="/nguoi-dung" element={<ListUser />} />
             <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+            <Route
+              path="/nguoi-dung/chi-tiet-nguoi-dung/:id"
+              element={<DetailUser />}
+            />
             <Route
               path="/kieu-nguoi-dung/tao-nguoi-dung"
               element={<CreateUser />}

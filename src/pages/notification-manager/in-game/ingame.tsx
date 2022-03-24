@@ -103,7 +103,7 @@ const NotificationInGame = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} />
+      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
     }
   ];
   return (

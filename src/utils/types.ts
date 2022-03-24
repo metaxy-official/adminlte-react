@@ -77,3 +77,13 @@ export interface DataListNotifyUser {
     from: string;
     createdAt: string;
 }
+
+export interface DataUser {
+    email: string;
+    createdAt: string;
+    fullName: string;
+    isActive: string;
+    phoneNumber: string;
+    role: [];
+    note: string;
+}

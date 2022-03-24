@@ -9,7 +9,7 @@ import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import {useNavigate} from "react-router-dom";
 import BtnCreate from "@app/components/btnCreate";
 import DetailsNotify from "@app/components/modal/Details-notify";
-import { useState } from "react";
+import {useState} from "react";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
 import editIcon from "../../../static/icon/edit.svg";
 import deleteIcon from "../../../static/icon/delete.svg";
@@ -19,39 +19,39 @@ const ListTypeNotification = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
-      // state for modal detail
-      const [isShowModal, setIsShowModal] = useState<boolean>(false);
-      const handleOpenModal = () => {
-        setIsShowModal(true);
-      };
-      const handleOk = () => {
-        setIsShowModal(false);
-      };
-      const handleCancel = () => {
-        setIsShowModal(false);
-      };
+  // state for modal detail
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const handleOpenModal = () => {
+    setIsShowModal(true);
+  };
+  const handleOk = () => {
+    setIsShowModal(false);
+  };
+  const handleCancel = () => {
+    setIsShowModal(false);
+  };
   const data: ListDataNotification[] = [
     {
       id: "1",
       type: "Cập Nhật",
       description: "Dành cho các thông báo liên quan đến cập nhật",
       note: "",
-      createdAt: "13:00 - 01/01/2022",
+      createdAt: "13:00 - 01/01/2022"
     },
     {
       id: "1",
       type: "Cập Nhật",
       description: "Dành cho các thông báo liên quan đến cập nhật",
       note: "",
-      createdAt: "13:00 - 01/01/2022",
+      createdAt: "13:00 - 01/01/2022"
     },
     {
       id: "1",
       type: "Cập Nhật",
       description: "Dành cho các thông báo liên quan đến cập nhật",
       note: "",
-      createdAt: "13:00 - 01/01/2022",
-    },
+      createdAt: "13:00 - 01/01/2022"
+    }
   ];
 
   const navigate = useNavigate();
@@ -63,8 +63,14 @@ const ListTypeNotification = () => {
       icon: watchmoreIcon,
       onClick: handleOpenModal
     },
-    {name: 'Chỉnh sửa', icon: editIcon, onClick: handleOpenModal},
-    {name: 'Xóa', icon: deleteIcon, onClick: ()=>{navigate('/')}}
+    {name: "Chỉnh sửa", icon: editIcon, onClick: handleOpenModal},
+    {
+      name: "Xóa",
+      icon: deleteIcon,
+      onClick: () => {
+        navigate("/");
+      }
+    }
   ];
   const columns = [
     {
@@ -87,7 +93,7 @@ const ListTypeNotification = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} />
+      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
     }
   ];
 

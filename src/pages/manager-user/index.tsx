@@ -6,14 +6,14 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/order */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ContentHeader } from "@components";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {ContentHeader} from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
-import { DataManagerUserProp } from "@app/utils/types";
-import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
+import {DataManagerUserProp} from "@app/utils/types";
+import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
@@ -64,43 +64,49 @@ const ManagerUser = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} />
+      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
     }
   ];
 
   const navigate = useNavigate();
-    // state for modal detail
-    const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
-    const handleOpenModalDelete = () => {
-      setIsShowModalDelete(true);
-    };
-    const handleOk = () => {
-      setIsShowModalDelete(false);
-    };
-    const handleCancel = () => {
-      setIsShowModalDelete(false);
-    };
+  // state for modal detail
+  const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
+  const handleOpenModalDelete = () => {
+    setIsShowModalDelete(true);
+  };
+  const handleOk = () => {
+    setIsShowModalDelete(false);
+  };
+  const handleCancel = () => {
+    setIsShowModalDelete(false);
+  };
 
   const listItem: ItemMoreOption[] = [
-    {name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-      navigate('/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung')
-    }},
-    {name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
-      navigate('/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung')
-    }},
-    {name: 'Xóa', icon: deleteIcon, onClick: handleOpenModalDelete}
-  ]
-
-
+    {
+      name: "Xem chi tiết",
+      icon: watchmoreIcon,
+      onClick: () => {
+        navigate("/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung");
+      }
+    },
+    {
+      name: "Chỉnh sửa",
+      icon: editIcon,
+      onClick: () => {
+        navigate("/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung");
+      }
+    },
+    {name: "Xóa", icon: deleteIcon, onClick: handleOpenModalDelete}
+  ];
 
   return (
     <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />
       <DeleteUserTypeModal
-          isModalVisible={isShowModalDelete}
-          handleOk={handleOk}
-          handleCancel={handleCancel}
-        /> 
+        isModalVisible={isShowModalDelete}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
       <section className="content">
         <div className="container-fluid">
           <div className="header-box">
