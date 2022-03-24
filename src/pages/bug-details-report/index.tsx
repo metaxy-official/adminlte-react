@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 
 import React, { useState } from 'react';
-import BoxComponent, {  Info } from '@app/components/boxComponent';
+import BoxComponent, { Info } from '@app/components/boxComponent';
 import EditBugReportModal from '@app/components/modal/EditBugReport';
 import img from '../../static/images/404.png'
 
 function DetailPlayer() {
-  const dataInfo:Info[] = [
+  const dataInfo: Info[] = [
     {
       name: 'Mã lỗi:',
       value: '#001'
@@ -39,7 +39,7 @@ function DetailPlayer() {
     },
     {
       name: 'Ảnh lỗi:',
-      value: <img src={img} alt="img-bug"/>
+      value: <img src={img} alt="img-bug" />
     },
     {
       name: 'Trạng thái xử lí:',
@@ -69,17 +69,17 @@ function DetailPlayer() {
     setIsModalVisible(false);
   };
 
-    return (
-        <div className="container-fuild">
-            <BoxComponent title="Thông tin báo cáo lỗi" handleEdit={showModal} listInfo={dataInfo}/>
-            <BoxComponent title="Thông tin chi tiết lỗi" listInfo={dataBugDetails}/>
-            <EditBugReportModal
-                isModalVisible={isModalVisible}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
-            />
-        </div>
-    );
+  return (
+    <div className="container-fuild">
+      <BoxComponent title="Thông tin báo cáo lỗi" handleEdit={showModal} listInfo={dataInfo} />
+      <BoxComponent title="Thông tin chi tiết lỗi" listInfo={dataBugDetails} />
+      <EditBugReportModal
+        isModalVisible={isModalVisible}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
+    </div>
+  );
 }
 
 export default DetailPlayer;

@@ -8,7 +8,7 @@ interface propsDeleteModal {
     handleOk?: () => void;
     handleCancel?: () => void;
 }
-const ChangeStatusModal = (props: propsDeleteModal) => {
+const ChangePlayerModal = (props: propsDeleteModal) => {
     const handleChange = (value: string) => {
         console.log(`selected ${value}`);
     };
@@ -17,7 +17,7 @@ const ChangeStatusModal = (props: propsDeleteModal) => {
     return (
         <Modal
             className="modal__wrapper modal-detail-error"
-            title="Thay đổi trạng thái"
+            title="Chỉnh sửa người chơi"
             visible={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
@@ -26,6 +26,10 @@ const ChangeStatusModal = (props: propsDeleteModal) => {
         >
             <div className="modal-detail-error__body">
                 <div className="modal-detail-error__content modal-detail-error--select">
+                    <p className="title">Ghi chú </p>
+                    <Input placeholder="Nhập ghi chú" />
+                </div>
+                <div className="modal-detail-error__content modal-detail-error--select">
                     <p className="title">Trạng thái (*)</p>
                     <Select onChange={handleChange} placeholder="Chọn đánh giá nghi vấn">
                         <Option value="1">Đang hoạt động</Option>
@@ -33,8 +37,8 @@ const ChangeStatusModal = (props: propsDeleteModal) => {
                     </Select>
                 </div>
                 <div className="modal-detail-error__content modal-detail-error--select">
-                    <p className="title">Lí do (*)  </p>
-                    <Input placeholder="Nhập ghi chú" />
+                    <p className="title">Lí do (*) </p>
+                    <Input placeholder="Nhập lí do" />
                 </div>
             </div>
             <div className="btn-control">
@@ -47,4 +51,4 @@ const ChangeStatusModal = (props: propsDeleteModal) => {
     );
 };
 
-export default ChangeStatusModal;
+export default ChangePlayerModal;

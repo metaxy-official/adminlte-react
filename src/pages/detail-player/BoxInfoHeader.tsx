@@ -1,36 +1,52 @@
-import React from 'react'
-import { DataHeaderInfo1 } from '@app/utils/types';
-import { ReactComponent as EditIcon } from '../../static/icon/edit.svg';
+import BoxComponent, { Info } from '@app/components/boxComponent'
+import ChangePlayerModal from '@app/components/modal/ChangePlayerModal';
+import React, { useState } from 'react'
 
-interface BoxInfoHeaderProps {
-    data: DataHeaderInfo1
-}
 
-const BoxInfoHeader = (props: BoxInfoHeaderProps) => {
-    const { data } = props
+
+const BoxInfoHeader = () => {
+
+
+    const dataInfo: Info[] = [
+        {
+            name: 'Địa chỉ ví:',
+            value: '0x7ef6c419ecabcmdksc9ee'
+        },
+        {
+            name: 'Quốc gia:',
+            value: 'Việt Nam'
+        },
+        {
+            name: 'Vai trò:',
+            value: 'Người chơi'
+        },
+
+    ]
+
+    // status modal
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+
     return (
-        <div className="box-information">
-            <div className="infor-header">
-                <p>{data.name}</p>
-                <div className="infor-header-btn">
-                    <EditIcon fill="#2d7ff9" />
-                    <p>Chỉnh sửa</p>
-                </div>
-            </div>
-            <div className="infor-body">
-                <div className="infor-body-box">
-                    <p className="infor-body-box__title">Địa chỉ ví:</p>
-                    <p className="infor-body-box__des">{data.address}</p>
-                </div>
-                <div className="infor-body-box">
-                    <p className="infor-body-box__title">Quốc gia:</p>
-                    <p className="infor-body-box__des">{data.nation}</p>
-                </div>
-                <div className="infor-body-box">
-                    <p className="infor-body-box__title">Vai trò:</p>
-                    <p className="infor-body-box__des">{data.role}</p>
-                </div>
-            </div>
+        <div className="container-fuild">
+            <BoxComponent title="Ltrannnn" handleEdit={showModal} listInfo={dataInfo} />
+            <ChangePlayerModal
+                isModalVisible={isModalVisible}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
         </div>
     )
 }

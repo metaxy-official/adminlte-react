@@ -12,6 +12,7 @@ export interface BoxComponentProps {
     title: string;
     listInfo: Info[];
     handleEdit?: () => void;
+
 }
 
 const BoxComponent = (props: BoxComponentProps) => {
@@ -23,7 +24,7 @@ const BoxComponent = (props: BoxComponentProps) => {
                 {handleEdit && <div onClick={handleEdit} className="infor-header-btn">
                     <EditIcon fill="#2d7ff9" />
                     <p>Chỉnh sửa</p>
-                 </div>}
+                </div>}
             </div>
             <div className="infor-body">
                 {listInfo.map((item) => {

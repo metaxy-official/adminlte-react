@@ -31,6 +31,7 @@ import BugDetailsReport from './pages/bug-details-report';
 import NotificationInGame from './pages/notification-manager/ingame';
 import NotificationType from './pages/notification-manager/type';
 import NotificationUsers from './pages/notification-manager/users';
+import EditUser from './pages/edit-user';
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -58,26 +59,27 @@ const App = () => {
           <Route path="/recover-password" element={<RecoverPassword />} />
         </Route>
         <Route path="/" element={<PrivateRoute />}>
-        <Route path="/" element={<Main />}>
-          <Route path="/nguoi-dung" element={<ListUser />} />
-          <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
-          <Route path="/kieu-nguoi-dung/tao-nguoi-dung" element={<CreateUser />}/>
-          <Route path="/kieu-nguoi-dung/tao-kieu-nguoi-dung" element={<CreateTypeUser />}/>
-          <Route path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"element={<DetailUser />}/>
-          <Route path="/gameinfo-manager-sub1" element={<ItemManager />} />
-          <Route path="/gameinfo-manager-sub2" element={<RankManager />} />
-          <Route path="/gameinfo-manager-sub3" element={<LevelStoryManager />} />
-          <Route path="/gameinfo-manager-sub4" element={<HeroManager />} />
-          <Route path="/nguoi-choi" element={<ManagePlayer />} />
-          <Route path="/nguoi-choi/chi-tiet-nguoi-choi" element={<DetailPlayer />}/>
-          <Route path="/quan-li-thong-bao/trong-game" element={<NotificationInGame/>} />
-          <Route path="/quan-li-thong-bao/the-loai" element={<NotificationType/>} />
-          <Route path="/quan-li-thong-bao/nguoi-choi" element={<NotificationUsers/>} />
-          <Route path="/quan-li-bao-cao-loi" element={<ListBugReport />} />
-          <Route path="/quan-li-bao-cao-loi/xem-chi-tiet" element={<BugDetailsReport />} />
-          <Route path="/" element={<ListUser />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
+          <Route path="/" element={<Main />}>
+            <Route path="/nguoi-dung" element={<ListUser />} />
+            <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+            <Route path="/kieu-nguoi-dung/tao-nguoi-dung" element={<CreateUser />} />
+            <Route path="/kieu-nguoi-dung/tao-kieu-nguoi-dung" element={<CreateTypeUser />} />
+            <Route path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung" element={<DetailUser />} />
+            <Route path="/gameinfo-manager-sub1" element={<ItemManager />} />
+            <Route path="/gameinfo-manager-sub2" element={<RankManager />} />
+            <Route path="/gameinfo-manager-sub3" element={<LevelStoryManager />} />
+            <Route path="/gameinfo-manager-sub4" element={<HeroManager />} />
+            <Route path="/nguoi-choi" element={<ManagePlayer />} />
+            <Route path="/nguoi-choi/chi-tiet-nguoi-choi" element={<DetailPlayer />} />
+            <Route path="/quan-li-thong-bao/trong-game" element={<NotificationInGame />} />
+            <Route path="/quan-li-thong-bao/the-loai" element={<NotificationType />} />
+            <Route path="/quan-li-thong-bao/nguoi-choi" element={<NotificationUsers />} />
+            <Route path="/quan-li-bao-cao-loi" element={<ListBugReport />} />
+            <Route path="/quan-li-bao-cao-loi/xem-chi-tiet" element={<BugDetailsReport />} />
+            <Route path="/" element={<ListUser />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/chinh-sua-nguoi-dung" element={<EditUser />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
