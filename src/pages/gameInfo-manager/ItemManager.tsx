@@ -1,15 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {Tabs} from 'antd';
-import {ContentHeader} from '@components';
-import '../../styles/pages/gameinfo.scss';
-import TableCustom from '@app/components/table/Table';
-import SearchBox from '@app/components/searchbox/SearchBox';
-import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
-import DeleteUserModal from '@app/components/modal/DeleteUser';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import {Tabs} from "antd";
+import {ContentHeader} from "@components";
+import "../../styles/pages/gameinfo.scss";
+import TableCustom from "@app/components/table/Table";
+import SearchBox from "@app/components/searchbox/SearchBox";
+import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
+import DeleteUserModal from "@app/components/modal/DeleteUser";
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 import editIcon from "../../static/icon/edit.svg";
-import TabContent from './TabContent';
+import TabContent from "./TabContent";
 import deleteIcon from "../../static/icon/delete.svg";
 
 const {TabPane} = Tabs;
@@ -56,17 +56,22 @@ const ItemManager = () => {
     setIsShowModal(value);
   };
   const handleOk = () => {
-    setIsShowModal('');
+    setIsShowModal("");
   };
   const handleCancel = () => {
-    setIsShowModal('');
+    setIsShowModal("");
   };
   const listItem: ItemMoreOption[] = [
-    {key: 'editInfo', name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
-      navigate('/')
-    }},
-    {key: 'delete',name: 'Xóa', icon: deleteIcon, onClick: handleOpenModal}
-  ]
+    {
+      key: "editInfo",
+      name: "Chỉnh sửa",
+      icon: editIcon,
+      onClick: () => {
+        navigate("/");
+      }
+    },
+    {key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal}
+  ];
   const columns = [
     {
       title: "Pack",
@@ -96,17 +101,17 @@ const ItemManager = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem= {listItem} />
+      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
     }
   ];
   return (
     <div className="gameinfo">
       <ContentHeader title="Vật phẩm trong game" />
       <DeleteUserModal
-        isModalVisible={isShowModal === 'delete'}
+        isModalVisible={isShowModal === "delete"}
         handleOk={handleOk}
         handleCancel={handleCancel}
-      /> 
+      />
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Tab 1" key="1">
           <div>
@@ -124,7 +129,7 @@ const ItemManager = () => {
         <div className="header-box__search mb-4">
           <SearchBox placeholder="Nhập tên gói packs" />
         </div>
-        <TableCustom data={data} columns={columns} dataSelection  />
+        <TableCustom data={data} columns={columns} dataSelection />
       </div>
     </div>
   );
