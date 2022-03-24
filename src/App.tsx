@@ -1,14 +1,14 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./styles/main.scss";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "@modules/main/Main";
 import Login from "@modules/login/Login";
 import ForgetPassword from "@modules/forgot-password/ForgotPassword";
 import RecoverPassword from "@modules/recover-password/RecoverPassword";
-import {useWindowSize} from "@app/hooks/useWindowSize";
-import {calculateWindowSize} from "@app/utils/helpers";
-import {useDispatch, useSelector} from "react-redux";
-import {setWindowSize} from "@app/store/reducers/ui";
+import { useWindowSize } from "@app/hooks/useWindowSize";
+import { calculateWindowSize } from "@app/utils/helpers";
+import { useDispatch, useSelector } from "react-redux";
+import { setWindowSize } from "@app/store/reducers/ui";
 
 // import Dashboard from "@pages/Dashboard";
 import ListUser from "@app/pages/list-users";
@@ -24,6 +24,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import CreateTypeUser from "./pages/create-type-user";
 import DetailUser from "./pages/detail-user";
 import ManagerUser from "./pages/manager-user";
+import EditUser from './pages/edit-user';
 import DetailPlayer from "./pages/detail-player";
 import CreateUser from "./pages/create-user";
 import ListBugReport from "./pages/list-bug-report";
@@ -75,10 +76,10 @@ const App = () => {
               path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
               element={<DetailUser />}
             />
-          <Route path="/gameinfo-manager-sub1" element={<ItemManager />} />
-          <Route path="/gameinfo-manager-sub2" element={<RankManager />} />
-          <Route path="/gameinfo-manager-sub3" element={<LevelStoryManager />} />
-          <Route path="/gameinfo-manager-sub4" element={<HeroManager />} />
+            <Route path="/gameinfo-manager-sub1" element={<ItemManager />} />
+            <Route path="/gameinfo-manager-sub2" element={<RankManager />} />
+            <Route path="/gameinfo-manager-sub3" element={<LevelStoryManager />} />
+            <Route path="/gameinfo-manager-sub4" element={<HeroManager />} />
             <Route path="/nguoi-choi" element={<ManagePlayer />} />
             <Route
               path="/nguoi-choi/chi-tiet-nguoi-choi"
@@ -111,10 +112,11 @@ const App = () => {
             />
             <Route path="/" element={<ListUser />} />
             <Route path="/profile" element={<Profile />} />
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="/chinh-sua-nguoi-dung" element={<EditUser />} />
+          </Route >
+        </Route >
+      </Routes >
+    </BrowserRouter >
   );
 };
 

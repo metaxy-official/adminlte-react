@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@app/components";
-import {Button, Input, Select} from "antd";
+import { ContentHeader } from "@app/components";
+import { Button, Input, Select } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React from "react";
 
-const {Option} = Select;
+const { Option } = Select;
 
 function CreateUser() {
   function handleChange(value: string) {

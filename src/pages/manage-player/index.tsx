@@ -3,8 +3,8 @@ import { ContentHeader } from '@app/components'
 import SearchBox from '@app/components/searchbox/SearchBox'
 import { Table } from 'antd';
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
+import ChangeStatusModal from '@app/components/modal/ChangeStatusPlayer';
 import { useNavigate } from 'react-router-dom';
-import DeleteUserTypeModal from '@app/components/modal/DeleteTypeUser';
 import changeStatusIcon from "../../static/icon/change-status.svg";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
@@ -56,23 +56,24 @@ const ManagePlayer = () => {
     ];
     const navigate = useNavigate();
     // state for modal detail
-    const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
-    const handleOpenModalDelete = () => {
-        setIsShowModalDelete(true);
+    const [isShowModal, setIsShowModal] = useState<string>();
+    const handleOpenModal = (value?: string) => {
+        setIsShowModal(value);
     };
     const handleOk = () => {
-        setIsShowModalDelete(false);
+        setIsShowModal('');
     };
     const handleCancel = () => {
-        setIsShowModalDelete(false);
+        setIsShowModal('');
     };
+
     const listItem: ItemMoreOption[] = [
         {
             key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
                 navigate('/nguoi-choi/chi-tiet-nguoi-choi')
             }
         },
-        { key: 'delete', name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: handleOpenModalDelete }
+        { key: 'changeStatus', name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: handleOpenModal }
     ]
 
     const columns = [
@@ -132,8 +133,8 @@ const ManagePlayer = () => {
         <section className="content">
             <div className="container-fluid">
                 <ContentHeader title="Danh sách người chơi" />
-                <DeleteUserTypeModal
-                    isModalVisible={isShowModalDelete}
+                <ChangeStatusModal
+                    isModalVisible={isShowModal === 'changeStatus'}
                     handleOk={handleOk}
                     handleCancel={handleCancel}
                 />
