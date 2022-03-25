@@ -11,7 +11,8 @@ import changeStatusIcon from "../../static/icon/change-status.svg";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
 const ManagePlayer = () => {
-
+    const [id, setId] = useState<string>("");
+    const handleChangeId = (id: string = "") => setId(id);
     const navigate = useNavigate();
     // state for modal detail
     const [isShowModal, setIsShowModal] = useState<string>();
@@ -39,7 +40,7 @@ const ManagePlayer = () => {
     const listItem: ItemMoreOption[] = [
         {
             key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-                navigate('/nguoi-choi/chi-tiet-nguoi-choi')
+                navigate(`/nguoi-choi/chi-tiet-nguoi-choi/${id}`)
             }
         },
         { key: 'changeStatus', name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: handleOpenModal }
@@ -95,10 +96,11 @@ const ManagePlayer = () => {
             )
         },
         {
-
             title: "",
-            dataIndex: "key",
-            render: () => <ThreeDot onChangeID={() => { }} listItem={listItem} />
+            dataIndex: "id",
+            render: (id: string) => (
+                <ThreeDot onChangeID={handleChangeId} listItem={listItem} id={id} />
+            )
         }
     ]
 
