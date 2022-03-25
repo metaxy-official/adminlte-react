@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ContentHeader } from '@app/components'
 import SearchBox from '@app/components/searchbox/SearchBox'
-import { Table } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
 import ChangeStatusModal from '@app/components/modal/ChangeStatusPlayer';
-import { useNavigate } from 'react-router-dom';
+import { formatTime, getListPlayer, shortAddress } from '@app/utils';
+import { DataListPlayerProp } from '@app/utils/types';
+import TableCustom from '@app/components/table/Table';
 import changeStatusIcon from "../../static/icon/change-status.svg";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
@@ -12,48 +14,7 @@ import watchmoreIcon from "../../static/icon/watch-more.svg";
 
 const ManagePlayer = () => {
 
-    const dataSource = [
-        {
-            key: '1',
-            AddressWallet: '0x7ef6c419ec...c9ee',
-            NameInGame: '32',
-            Nation: 'Việt Nam',
-            Level: 500,
-            AcitonLast: '13:00 - 01/01/2022',
-            Day: '01/01/2022',
-            Status: true,
-        },
-        {
-            key: '2',
-            AddressWallet: '0x7ef6c419ec...c9ee',
-            NameInGame: '32',
-            Nation: 'Việt Nam',
-            Level: 500,
-            AcitonLast: '13:00 - 01/01/2022',
-            Day: '01/01/2022',
-            Status: true,
-        },
-        {
-            key: '3',
-            AddressWallet: '0x7ef6c419ec...c9ee',
-            NameInGame: '32',
-            Nation: 'Việt Nam',
-            Level: 500,
-            AcitonLast: '13:00 - 01/01/2022',
-            Day: '01/01/2022',
-            Status: true,
-        },
-        {
-            key: '4',
-            AddressWallet: '0x7ef6c419ec...c9ee',
-            NameInGame: '32',
-            Nation: 'Việt Nam',
-            Level: 500,
-            AcitonLast: '13:00 - 01/01/2022',
-            Day: '01/01/2022',
-            Status: false,
-        },
-    ];
+
     const navigate = useNavigate();
     // state for modal detail
     const [isShowModal, setIsShowModal] = useState<string>();
@@ -66,6 +27,17 @@ const ManagePlayer = () => {
     const handleCancel = () => {
         setIsShowModal('');
     };
+    const [dataPlayer, setDataPlayer] = useState<DataListPlayerProp[]>([])
+
+    useEffect(() => {
+        const getDataPlayer = async () => {
+            const data = await getListPlayer();
+            setDataPlayer(data)
+        }
+        getDataPlayer();
+    }, [])
+    console.log('dataUsers', dataPlayer)
+
 
     const listItem: ItemMoreOption[] = [
         {
@@ -79,44 +51,48 @@ const ManagePlayer = () => {
     const columns = [
         {
             title: 'Địa chí ví',
-            dataIndex: 'AddressWallet',
-            key: 'AddressWallet',
+            dataIndex: 'address',
+            key: 'address',
+            render: (transactionHash: string) => <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
         },
         {
             title: 'Tên trong game',
-            dataIndex: 'NameInGame',
-            key: 'NameInGame',
+            dataIndex: 'name',
+            key: 'name',
         },
         {
             title: 'Quốc Gia',
-            dataIndex: 'Nation',
-            key: 'Nation',
+            dataIndex: 'regionId',
+            key: 'regionId',
         },
         {
             title: 'Level Cao nhất',
-            dataIndex: 'Level',
-            key: 'Level',
+            dataIndex: 'highestLevel',
+            key: 'highestLevel',
         },
         {
             title: 'Lần Hoạt động gần nhất',
-            dataIndex: 'AcitonLast',
-            key: 'AcitonLast',
+            dataIndex: 'updatedAt',
+            key: 'updatedAt',
+            render: (date: string) => <p>{formatTime(date)}</p>
         },
         {
             title: 'Ngày tham gia',
-            dataIndex: 'Day',
-            key: 'Day',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (date: string) => <p>{formatTime(date)}</p>
         },
         {
             title: 'Trạng thái',
-            dataIndex: 'Status',
-            key: 'Status',
+            dataIndex: 'banned',
+            key: 'banned',
             render: (status: boolean) => (
                 <>
                     {status ? (
-                        <div className="status-actived">Đang hoạt động</div>
-                    ) : (
+
                         <div className="status-not-active">Dừng hoạt động</div>
+                    ) : (
+                        <div className="status-actived">Đang hoạt động</div>
                     )}
                 </>
             )
@@ -140,11 +116,14 @@ const ManagePlayer = () => {
                 />
                 <div className="header-box">
                     <div className="header-box__search">
-                        <SearchBox placeholder="Nhập tên trong game hoặc địa chỉ ví của người dùng" />
+                        <SearchBox
+                            placeholder="Nhập tên trong game hoặc địa chỉ ví của người dùng"
+
+                        />
                     </div>
                 </div>
                 <div className="table-custom my-5">
-                    <Table dataSource={dataSource} columns={columns} />
+                    <TableCustom data={dataPlayer.map((item, index) => { return { ...item, key: index } })} columns={columns} />
                 </div>
             </div>
         </section>

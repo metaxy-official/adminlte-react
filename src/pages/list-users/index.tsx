@@ -83,12 +83,12 @@ const ListUser = () => {
     {
       title: "Vai trò",
       dataIndex: "roles",
-      render: (role:ItemRole[]) => role.map((item:ItemRole)=><p key = 'fullName'>{item.name}</p>)
+      render: (role: ItemRole[]) => role.map((item: ItemRole) => <p key='fullName'>{item.name}</p>)
     },
     {
       title: "Ngày tham gia",
       dataIndex: "createdAt",
-      render: (date:string)=><p>{formatTime(date)}</p>
+      render: (date: string) => <p>{formatTime(date)}</p>
     },
     {
       title: "Trạng thái",
@@ -158,7 +158,7 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={dataUsers.map((item, index) => {return {...item, key: index}})} columns={columns} dataSelection />
+            <TableCustom data={dataUsers.map((item, index) => { return { ...item, key: index } })} columns={columns} dataSelection />
           </div>
         </div>
       </section>
