@@ -1,15 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import { ContentHeader } from "@components";
+import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
-import { DataListBugProp } from "@app/utils/types";
-import { DatePicker, Input, Select } from "antd";
-import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
-import { useNavigate } from "react-router-dom";
+import {DataListBugProp} from "@app/utils/types";
+import {DatePicker, Input, Select} from "antd";
+import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
+import {useNavigate} from "react-router-dom";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
-const { Option } = Select;
+const {Option} = Select;
 const ListBugReport = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
@@ -17,43 +17,46 @@ const ListBugReport = () => {
 
   const data: DataListBugProp[] = [
     {
-      id: '#001',
-      type: 'Tải Game',
-      brief: 'Tải game lỗi',
-      address: '0x7ef6c419ecabcmdksc9ee',
-      nameInGame: 'Ltrannn',
-      datePublished: '13:00 - 01/01/2022',
+      id: "#001",
+      type: "Tải Game",
+      brief: "Tải game lỗi",
+      address: "0x7ef6c419ecabcmdksc9ee",
+      nameInGame: "Ltrannn",
+      datePublished: "13:00 - 01/01/2022",
       status: true
     },
     {
-      id: '#002',
-      type: 'Tải Game',
-      brief: 'Tải game lỗi',
-      address: '0x7ef6c419ecabcmdksc9ee',
-      nameInGame: 'Ltrannn',
-      datePublished: '13:00 - 01/01/2022',
+      id: "#002",
+      type: "Tải Game",
+      brief: "Tải game lỗi",
+      address: "0x7ef6c419ecabcmdksc9ee",
+      nameInGame: "Ltrannn",
+      datePublished: "13:00 - 01/01/2022",
       status: false
     },
     {
-      id: '#003',
-      type: 'Tải Game',
-      brief: 'Tải game lỗi',
-      address: '0x7ef6c419ecabcmdksc9ee',
-      nameInGame: 'Ltrannn',
-      datePublished: '13:00 - 01/01/2022',
+      id: "#003",
+      type: "Tải Game",
+      brief: "Tải game lỗi",
+      address: "0x7ef6c419ecabcmdksc9ee",
+      nameInGame: "Ltrannn",
+      datePublished: "13:00 - 01/01/2022",
       status: false
-    },
+    }
   ];
 
   const navigate = useNavigate();
 
   const listItem: ItemMoreOption[] = [
     {
-      key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-        navigate('/quan-li-bao-cao-loi/xem-chi-tiet')
+      key: "detailInfo",
+      name: "Xem chi tiết",
+      icon: watchmoreIcon,
+      onClick: () => {
+        navigate("/quan-li-bao-cao-loi/xem-chi-tiet");
       }
-    },
-  ]
+    }
+  ];
   const columns = [
     {
       title: "Mã lỗi",
@@ -96,7 +99,7 @@ const ListBugReport = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} />
+      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
     }
   ];
   return (
@@ -108,13 +111,19 @@ const ListBugReport = () => {
           <div className="box-filter">
             <div className="box-filter__date">
               <Input.Group compact>
-                <DatePicker.RangePicker style={{ width: '100%', borderRadius: '8px', marginRight: '10px' }} />
+                <DatePicker.RangePicker
+                  style={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    marginRight: "10px"
+                  }}
+                />
               </Input.Group>
             </div>
             <div className="box-filter__type-bug">
               <Select
                 defaultValue="Thể loại lỗi"
-                style={{ width: 180 }}
+                style={{width: 180}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -125,7 +134,7 @@ const ListBugReport = () => {
             <div className="box-filter__status">
               <Select
                 defaultValue="Trạng thái"
-                style={{ width: 120 }}
+                style={{width: 120}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>

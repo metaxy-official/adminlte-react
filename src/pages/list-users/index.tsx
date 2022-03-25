@@ -22,53 +22,69 @@ import changeStatusIcon from "../../static/icon/change-status.svg";
 const { Option } = Select;
 
 const ListUser = () => {
+  const navigate = useNavigate();
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
-
-  const navigate = useNavigate();
+  // state and functions for getID
+  const [id, setId] = useState<string>("");
+  const handleChangeId = (id: string = "") => setId(id);
+  // const [textSearch, setTextSearch] = useState<string>();
+  const handleSearch = (value: String) => console.log(value);
   // state for modal detail
   const [isShowModal, setIsShowModal] = useState<string>();
   const handleOpenModal = (value?: string) => {
     setIsShowModal(value);
   };
   const handleOk = () => {
-    setIsShowModal('');
+    setIsShowModal("");
   };
   const handleCancel = () => {
-    setIsShowModal('');
+    setIsShowModal("");
   };
   // get data users
-  const [dataUsers, setDataUsers] = useState<DataListUserProp[]>([])
+  const [dataUsers, setDataUsers] = useState<DataListUserProp[]>([]);
 
   useEffect(() => {
     const getDataUsers = async () => {
       const data = await getListUsers();
-      setDataUsers(data)
-    }
+      setDataUsers(data);
+    };
     getDataUsers();
-  }, [])
-  console.log('dataUsers', dataUsers)
+  }, []);
 
   const listItem: ItemMoreOption[] = [
     {
-      key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      key: "detailInfo",
+      name: "Xem chi tiết",
+      icon: watchmoreIcon,
+      onClick: () => {
+        navigate(`/nguoi-dung/chi-tiet-nguoi-dung/${id}`);
       }
     },
     {
-      key: 'editInfo', name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
-        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      key: "editInfo",
+      name: "Chỉnh sửa",
+      icon: editIcon,
+      onClick: () => {
+        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
-    { key: 'resetPass', name: 'Cấp mật khẩu', icon: resetPassIcon, onClick: handleOpenModal },
     {
-      name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
-        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      key: "resetPass",
+      name: "Cấp mật khẩu",
+      icon: resetPassIcon,
+      onClick: handleOpenModal
+    },
+    {
+      name: "Đổi Trạng thái",
+      icon: changeStatusIcon,
+      onClick: () => {
+        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
-    { key: 'delete', name: 'Xóa', icon: deleteIcon, onClick: handleOpenModal }
-  ]
+    { key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal }
+  ];
   const columns = [
     {
       title: "Họ và tên",
@@ -76,14 +92,15 @@ const ListUser = () => {
       render: (text: string) => <p>{text}</p>
     },
     {
-      key: 'email',
+      key: "email",
       title: "Email",
       dataIndex: "email"
     },
     {
       title: "Vai trò",
       dataIndex: "roles",
-      render: (role: ItemRole[]) => role.map((item: ItemRole) => <p key='fullName'>{item.name}</p>)
+      render: (role: ItemRole[]) =>
+        role.map((item: ItemRole) => <p key="fullName">{item.name}</p>)
     },
     {
       title: "Ngày tham gia",
@@ -105,20 +122,22 @@ const ListUser = () => {
     },
     {
       title: "",
-      dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} />
+      dataIndex: "id",
+      render: (id: string) => (
+        <ThreeDot onChangeID={handleChangeId} listItem={listItem} id={id} />
+      )
     }
   ];
   return (
     <div className="list-user-page">
       <ContentHeader title="Danh sách người dùng" />
       <DeleteUserModal
-        isModalVisible={isShowModal === 'delete'}
+        isModalVisible={isShowModal === "delete"}
         handleOk={handleOk}
         handleCancel={handleCancel}
       />
       <WarningChangePassModal
-        isModalVisible={isShowModal === 'resetPass'}
+        isModalVisible={isShowModal === "resetPass"}
         handleOk={handleOk}
         handleCancel={handleCancel}
       />
@@ -126,7 +145,10 @@ const ListUser = () => {
         <div className="container-fluid">
           <div className="header-box">
             <div className="header-box__search">
-              <SearchBox placeholder="Nhập họ tên hoặc email của người dùng" />
+              <SearchBox
+                onSearch={handleSearch}
+                placeholder="Nhập họ tên hoặc email của người dùng"
+              />
             </div>
             <BtnCreate
               path="/kieu-nguoi-dung/tao-nguoi-dung"
@@ -158,7 +180,7 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={dataUsers.map((item, index) => { return { ...item, key: index } })} columns={columns} dataSelection />
+            <TableCustom data={dataUsers} columns={columns} dataSelection />
           </div>
         </div>
       </section>

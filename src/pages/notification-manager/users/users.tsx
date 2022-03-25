@@ -1,16 +1,15 @@
-
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import { ContentHeader } from "@components";
+import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
-import { DataListNotifyUser } from "@app/utils/types";
-import { Select, DatePicker } from "antd";
-import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
-import { useNavigate } from "react-router-dom";
+import {DataListNotifyUser} from "@app/utils/types";
+import {Select, DatePicker} from "antd";
+import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
+import {useNavigate} from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
-import { useState } from "react";
+import {useState} from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
 import editIcon from "../../../static/icon/edit.svg";
@@ -18,10 +17,9 @@ import deleteIcon from "../../../static/icon/delete.svg";
 import resetPassIcon from "../../../static/icon/reset-pass.svg";
 import changeStatusIcon from "../../../static/icon/change-status.svg";
 
-const { Option } = Select;
-const { RangePicker } = DatePicker;
+const {Option} = Select;
+const {RangePicker} = DatePicker;
 const NotificationUsers = () => {
-
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
@@ -63,32 +61,44 @@ const NotificationUsers = () => {
     setIsShowModal(value);
   };
   const handleOk = () => {
-    setIsShowModal('');
+    setIsShowModal("");
   };
   const handleCancel = () => {
-    setIsShowModal('');
+    setIsShowModal("");
   };
-
 
   const listItem: ItemMoreOption[] = [
     {
-      key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      key: "detailInfo",
+      name: "Xem chi tiết",
+      icon: watchmoreIcon,
+      onClick: () => {
+        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
     {
-      key: 'editInfo', name: 'Chỉnh sửa', icon: editIcon, onClick: () => {
-        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      key: "editInfo",
+      name: "Chỉnh sửa",
+      icon: editIcon,
+      onClick: () => {
+        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
-    { key: 'resetPass', name: 'Cấp mật khẩu', icon: resetPassIcon, onClick: handleOpenModal },
     {
-      name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: () => {
-        navigate('/nguoi-dung/chi-tiet-nguoi-dung')
+      key: "resetPass",
+      name: "Cấp mật khẩu",
+      icon: resetPassIcon,
+      onClick: handleOpenModal
+    },
+    {
+      name: "Đổi Trạng thái",
+      icon: changeStatusIcon,
+      onClick: () => {
+        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
-    { key: 'delete', name: 'Xóa', icon: deleteIcon, onClick: handleOpenModal }
-  ]
+    {key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal}
+  ];
   const columns = [
     {
       title: "Tiêu đề",
@@ -118,19 +128,19 @@ const NotificationUsers = () => {
     {
       title: "",
       dataIndex: "key",
-      render: () => <ThreeDot listItem={listItem} />
+      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
     }
   ];
   return (
     <div className="list-user-page">
       <ContentHeader title="Danh sách người dùng" />
       <DeleteUserModal
-        isModalVisible={isShowModal === 'delete'}
+        isModalVisible={isShowModal === "delete"}
         handleOk={handleOk}
         handleCancel={handleCancel}
       />
       <WarningChangePassModal
-        isModalVisible={isShowModal === 'resetPass'}
+        isModalVisible={isShowModal === "resetPass"}
         handleOk={handleOk}
         handleCancel={handleCancel}
       />
@@ -142,13 +152,13 @@ const NotificationUsers = () => {
             </div>
           </div>
           <div className="box-filter">
-            <div className='box-filter__date'>
+            <div className="box-filter__date">
               <RangePicker />
             </div>
             <div className="box-filter__left">
               <Select
                 placeholder="Nền tảng"
-                style={{ width: 180, marginLeft: '20px' }}
+                style={{width: 180, marginLeft: "20px"}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -159,7 +169,7 @@ const NotificationUsers = () => {
             <div className="box-filter__right">
               <Select
                 placeholder="Thể loại thông báo"
-                style={{ width: 200 }}
+                style={{width: 200}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -170,7 +180,7 @@ const NotificationUsers = () => {
             <div className="box-filter__right">
               <Select
                 placeholder="Trạng thái"
-                style={{ width: 120, marginLeft: '20px' }}
+                style={{width: 120, marginLeft: "20px"}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>

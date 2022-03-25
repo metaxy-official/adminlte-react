@@ -10,10 +10,7 @@ import TableCustom from '@app/components/table/Table';
 import changeStatusIcon from "../../static/icon/change-status.svg";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
-
-
 const ManagePlayer = () => {
-
 
     const navigate = useNavigate();
     // state for modal detail
@@ -101,7 +98,7 @@ const ManagePlayer = () => {
 
             title: "",
             dataIndex: "key",
-            render: () => <ThreeDot listItem={listItem} />
+            render: () => <ThreeDot onChangeID={() => { }} listItem={listItem} />
         }
     ]
 
@@ -127,8 +124,7 @@ const ManagePlayer = () => {
                 </div>
             </div>
         </section>
-
     )
-}
+};
 
-export default ManagePlayer
+export default ManagePlayer;

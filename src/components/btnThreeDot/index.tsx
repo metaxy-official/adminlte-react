@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -9,31 +10,38 @@ export interface ItemMoreOption {
   key?: string;
   icon: string;
   name: string;
-  onClick: (value?: string) => void;
+  onClick: (value?: any) => void;
 }
 interface Props {
-listItem : ItemMoreOption[]
+  id?: string;
+  listItem: ItemMoreOption[];
+  onChangeID: (value?: string) => void;
 }
 
 function ThreeDot(props: Props) {
-  const {listItem} = props
+  const {listItem, id = "", onChangeID} = props;
 
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsShowModal(false));
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const handleGetIDRecord = () => {
+    onChangeID(id);
+    setIsShowModal(true);
+  };
 
   return (
     <>
-      <div className="btn" onClick={() => setIsShowModal(true)}>
+      <div className="btn" onClick={handleGetIDRecord}>
         <img src={threeDotIcon} alt="icon" />
         {isShowModal && (
           <div ref={ref} className="more-action">
-          {listItem.map((item) =>
-          <div onClick={() => item.onClick(item.key)} key={item.key}>
-            <img src={item.icon} alt="icon" />
-            <p>{item.name}</p>
-          </div>)}
-        </div>
+            {listItem.map((item, index) => (
+              <div onClick={() => item.onClick(item.key)} key={index}>
+                <img src={item.icon} alt="icon" />
+                <p>{item.name}</p>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </>
