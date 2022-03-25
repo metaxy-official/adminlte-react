@@ -69,3 +69,12 @@ export const getUserById = async (id: string = '') => {
         );
     }
 }
+export const getListPlayer = async (page: string = '1', pageSize: string = '10', sortBy: string = 'createdAt%3Aasc') => {
+    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`
+    try {
+        const response = await axios.get(url);
+        return response.data.docs;
+    } catch (error) {
+        console.log("🚀 ~ file: helpers.ts ~ line 52 ~ getListPlayer ~ error", error)
+    }
+}

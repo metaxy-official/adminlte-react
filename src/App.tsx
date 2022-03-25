@@ -86,7 +86,7 @@ const App = () => {
             <Route path="/gameinfo-manager-sub4" element={<HeroManager />} />
             <Route path="/nguoi-choi" element={<ManagePlayer />} />
             <Route
-              path="/nguoi-choi/chi-tiet-nguoi-choi"
+              path="/nguoi-choi/chi-tiet-nguoi-choi/:id"
               element={<DetailPlayer />}
             />
             <Route

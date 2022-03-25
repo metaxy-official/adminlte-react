@@ -17,6 +17,18 @@ export interface DataListUserProp {
     createdAt: string;
     isActive: boolean;
 }
+export interface DataListPlayerProp {
+    id: string;
+    address: string;
+    name: string;
+    regionId: number;
+    highestLevel: number;
+    createdAt: string;
+    updatedAt: string;
+    banned: boolean;
+
+}
+
 export interface DataListItemGoldProp {
     key: number | string;
 }

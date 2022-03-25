@@ -1,25 +1,25 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@components";
+import { ContentHeader } from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import BtnCreate from "@app/components/btnCreate";
-import {DataListUserProp, ItemRole} from "@app/utils/types";
-import {Select} from "antd";
-import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
-import {useNavigate} from "react-router-dom";
+import { DataListUserProp, ItemRole } from "@app/utils/types";
+import { Select } from "antd";
+import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
+import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
-import {formatTime, getListUsers} from "@app/utils";
+import { formatTime, getListUsers } from "@app/utils";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import resetPassIcon from "../../static/icon/reset-pass.svg";
 import changeStatusIcon from "../../static/icon/change-status.svg";
 
-const {Option} = Select;
+const { Option } = Select;
 
 const ListUser = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ const ListUser = () => {
         navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
-    {key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal}
+    { key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal }
   ];
   const columns = [
     {
@@ -159,7 +159,7 @@ const ListUser = () => {
             <div className="box-filter__left">
               <Select
                 defaultValue="Vai trò người dùng"
-                style={{width: 180}}
+                style={{ width: 180 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -170,7 +170,7 @@ const ListUser = () => {
             <div className="box-filter__right">
               <Select
                 defaultValue="Trạng thái"
-                style={{width: 120}}
+                style={{ width: 120 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
