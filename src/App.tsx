@@ -23,7 +23,7 @@ import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 import CreateTypeUser from "./pages/create-type-user";
 import DetailUser from "./pages/detail-user";
-import ManagerUser from "./pages/manager-user";
+import ManagerTypeUser from "./pages/manager-type-user";
 import EditUser from './pages/edit-user';
 import DetailPlayer from "./pages/detail-player";
 import CreateUser from "./pages/create-user";
@@ -34,6 +34,7 @@ import NotificationType from "./pages/notification-manager/list-type-notify/list
 import NotificationUsers from "./pages/notification-manager/users/users";
 import CreateNotification from "./pages/create-notification";
 import DetailNotificationInGame from "./pages/notification-manager/in-game/details-notification";
+import DetailTypeUser from "./pages/detail-type-user";
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -63,7 +64,7 @@ const App = () => {
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Main />}>
             <Route path="/nguoi-dung" element={<ListUser />} />
-            <Route path="/kieu-nguoi-dung" element={<ManagerUser />} />
+            <Route path="/kieu-nguoi-dung" element={<ManagerTypeUser />} />
             <Route
               path="/nguoi-dung/chi-tiet-nguoi-dung/:id"
               element={<DetailUser />}
@@ -77,8 +78,8 @@ const App = () => {
               element={<CreateTypeUser />}
             />
             <Route
-              path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung"
-              element={<DetailUser />}
+              path="/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung/:id"
+              element={<DetailTypeUser />}
             />
             <Route path="/gameinfo-manager-sub1" element={<ItemManager />} />
             <Route path="/gameinfo-manager-sub2" element={<RankManager />} />
