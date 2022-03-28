@@ -12,13 +12,13 @@ import {ContentHeader} from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
-import { DataTypeUser} from "@app/utils/types";
+import { DataRolesUser} from "@app/utils/types";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
-import { formatTime, getTypeUser } from "@app/utils";
+import { formatTime, getRoles } from "@app/utils";
 
 const ManagerTypeUser = () => {
 
@@ -77,11 +77,11 @@ const ManagerTypeUser = () => {
     }
   ];
 
-  const [dataTypeUser, setDataTypeUser] = useState<DataTypeUser[]>()
+  const [dataTypeUser, setDataTypeUser] = useState<DataRolesUser[]>()
   useEffect(() => {
     const getDataUsers = async () => {
       setLoading(true)
-      const data = await getTypeUser();
+      const data = await getRoles();
       setDataTypeUser(data);
       setLoading(false)
     };
