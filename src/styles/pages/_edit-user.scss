@@ -1,5 +1,4 @@
 .edit-user {
-
     &__content {
         width: 80%;
         margin: auto;
@@ -22,17 +21,12 @@
     &__select {
         .ant-select {
             width: 100%;
-
-            .ant-select-selector {
-                min-height: 40px;
-            }
         }
     }
 
     &__button {
-
         border-radius: 8px;
-        border: 1px solid #2D7FF9;
+        border: 1px solid #2d7ff9;
         width: 140px;
         text-align: center;
         padding: 8px 10px;
@@ -45,8 +39,7 @@
             line-height: 20px;
             margin: 0;
             margin-left: 5px;
-            color: #2D7FF9;
+            color: #2d7ff9;
         }
     }
-
 }

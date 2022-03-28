@@ -1,4 +1,6 @@
-import ExportTypography from "antd/lib/typography/Typography";
+import { AuthState } from "@app/store/reducers/auth";
+import { UiState } from "@app/store/reducers/ui";
+import { UserState } from "@app/store/reducers/user";
 
 export interface ItemRole {
     name: string;
@@ -21,7 +23,6 @@ export interface DataListPlayerProp {
     createdAt: string;
     updatedAt: string;
     banned: boolean;
-
 }
 
 export interface DataListItemGoldProp {
@@ -42,8 +43,8 @@ export interface DataHeaderInfo {
     role: string;
     dateActived: string;
     percent: string;
-    totalGold: string,
-    status: boolean,
+    totalGold: string;
+    status: boolean;
 }
 export interface DataBasicInfo {
     timeActive: string;
@@ -150,7 +151,6 @@ export interface DataRoleUser {
     id: string;
 }
 
-
 export interface DataNftPlayer {
     isRaiding: boolean;
     ownerAddress: string;
@@ -172,4 +172,15 @@ export interface DataDetailNft {
     rankName: string;
     speed: number;
     battlePower: number;
+}
+
+export interface OptionRole {
+    name: string;
+    value: string;
+}
+
+export interface ApplicationRootState {
+    auth: AuthState,
+    ui: UiState,
+    user: UserState
 }

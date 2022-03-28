@@ -54,19 +54,18 @@ export const getListUsers = async (
         return response.data.docs;
     } catch (error: any) {
         throw new Error(error.message);
-
     }
 };
 
-export const getUserById = async (id: string = '') => {
-    const url = `users/${id}`
+export const getUserById = async (id: string = "") => {
+    const url = `users/${id}`;
     try {
         const response = await axios.get(url);
-        return response.data
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
+};
 
 export const getRoles = async (
     page: string = "1",
@@ -82,56 +81,74 @@ export const getRoles = async (
     }
 };
 
-export const getRoleUserById = async (id: string = '') => {
-    const url = `roles/${id}`
+export const getRoleUserById = async (id: string = "") => {
+    const url = `roles/${id}`;
     try {
         const response = await axios.get(url);
-        return response.data
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
-export const getListPlayer = async (page: string = '1', pageSize: string = '10', sortBy: string = 'createdAt%3Aasc') => {
-    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`
+};
+export const getListPlayer = async (
+    page: string = "1",
+    pageSize: string = "10",
+    sortBy: string = "createdAt%3Aasc"
+) => {
+    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`;
     try {
         const response = await axios.get(url);
         return response.data.docs;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
+};
 
-export const getPlayerById = async (id: string = '') => {
-    const url = `player/${id}`
+export const getPlayerById = async (id: string = "") => {
+    const url = `player/${id}`;
     try {
         const response = await axios.get(url);
-        return response.data
+        return response.data;
     } catch (error) {
         console.log(
             "🚀 ~ file: helpers.ts ~ line 52 ~ getListUsers ~ error",
             error
         );
     }
-}
+};
 
-
-export const getPlayerStoryMode = async (address?: string, page?: number, pageSize?: number, startDate?: string, endDate?: string, keyword?: string) => {
+export const getPlayerStoryMode = async (
+    address?: string,
+    page?: number,
+    pageSize?: number,
+    startDate?: string,
+    endDate?: string,
+    keyword?: string
+) => {
     try {
-        const response = await axios.get(`/player/${address}/game/story-mode?page=${1}&pageSize=${10}&startDate=${'2021-12-24T10%3A15%3A26.658Z'}&endDate=${'2022-07-24T10:15:26.658Z'}&keyword=${keyword}`)
-        return response.data
+        const response = await axios.get(
+            `/player/${address}/game/story-mode?page=${1}&pageSize=${10}&startDate=${"2021-12-24T10%3A15%3A26.658Z"}&endDate=${"2022-07-24T10:15:26.658Z"}&keyword=${keyword}`
+        );
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
+};
 
-export const getDataHeroes = async (address?: string, page: number = 1, pageSize: number = 10) => {
+export const getDataHeroes = async (
+    address?: string,
+    page: number = 1,
+    pageSize: number = 10
+) => {
     try {
-        const response = await axios.get(`/player/${address}/game/nfts?page=${page}&pageSize=${pageSize}`)
-        return response.data
+        const response = await axios.get(
+            `/player/${address}/game/nfts?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
+};
 export interface UserI {
     fullName: string;
     email: string;
@@ -141,7 +158,7 @@ export interface UserI {
     note: string;
 }
 export const createNewUser = async (user: UserI) => {
-    const url = `users/create`
+    const url = `users/create`;
     const response = await axios.post(url, user);
     return response.data;
-}
+};
