@@ -119,7 +119,7 @@ export interface DataPlayerStoryMode {
     coinsReward: number;
     lastPlayedAt: string;
 }
-export interface DataTypeUser {
+export interface DataRolesUser {
     fullAccess: boolean;
     permissions: [];
     id: string;
