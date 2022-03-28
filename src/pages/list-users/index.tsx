@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
 import { formatTime, getListUsers } from "@app/utils";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
-import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import resetPassIcon from "../../static/icon/reset-pass.svg";
 import changeStatusIcon from "../../static/icon/change-status.svg";
@@ -63,14 +62,6 @@ const ListUser = () => {
       icon: watchmoreIcon,
       onClick: () => {
         navigate(`/nguoi-dung/chi-tiet-nguoi-dung/${id}`);
-      }
-    },
-    {
-      key: "editInfo",
-      name: "Chỉnh sửa",
-      icon: editIcon,
-      onClick: () => {
-        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
     {

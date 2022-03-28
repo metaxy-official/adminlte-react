@@ -6,22 +6,22 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/order */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ContentHeader} from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
-import { DataRolesUser} from "@app/utils/types";
+import {ApplicationRootState} from "@app/utils/types";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
-import { formatTime, getRoles } from "@app/utils";
+import {formatTime} from "@app/utils";
+import {useSelector} from "react-redux";
 
 const ManagerTypeUser = () => {
-
   const navigate = useNavigate();
   // state for modal detail
   const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
@@ -35,7 +35,6 @@ const ManagerTypeUser = () => {
     setIsShowModalDelete(false);
   };
   const [idUser, setIdUser] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const handleChangeId = (id: string = "") => setIdUser(id);
   const listItem: ItemMoreOption[] = [
     {
@@ -63,7 +62,7 @@ const ManagerTypeUser = () => {
     },
     {
       title: "Người tạo",
-      dataIndex: "createdBy",
+      dataIndex: "createdBy"
     },
     {
       title: "Ngày tạo",
@@ -73,20 +72,15 @@ const ManagerTypeUser = () => {
     {
       title: "",
       dataIndex: "id",
-      render: (id:string) => <ThreeDot onChangeID={handleChangeId} id={id} listItem={listItem} />
+      render: (id: string) => (
+        <ThreeDot onChangeID={handleChangeId} id={id} listItem={listItem} />
+      )
     }
   ];
 
-  const [dataTypeUser, setDataTypeUser] = useState<DataRolesUser[]>()
-  useEffect(() => {
-    const getDataUsers = async () => {
-      setLoading(true)
-      const data = await getRoles();
-      setDataTypeUser(data);
-      setLoading(false)
-    };
-    getDataUsers();
-  }, []);
+  const dataRoleUser = useSelector(
+    (state: ApplicationRootState) => state.user.dataRoles
+  );
   return (
     <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />
@@ -107,7 +101,7 @@ const ManagerTypeUser = () => {
             />
           </div>
           <div className="mt-2">
-            <TableCustom columns={columns} data={dataTypeUser} dataSelection loading={loading} />
+            <TableCustom columns={columns} data={dataRoleUser} dataSelection />
           </div>
         </div>
       </section>

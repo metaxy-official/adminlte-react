@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BoxComponent, { Info } from "@app/components/boxComponent";
-import EditBugReportModal from "@app/components/modal/EditBugReport";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatTimeByDay, getUserById } from "@app/utils";
 import { DataUser } from "@app/utils/types";
 
@@ -53,34 +52,16 @@ function DetailUser() {
       value: dataUser?.createdAt ? formatTimeByDay(dataUser?.createdAt) : ''
     }
   ];
-  // status modal
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
+  const naviagte = useNavigate();
+  const handleEdit = () => naviagte(`/chinh-sua-nguoi-dung/${id}`)
   return (
     <div className="container-fuild">
       <BoxComponent
         title="Thông tin người dùng"
-        handleEdit={showModal}
+        handleEdit={handleEdit}
         listInfo={dataInfo}
       />
-      <BoxComponent title="Thông tin cơ bản" listInfo={dataNotificationBasic} />
-      <EditBugReportModal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
+      <BoxComponent title="Thông tin cơ bản" listInfo={dataNotificationBasic}  />
     </div>
   );
 }
