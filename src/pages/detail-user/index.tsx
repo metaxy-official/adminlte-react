@@ -1,21 +1,22 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import React, {useEffect, useState} from "react";
-import BoxComponent, {Info} from "@app/components/boxComponent";
+import React, { useEffect, useState } from "react";
+import BoxComponent, { Info } from "@app/components/boxComponent";
 import EditBugReportModal from "@app/components/modal/EditBugReport";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { formatTimeByDay, getUserById } from "@app/utils";
 import { DataUser } from "@app/utils/types";
 
 function DetailUser() {
   // get id user
-  const {id} = useParams<string>();
-    const [dataUser, setDataUser] = useState<DataUser>();
+  const { id } = useParams<string>();
+  const [dataUser, setDataUser] = useState<DataUser>();
+
   useEffect(() => {
     const getData = async () => {
-        if(!id) return
-        const data = await getUserById(id);
-        setDataUser(data);
+      if (!id) return
+      const data = await getUserById(id);
+      setDataUser(data);
     }
     getData()
   }, [id])

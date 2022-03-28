@@ -99,3 +99,29 @@ export interface DataUser {
     role: [];
     note: string;
 }
+export interface DataPlayer {
+    name: string;
+    address: string;
+    nation: string;
+    role: string;
+    totalOnlineHours: number;
+    lastUpdate: string;
+    banned: boolean;
+    reason: string;
+    updatedAt: string;
+    note: string;
+    createdAt: string;
+    highestLevel: number;
+    totalStars: number;
+    totalCoins: number;
+    tokenEarned: number;
+    lastPlayed: string;
+}
+export interface DataPlayerStoryMode {
+    levelInfoId: number;
+    tokensStar: number;
+    totalPlayed: number;
+    tokensReward: number;
+    coinsReward: number;
+    lastPlayedAt: string;
+}

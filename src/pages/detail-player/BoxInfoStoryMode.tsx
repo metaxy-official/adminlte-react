@@ -3,6 +3,9 @@ import React from 'react'
 import { DatePicker, Table } from 'antd'
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import SearchBox from '@app/components/searchbox/SearchBox'
+import { DataPlayer } from '@app/utils/types';
+
+
 
 const dataSource = [
     {
@@ -73,22 +76,30 @@ const columns = [
 ];
 
 
-const BoxInfoStoryMode = () => {
+interface DataInfoProps {
+    dataInfo?: DataPlayer
+}
 
-    function onChange(date: any, dateString: any) {
-        console.log(date, dateString);
-    }
+const BoxInfoStoryMode = (props: DataInfoProps) => {
 
-    const fakeDataBoxInfoStory: Info[] =
+    const { dataInfo } = props
+
+    const { RangePicker } = DatePicker;
+
+
+
+
+
+    const DataBoxInfoStory: Info[] =
         [
-            { name: 'Level chơi cao nhất:', value: 506 },
-            { name: 'Tổng sao đạt được:', value: 1000 },
-            { name: 'Tổng số reward kiếm được:', value: '10000 MXY, 100000 Golds' },
-            { name: 'Lần chơi gần nhất:', value: '13:00 - 01/01/2022' },
+            { name: 'Level chơi cao nhất:', value: dataInfo?.highestLevel },
+            { name: 'Tổng sao đạt được:', value: dataInfo?.totalStars },
+            { name: 'Tổng số reward kiếm được:', value: dataInfo?.totalCoins },
+            { name: 'Lần chơi gần nhất:', value: dataInfo?.lastPlayed },
         ]
     return (
         <div className="detail-box-player">
-            <BoxComponent title='Thông tin Story Mode' listInfo={fakeDataBoxInfoStory} />
+            <BoxComponent title='Thông tin Story Mode' listInfo={DataBoxInfoStory} />
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách level người chơi đã chơi</h3>
                 <div className="table-filter">
@@ -96,8 +107,7 @@ const BoxInfoStoryMode = () => {
                         <SearchBox placeholder="Nhập level của người chơi" />
                     </div>
                     <div className="table-filter__date my-3">
-                        <DatePicker onChange={onChange} placeholder="Từ ngày" className="mr-3" />
-                        <DatePicker onChange={onChange} placeholder="Đến ngày" />
+                        <RangePicker />
                     </div>
                     <div className="table-custom my-5">
                         <Table dataSource={dataSource} columns={columns} />

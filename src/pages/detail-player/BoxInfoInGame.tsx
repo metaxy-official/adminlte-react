@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tabs } from 'antd';
+import { DataPlayer } from '@app/utils/types';
 import BoxInfoHero from './BoxInfoHero';
 import BoxInfoStoryMode from './BoxInfoStoryMode';
 import BoxInfoItemIngame from './BoxInfoItemInGame';
@@ -12,13 +13,21 @@ const { TabPane } = Tabs;
 function hanndleChangeTab(key: any) {
     console.log(key);
 }
-const BoxInfoInGame = () => {
+
+interface DataInfoProps {
+    dataInfo?: DataPlayer
+}
+
+const BoxInfoInGame = (props: DataInfoProps) => {
+
+    const { dataInfo } = props
+
 
     return (
         <div className="box-information-ingame">
             <Tabs defaultActiveKey="1" onChange={hanndleChangeTab} className="tabs--inbox">
                 <TabPane tab="Story Mode" key="1">
-                    <BoxInfoStoryMode />
+                    <BoxInfoStoryMode dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Danh sách Hero" key="2">
                     <BoxInfoHero />

@@ -1,6 +1,9 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
+import { useParams } from 'react-router-dom';
+import { DataPlayer } from '@app/utils/types';
+import { getPlayerById } from '@app/utils';
 import BoxInfoBasic from './BoxInfoBasic';
 import BoxInfoHeader from './BoxInfoHeader';
 import BoxInfoInGame from './BoxInfoInGame';
@@ -13,32 +16,29 @@ function callback(key: any) {
 
 function DetailPlayer() {
 
-    // const DataHeaderInfo: DataHeaderInfo1 =
-    // {
-    //     name: 'Ltrannnn',
-    //     address: '0x7ef6c419ecabcmdksc9ee',
-    //     nation: 'Việt Nam',
-    //     role: 'Người chơi',
-    // }
-    // const DataBasicInfo: DataBasicInfo =
-    // {
-    //     timeActive: '1200 giờ',
-    //     latestInGame: '13:00 - 01/01/2022',
-    //     statusActive: true,
-    //     note: 'Chưa cập nhật',
-    //     date: '01/01/2022',
-    // }
+    // get id user
+    const { id } = useParams<string>();
+    const [dataPlayer, setDataPlayer] = useState<DataPlayer>();
+    console.log("🚀 ~ file: BoxInfoBasic.tsx ~ line 16 ~ BoxInfoBasic ~ dataUser", dataPlayer)
+    useEffect(() => {
+        const getData = async () => {
+            if (!id) return
+            const data = await getPlayerById(id);
+            setDataPlayer(data);
+        }
+        getData()
+    }, [id])
 
     return (
         <div className="container-fuild detail-player">
-            <BoxInfoHeader />
+            <BoxInfoHeader dataHeader={dataPlayer} />
             <div className="tabs detail-player__content">
                 <Tabs defaultActiveKey="1" onChange={callback} className="tabs--outbox">
                     <TabPane tab="Thông tin cơ bản" key="1">
-                        <BoxInfoBasic />
+                        <BoxInfoBasic dataBasic={dataPlayer} />
                     </TabPane>
                     <TabPane tab="Thông tin trong game" key="2">
-                        <BoxInfoInGame />
+                        <BoxInfoInGame dataInfo={dataPlayer} />
                     </TabPane>
                 </Tabs>
             </div>

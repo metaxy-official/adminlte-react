@@ -78,3 +78,15 @@ export const getListPlayer = async (page: string = '1', pageSize: string = '10',
         console.log("🚀 ~ file: helpers.ts ~ line 52 ~ getListPlayer ~ error", error)
     }
 }
+export const getPlayerById = async (id: string = '') => {
+    const url = `player/${id}`
+    try {
+        const response = await axios.get(url);
+        return response.data
+    } catch (error) {
+        console.log(
+            "🚀 ~ file: helpers.ts ~ line 52 ~ getListUsers ~ error",
+            error
+        );
+    }
+}

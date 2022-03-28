@@ -9,7 +9,7 @@ export interface Info {
 }
 
 export interface BoxComponentProps {
-    title: string;
+    title: string | undefined;
     listInfo: Info[];
     handleEdit?: () => void;
 
