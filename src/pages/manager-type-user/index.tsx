@@ -6,67 +6,21 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/order */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ContentHeader} from "@components";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import TableCustom from "@app/components/table/Table";
 import BtnCreateNewUser from "@app/components/btnCreate";
-import {DataManagerUserProp} from "@app/utils/types";
+import { DataTypeUser} from "@app/utils/types";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
+import { formatTime, getTypeUser } from "@app/utils";
 
-const ManagerUser = () => {
-  const data: DataManagerUserProp[] = [
-    {
-      key: "1",
-      name: "John Brown",
-      creator: "LongTT",
-      createdDate: "01/01/2022"
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      creator: "LongTT",
-      createdDate: "01/01/2022"
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      creator: "LongTT",
-      createdDate: "01/01/2022"
-    },
-    {
-      key: "4",
-      name: "Disabled User",
-      creator: "LongTT",
-      createdDate: "01/01/2022"
-    }
-  ];
-
-  const columns = [
-    {
-      title: "Kiểu người dùng",
-      dataIndex: "name",
-      render: (text: string) => <p>{text}</p>
-    },
-    {
-      title: "Người tạo",
-      dataIndex: "creator"
-    },
-    {
-      title: "Ngày tạo",
-      dataIndex: "createdDate"
-    },
-    {
-      title: "",
-      dataIndex: "key",
-      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
-    }
-  ];
+const ManagerTypeUser = () => {
 
   const navigate = useNavigate();
   // state for modal detail
@@ -80,13 +34,15 @@ const ManagerUser = () => {
   const handleCancel = () => {
     setIsShowModalDelete(false);
   };
-
+  const [idUser, setIdUser] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const handleChangeId = (id: string = "") => setIdUser(id);
   const listItem: ItemMoreOption[] = [
     {
       name: "Xem chi tiết",
       icon: watchmoreIcon,
       onClick: () => {
-        navigate("/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung");
+        navigate(`/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung/${idUser}`);
       }
     },
     {
@@ -99,6 +55,38 @@ const ManagerUser = () => {
     {name: "Xóa", icon: deleteIcon, onClick: handleOpenModalDelete}
   ];
 
+  const columns = [
+    {
+      title: "Kiểu người dùng",
+      dataIndex: "name",
+      render: (text: string) => <p>{text}</p>
+    },
+    {
+      title: "Người tạo",
+      dataIndex: "createdBy",
+    },
+    {
+      title: "Ngày tạo",
+      dataIndex: "createdAt",
+      render: (date: string) => <p>{formatTime(date)}</p>
+    },
+    {
+      title: "",
+      dataIndex: "id",
+      render: (id:string) => <ThreeDot onChangeID={handleChangeId} id={id} listItem={listItem} />
+    }
+  ];
+
+  const [dataTypeUser, setDataTypeUser] = useState<DataTypeUser[]>()
+  useEffect(() => {
+    const getDataUsers = async () => {
+      setLoading(true)
+      const data = await getTypeUser();
+      setDataTypeUser(data);
+      setLoading(false)
+    };
+    getDataUsers();
+  }, []);
   return (
     <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />
@@ -119,7 +107,7 @@ const ManagerUser = () => {
             />
           </div>
           <div className="mt-2">
-            <TableCustom columns={columns} data={data} dataSelection={true} />
+            <TableCustom columns={columns} data={dataTypeUser} dataSelection loading={loading} />
           </div>
         </div>
       </section>
@@ -127,4 +115,4 @@ const ManagerUser = () => {
   );
 };
 
-export default ManagerUser;
+export default ManagerTypeUser;

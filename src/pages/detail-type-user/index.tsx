@@ -1,29 +1,33 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@app/components";
-import {Button, Checkbox} from "antd";
-import React from "react";
-import {ReactComponent as EditIcon} from "../../static/icon/edit.svg";
+import { ContentHeader } from "@app/components";
+import { getRoleUserById } from "@app/utils";
+import { DataRoleUser } from "@app/utils/types";
+import { Button } from "antd";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ReactComponent as EditIcon } from "../../static/icon/edit.svg";
 
 function DetailTypeUser() {
-  function onChange(checkedValues: any) {
-    console.log("checked = ", checkedValues);
-  }
+  // get id user
+  const { id } = useParams<string>();
+  const [dataRoleUser, setDataRoleUser] = useState<DataRoleUser>();
+  useEffect(() => {
+    const getData = async () => {
+      if (!id) return
+      const data = await getRoleUserById(id);
+      setDataRoleUser(data);
+    }
+    getData()
+  }, [id])
 
-  const optionsWithDisabled = [
-    {label: "Quản lí người dùng", value: "Apple"},
-    {label: "Quản lí người chơi", value: "Pear"},
-    {label: "Quản lí thông tin game", value: "Orange"},
-    {label: "Quản lí thông báo", value: "Orang"},
-    {label: "Quản lí báo cáo", value: "Oran"},
-    {label: "Quản lí FAQ", value: "Ora", disabled: false}
-  ];
   return (
     <div className="container-detail-user">
       <ContentHeader title="Chi tiết kiểu người dùng" />
       <div className="box-information">
         <div className="infor-header">
-          <p>Admin Vận Hành</p>
+          <p>{dataRoleUser?.name}</p>
           <div className="infor-header-btn">
             <EditIcon fill="#2d7ff9" />
             <p>Chỉnh sửa</p>
@@ -32,7 +36,7 @@ function DetailTypeUser() {
         <div className="infor-body">
           <div className="infor-body-box">
             <p className="infor-body-box__title">Ghi chú:</p>
-            <p className="infor-body-box__des">Chưa cập nhật</p>
+            <p className="infor-body-box__des">{dataRoleUser?.note ? dataRoleUser.note : 'Chưa cập nhật'}</p>
           </div>
           <div className="infor-body-box">
             <p className="infor-body-box__title">Ngày tạo:</p>
@@ -50,11 +54,7 @@ function DetailTypeUser() {
       </div>
       <div className="permission-box">
         <p>Thông tin quyền cơ bản</p>
-        <Checkbox.Group
-          options={optionsWithDisabled}
-          defaultValue={["Apple"]}
-          onChange={onChange}
-        />
+        {dataRoleUser?.permissions.map((item, index) => <div key={index} className="options">{item.feature}</div>)}
       </div>
     </div>
   );

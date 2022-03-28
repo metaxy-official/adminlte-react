@@ -3,16 +3,12 @@
 import EmptyImg from "../../static/images/404.png";
 import React from "react";
 
-interface EmptyDataProps {
-  dataTable: any[];
-}
-function EmptyData(props: EmptyDataProps) {
-  const {dataTable} = props;
+function EmptyData() {
   return (
     <div className="empty-data-container">
       <div className="box-overview">
         <p>
-          Tổng: <span>{dataTable.length} kiểu người dùng</span>
+          Tổng: <span>0 kiểu người dùng</span>
         </p>
       </div>
       <div className="container-nodata">

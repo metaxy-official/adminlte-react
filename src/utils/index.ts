@@ -62,11 +62,32 @@ export const getUserById = async (id: string = '') => {
     try {
         const response = await axios.get(url);
         return response.data
-    } catch (error) {
-        console.log(
-            "🚀 ~ file: helpers.ts ~ line 52 ~ getListUsers ~ error",
-            error
-        );
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
+
+export const getTypeUser = async (
+    page: string = "1",
+    pageSize: string = "10",
+    sortBy: string = "createdAt%3Aasc"
+) => {
+    const url = `roles?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`;
+    try {
+        const response = await axios.get(url);
+        return response.data.docs;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+};
+
+export const getRoleUserById = async (id: string = '') => {
+    const url = `roles/${id}`
+    try {
+        const response = await axios.get(url);
+        return response.data
+    } catch (error: any) {
+        throw new Error(error.message);
     }
 }
 export const getListPlayer = async (page: string = '1', pageSize: string = '10', sortBy: string = 'createdAt%3Aasc') => {
@@ -78,6 +99,7 @@ export const getListPlayer = async (page: string = '1', pageSize: string = '10',
         console.log("🚀 ~ file: helpers.ts ~ line 52 ~ getListPlayer ~ error", error)
     }
 }
+
 export const getPlayerById = async (id: string = '') => {
     const url = `player/${id}`
     try {

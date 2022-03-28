@@ -1,9 +1,3 @@
-export interface DataManagerUserProp {
-    key: number | string;
-    name: string;
-    creator: string;
-    createdDate: string;
-}
 
 export interface ItemRole {
     name: string;
@@ -124,4 +118,25 @@ export interface DataPlayerStoryMode {
     tokensReward: number;
     coinsReward: number;
     lastPlayedAt: string;
+}
+export interface DataTypeUser {
+    fullAccess: boolean;
+    permissions: [];
+    id: string;
+    name: string;
+    createdBy: string;
+    createdAt: string;
+}
+
+export interface PermissionProp {
+    feature: string;
+    id: string;
+}
+export interface DataRoleUser {
+    note: string;
+    fullAccess: boolean;
+    permissions: PermissionProp[];
+    name: string;
+    createdBy: string;
+    id: string;
 }

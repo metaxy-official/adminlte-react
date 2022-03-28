@@ -50,20 +50,6 @@ function CreateUser() {
               <Option value="Yiminghe">yiminghe</Option>
             </Select>
           </div>
-          <div className="form-body__status">
-            <label htmlFor="user-status">
-              Trạng thái <span>(*)</span>
-            </label>
-            <Select
-              id="user-status"
-              defaultValue="Chọn thạng thái"
-              onChange={handleChange}
-            >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="Yiminghe">yiminghe</Option>
-            </Select>
-          </div>
         </div>
         <div className="form-footer__note">
           <label htmlFor="user-note">Ghi chú</label>

@@ -1,21 +1,23 @@
 import React from "react";
-import {Spin, Table} from "antd";
+import { Spin, Table} from "antd";
 import EmptyData from "../emptyData";
 
 interface TableCustomProps {
+  loading?: boolean;
   data?: any[];
   columns: any;
   dataSelection?: boolean;
 }
 
 const TableCustom = (props: TableCustomProps) => {
-  const {data, columns, dataSelection} = props;
-  if (!data) return <Spin size="large" />;
+  const {data=[], columns, dataSelection, loading} = props;
+  if (loading) return <div className="d-flex justify-content-center mt-2"><Spin size="large"/></div>
   return (
     <>
       {data && data.length > 0 ? (
         <div className="table-custom">
           <Table
+            tableLayout="fixed"
             className="table-ant"
             rowSelection={dataSelection ? {} : undefined}
             columns={columns}
@@ -29,7 +31,7 @@ const TableCustom = (props: TableCustomProps) => {
           </p>
         </div>
       ) : (
-        <EmptyData dataTable={data} />
+        <EmptyData />
       )}
     </>
   );

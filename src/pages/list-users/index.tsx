@@ -44,11 +44,14 @@ const ListUser = () => {
   };
   // get data users
   const [dataUsers, setDataUsers] = useState<DataListUserProp[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getDataUsers = async () => {
+      setLoading(true)
       const data = await getListUsers();
       setDataUsers(data);
+      setLoading(false)
     };
     getDataUsers();
   }, []);
@@ -180,7 +183,7 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={dataUsers} columns={columns} dataSelection />
+            <TableCustom data={dataUsers} columns={columns} dataSelection loading={loading} />
           </div>
         </div>
       </section>
