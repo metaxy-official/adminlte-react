@@ -22,7 +22,6 @@ const BoxInfoInGame = (props: DataInfoProps) => {
 
     const { dataInfo } = props
 
-
     return (
         <div className="box-information-ingame">
             <Tabs defaultActiveKey="1" onChange={hanndleChangeTab} className="tabs--inbox">
@@ -30,7 +29,7 @@ const BoxInfoInGame = (props: DataInfoProps) => {
                     <BoxInfoStoryMode dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Danh sách Hero" key="2">
-                    <BoxInfoHero />
+                    <BoxInfoHero dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Vật phẩm trong game" key="3">
                     <BoxInfoItemIngame />

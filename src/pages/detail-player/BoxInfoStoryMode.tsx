@@ -1,94 +1,80 @@
 /* eslint-disable react/jsx-no-bind */
-import React from 'react'
-import { DatePicker, Table } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { DatePicker } from 'antd'
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import SearchBox from '@app/components/searchbox/SearchBox'
-import { DataPlayer } from '@app/utils/types';
-
-
-
-const dataSource = [
-    {
-        key: '1',
-        Level: '1',
-        NameInGame: '32',
-        Nation: 'Việt Nam',
-        AcitonLast: '13:00 - 01/01/2022',
-        Day: '01/01/2022',
-    },
-    {
-        key: '2',
-        Level: '2',
-        NameInGame: '32',
-        Nation: 'Việt Nam',
-        AcitonLast: '13:00 - 01/01/2022',
-        Day: '01/01/2022',
-    },
-    {
-        key: '3',
-        Level: '3',
-        NameInGame: '32',
-        Nation: 'Việt Nam',
-        AcitonLast: '13:00 - 01/01/2022',
-        Day: '01/01/2022',
-    },
-    {
-        key: '4',
-        Level: '4',
-        NameInGame: '32',
-        Nation: 'Việt Nam',
-        AcitonLast: '13:00 - 01/01/2022',
-        Day: '01/01/2022',
-    },
-];
-
-const columns = [
-    {
-        title: 'Level',
-        dataIndex: 'Level',
-        key: 'Level',
-    },
-    {
-        title: 'Số sao đạt được',
-        dataIndex: 'NameInGame',
-        key: 'NameInGame',
-    },
-    {
-        title: 'Tổng lần chơi',
-        dataIndex: 'Nation',
-        key: 'Nation',
-    },
-    {
-        title: 'số Token kiếm được',
-        dataIndex: 'Level',
-        key: 'Level',
-    },
-    {
-        title: 'số Gold kiếm được',
-        dataIndex: 'AcitonLast',
-        key: 'AcitonLast',
-    },
-    {
-        title: 'Lần chơi gần nhất',
-        dataIndex: 'Day',
-        key: 'Day',
-    },
-];
-
+import { AutoRaidProps, DataPlayer, DataPlayerStoryMode } from '@app/utils/types';
+import { formatTime, getPlayerStoryMode } from '@app/utils';
+import TableCustom from '@app/components/table/Table';
 
 interface DataInfoProps {
     dataInfo?: DataPlayer
 }
 
 const BoxInfoStoryMode = (props: DataInfoProps) => {
+    const { RangePicker } = DatePicker;
 
     const { dataInfo } = props
 
-    const { RangePicker } = DatePicker;
+    const address = dataInfo?.address
+
+    const [dataStoryMode, setDataStoryMode] = useState<DataPlayerStoryMode[]>([]);
+    console.log("🚀 ~ file: BoxInfoStoryMode.tsx ~ line 22 ~ BoxInfoStoryMode ~ dataStoryMode", dataStoryMode)
 
 
+    useEffect(() => {
+        const getDataStoryMode = async () => {
+            const results = await getPlayerStoryMode(address);
+            setDataStoryMode(results.docs);
+        }
+        getDataStoryMode()
+    }, [])
 
+    const dataSource = dataStoryMode
 
+    const columns = [
+        {
+            title: 'Level',
+            dataIndex: 'levelInfoId',
+            key: 'levelInfoId',
+        },
+        {
+            title: 'Số sao đạt được',
+            dataIndex: 'NameInGame',
+            key: 'NameInGame',
+        },
+        {
+            title: 'Tổng lần chơi',
+            dataIndex: 'totalPlayed',
+            key: 'totalPlayed',
+        },
+        {
+            title: 'số Token kiếm được',
+            dataIndex: 'autoRaid',
+            key: 'coinsReward',
+            render: (autoRaid: AutoRaidProps) => (
+                <>
+                    <p>{autoRaid?.tokensReward}</p>
+                </>
+            )
+        },
+        {
+            title: 'số Gold kiếm được',
+            dataIndex: 'autoRaid',
+            key: 'coinsReward',
+            render: (autoRaid: AutoRaidProps) => (
+                <>
+                    <p>{autoRaid?.coinsReward}</p>
+                </>
+            )
+        },
+        {
+            title: 'Lần chơi gần nhất',
+            dataIndex: 'lastPlayedAt',
+            key: 'lastPlayedAt',
+            render: (date: string) => <p>{formatTime(date)}</p>
+        },
+    ];
 
     const DataBoxInfoStory: Info[] =
         [
@@ -110,7 +96,7 @@ const BoxInfoStoryMode = (props: DataInfoProps) => {
                         <RangePicker />
                     </div>
                     <div className="table-custom my-5">
-                        <Table dataSource={dataSource} columns={columns} />
+                        <TableCustom data={dataSource} columns={columns} />
                     </div>
                 </div>
             </div>

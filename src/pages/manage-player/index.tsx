@@ -34,7 +34,6 @@ const ManagePlayer = () => {
         }
         getDataPlayer();
     }, [])
-    console.log('dataUsers', dataPlayer)
 
 
     const listItem: ItemMoreOption[] = [

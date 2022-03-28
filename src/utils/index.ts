@@ -112,3 +112,21 @@ export const getPlayerById = async (id: string = '') => {
         );
     }
 }
+
+export const getPlayerStoryMode = async (address?: string, page?: number, pageSize?: number, startDate?: string, endDate?: string, keyword?: string) => {
+    try {
+        const response = await axios.get(`/player/${address}/game/story-mode?page=${1}&pageSize=${10}&startDate=${'2021-12-24T10%3A15%3A26.658Z'}&endDate=${'2022-07-24T10:15:26.658Z'}&keyword=${keyword}`)
+        return response.data
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
+
+export const getDataHeroes = async (address?: string, page: number = 1, pageSize: number = 10) => {
+    try {
+        const response = await axios.get(`/player/${address}/game/nfts?page=${page}&pageSize=${pageSize}`)
+        return response.data
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}

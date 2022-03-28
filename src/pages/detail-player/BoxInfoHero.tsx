@@ -1,178 +1,154 @@
 /* eslint-disable react/jsx-no-bind */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import SearchBox from '@app/components/searchbox/SearchBox'
-import { Table } from 'antd';
+import { DataDetailNft, DataNftPlayer, DataPlayer } from '@app/utils/types';
+import { getDataHeroes } from '@app/utils';
+import TableCustom from '@app/components/table/Table';
 
-const dataSource = [
-    {
-        key: '1',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: true,
-    },
-    {
-        key: '2',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: true,
-    },
-    {
-        key: '3',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: true,
-    },
-    {
-        key: '4',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: false,
-    },
-    {
-        key: '5',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: false,
-    },
-    {
-        key: '6',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: false,
-    },
-    {
-        key: '7',
-        heroId: '#1000',
-        hero: 'Sabe',
-        rank: 'BE+',
-        level: '1,250',
-        levelEvolve: '10',
-        bp: '1,000,000',
-        attack: '1,000,000',
-        hp: '1,000,000',
-        speed: '1,000,000',
-        energy: '1,000,000',
-        status: false,
-    },
-];
 
-const columns = [
-    {
-        title: 'Hero ID',
-        dataIndex: 'heroId',
-        key: 'heroId',
-    },
-    {
-        title: 'Hero',
-        dataIndex: 'hero',
-        key: 'hero',
-    },
-    {
-        title: 'Rank',
-        dataIndex: 'rank',
-        key: 'rank',
-    },
-    {
-        title: 'Level',
-        dataIndex: 'level',
-        key: 'level',
-    },
-    {
-        title: 'Level Evolve',
-        dataIndex: 'levelEvolve',
-        key: 'LevelEvolve',
-    },
-    {
-        title: 'BP',
-        dataIndex: 'bp',
-        key: 'bp',
-    },
-    {
-        title: 'Attack',
-        dataIndex: 'attack',
-        key: 'attack',
-    },
-    {
-        title: 'HP',
-        dataIndex: 'hp',
-        key: 'hp',
-    },
-    {
-        title: 'Speed',
-        dataIndex: 'speed',
-        key: 'speed',
-    },
-    {
-        title: 'Energy',
-        dataIndex: 'energy',
-        key: 'energy',
-    },
-    {
-        title: 'Trạng thái',
-        dataIndex: 'status',
-        key: 'status',
-        render: (status: boolean) => (
-            <>
-                {status ? (
-                    <div className="status-actived">Đang chơi</div>
-                ) : (
-                    <div className="status-not-active">Đang bán</div>
-                )}
-            </>
-        )
-    },
-];
+interface DataInfoProps {
+    dataInfo?: DataPlayer
+}
 
-const BoxInfoHero = () => {
+
+const BoxInfoHero = (props: DataInfoProps) => {
+
+    const { dataInfo } = props
+
+    const [dataNft, setDataNft] = useState<DataNftPlayer[]>([]);
+    console.log("🚀 ~ file: BoxInfoHero.tsx ~ line 20 ~ BoxInfoHero ~ dataNft", dataNft)
+
+    const address = dataInfo?.address
+
+    useEffect(() => {
+        const getDataNft = async () => {
+            const data = await getDataHeroes(address);
+            setDataNft(data.docs);
+        }
+        getDataNft()
+    }, [])
+
+    const dataSource = dataNft
+
+    const columns = [
+        {
+            title: 'Hero ID',
+            dataIndex: 'metadata',
+            key: 'rankInfoId',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.rankInfoId}</p>
+                </>
+            )
+        },
+        {
+            title: 'Hero',
+            dataIndex: 'metadata',
+            key: 'characterName',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.characterName}</p>
+                </>
+            )
+        },
+        {
+            title: 'Rank',
+            dataIndex: 'metadata',
+            key: 'rankName',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.rankName}</p>
+                </>
+            )
+        },
+        {
+            title: 'Level',
+            dataIndex: 'metadata',
+            key: 'level',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.level}</p>
+                </>
+            )
+        },
+        {
+            title: 'Level Evolve',
+            dataIndex: 'metadata',
+            key: 'evolveLevel',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.evolveLevel}</p>
+                </>
+            )
+        },
+        {
+            title: 'BP',
+            dataIndex: 'metadata',
+            key: 'battlePower',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.battlePower}</p>
+                </>
+            )
+        },
+        {
+            title: 'Attack',
+            dataIndex: 'metadata',
+            key: 'attack',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.attack}</p>
+                </>
+            )
+        },
+        {
+            title: 'HP',
+            dataIndex: 'metadata',
+            key: 'hp',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.hp}</p>
+                </>
+            )
+        },
+        {
+            title: 'Speed',
+            dataIndex: 'metadata',
+            key: 'speed',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.speed}</p>
+                </>
+            )
+        },
+        {
+            title: 'Energy',
+            dataIndex: 'metadata',
+            key: 'energy',
+            render: (metadata: DataDetailNft) => (
+                <>
+                    <p>{metadata?.energy}</p>
+                </>
+            )
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'status',
+            key: 'isFree',
+            render: (status: boolean) => (
+                <>
+                    {status ? (
+                        <div className="status-not-active">Đang bán</div>
+                    ) : (
+                        <div className="status-actived">Đang chơi</div>
+                    )}
+                </>
+            )
+        },
+    ];
+
+
 
 
     const fakeDataInfoHero: Info[] =
@@ -194,7 +170,7 @@ const BoxInfoHero = () => {
                         <p>abc</p>
                     </div>
                     <div className="table-custom my-5">
-                        <Table dataSource={dataSource} columns={columns} />
+                        <TableCustom data={dataSource} columns={columns} />
                     </div>
                 </div>
             </div>
