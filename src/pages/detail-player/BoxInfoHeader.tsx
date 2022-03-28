@@ -1,24 +1,29 @@
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import ChangePlayerModal from '@app/components/modal/ChangePlayerModal';
+import { DataPlayer } from '@app/utils/types';
 import React, { useState } from 'react'
 
+interface DataHeaderProps {
+    dataHeader?: DataPlayer
+}
 
+const BoxInfoHeader = (props: DataHeaderProps) => {
 
-const BoxInfoHeader = () => {
+    const { dataHeader } = props
 
 
     const dataInfo: Info[] = [
         {
             name: 'Địa chỉ ví:',
-            value: '0x7ef6c419ecabcmdksc9ee'
+            value: dataHeader?.address
         },
         {
             name: 'Quốc gia:',
-            value: 'Việt Nam'
+            value: dataHeader?.nation
         },
         {
             name: 'Vai trò:',
-            value: 'Người chơi'
+            value: dataHeader?.role
         },
 
     ]
@@ -41,7 +46,7 @@ const BoxInfoHeader = () => {
 
     return (
         <div className="container-fuild">
-            <BoxComponent title="Ltrannnn" handleEdit={showModal} listInfo={dataInfo} />
+            <BoxComponent title={dataHeader?.name} handleEdit={showModal} listInfo={dataInfo} />
             <ChangePlayerModal
                 isModalVisible={isModalVisible}
                 handleOk={handleOk}

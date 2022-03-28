@@ -1,12 +1,17 @@
 import BoxComponent, { Info } from '@app/components/boxComponent';
 import ChangeHistoryModal, { dataHistoryItem } from '@app/components/modal/ChangeHistoryModal';
+import { formatTimeByDay } from '@app/utils';
+import { DataPlayer } from '@app/utils/types';
 import React, { useState } from 'react'
 
 
+interface DataBasicProps {
+    dataBasic?: DataPlayer
+}
 
+const BoxInfoBasic = (props: DataBasicProps) => {
 
-const BoxInfoBasic = () => {
-
+    const { dataBasic } = props
 
     const dataHistory: dataHistoryItem[] = [
         {
@@ -89,31 +94,32 @@ const BoxInfoBasic = () => {
     const dataInfo: Info[] = [
         {
             name: 'Tổng thời gian hoạt động:',
-            value: '1200 giờ'
+            value: dataBasic?.totalOnlineHours
         },
         {
             name: 'Lần hoạt động gần nhất:',
-            value: '13:00 - 01/01/2022'
+            value: dataBasic?.lastUpdate
         },
         {
             name: 'Trạng thái:',
-            value: 'Dừng hoạt động'
+            value: dataBasic?.banned ? 'Chua hoạt động' : 'Đang hoạt động'
         },
+
         {
             name: 'Lí do:',
-            value: 'Người chơi vi phạm nhiều lần'
+            value: dataBasic?.reason
         },
         {
             name: 'Lần cuối sửa đổi:',
-            value: '13:30 - 01/01/2022, Long Tran Thanh'
+            value: dataBasic?.updatedAt ? formatTimeByDay(dataBasic?.updatedAt) : ''
         },
         {
             name: 'Ghi chú:',
-            value: 'Chưa cập nhật'
+            value: dataBasic?.note
         },
         {
             name: 'Ngày tham gia:',
-            value: '01/01/2022'
+            value: dataBasic?.createdAt ? formatTimeByDay(dataBasic?.createdAt) : ''
         },
     ]
 

@@ -1,23 +1,23 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@app/components";
+import { ContentHeader } from "@app/components";
 import { getRoleUserById } from "@app/utils";
 import { DataRoleUser } from "@app/utils/types";
-import {Button} from "antd";
+import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {ReactComponent as EditIcon} from "../../static/icon/edit.svg";
+import { ReactComponent as EditIcon } from "../../static/icon/edit.svg";
 
 function DetailTypeUser() {
-    // get id user
-    const {id} = useParams<string>();
-    const [dataRoleUser, setDataRoleUser] = useState<DataRoleUser>();
+  // get id user
+  const { id } = useParams<string>();
+  const [dataRoleUser, setDataRoleUser] = useState<DataRoleUser>();
   useEffect(() => {
     const getData = async () => {
-        if(!id) return
-        const data = await getRoleUserById(id);
-        setDataRoleUser(data);
+      if (!id) return
+      const data = await getRoleUserById(id);
+      setDataRoleUser(data);
     }
     getData()
   }, [id])
