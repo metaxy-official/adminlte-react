@@ -127,7 +127,8 @@ export interface AutoRaidProps {
     coinsReward: number;
     tokensReward: number;
 }
-export interface DataTypeUser {
+
+export interface DataRolesUser {
     fullAccess: boolean;
     permissions: [];
     id: string;

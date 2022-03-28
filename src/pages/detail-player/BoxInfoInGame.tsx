@@ -22,6 +22,7 @@ const BoxInfoInGame = (props: DataInfoProps) => {
 
     const { dataInfo } = props
 
+
     return (
         <div className="box-information-ingame">
             <Tabs defaultActiveKey="1" onChange={hanndleChangeTab} className="tabs--inbox">

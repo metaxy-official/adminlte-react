@@ -42,6 +42,7 @@ export const shortAddress = (address: string) => {
     return address;
 };
 
+// function manager list uses and roles
 export const getListUsers = async (
     page: string = "1",
     pageSize: string = "10",
@@ -67,7 +68,7 @@ export const getUserById = async (id: string = '') => {
     }
 }
 
-export const getTypeUser = async (
+export const getRoles = async (
     page: string = "1",
     pageSize: string = "10",
     sortBy: string = "createdAt%3Aasc"
@@ -95,8 +96,8 @@ export const getListPlayer = async (page: string = '1', pageSize: string = '10',
     try {
         const response = await axios.get(url);
         return response.data.docs;
-    } catch (error) {
-        console.log("🚀 ~ file: helpers.ts ~ line 52 ~ getListPlayer ~ error", error)
+    } catch (error: any) {
+        throw new Error(error.message);
     }
 }
 
@@ -112,6 +113,7 @@ export const getPlayerById = async (id: string = '') => {
         );
     }
 }
+
 
 export const getPlayerStoryMode = async (address?: string, page?: number, pageSize?: number, startDate?: string, endDate?: string, keyword?: string) => {
     try {
@@ -129,4 +131,17 @@ export const getDataHeroes = async (address?: string, page: number = 1, pageSize
     } catch (error: any) {
         throw new Error(error.message);
     }
+}
+export interface UserI {
+    fullName: string;
+    email: string;
+    password: string;
+    roles: string[];
+    phoneNumber: string;
+    note: string;
+}
+export const createNewUser = async (user: UserI) => {
+    const url = `users/create`
+    const response = await axios.post(url, user);
+    return response.data;
 }

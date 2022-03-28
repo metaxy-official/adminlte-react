@@ -7,6 +7,8 @@ import { AutoRaidProps, DataPlayer, DataPlayerStoryMode } from '@app/utils/types
 import { formatTime, getPlayerStoryMode } from '@app/utils';
 import TableCustom from '@app/components/table/Table';
 
+
+
 interface DataInfoProps {
     dataInfo?: DataPlayer
 }
