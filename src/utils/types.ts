@@ -1,3 +1,4 @@
+import ExportTypography from "antd/lib/typography/Typography";
 
 export interface ItemRole {
     name: string;
@@ -118,7 +119,15 @@ export interface DataPlayerStoryMode {
     tokensReward: number;
     coinsReward: number;
     lastPlayedAt: string;
+    autoRaid: AutoRaidProps[];
 }
+
+export interface AutoRaidProps {
+    cardTokenId: number;
+    coinsReward: number;
+    tokensReward: number;
+}
+
 export interface DataRolesUser {
     fullAccess: boolean;
     permissions: [];
@@ -139,4 +148,28 @@ export interface DataRoleUser {
     name: string;
     createdBy: string;
     id: string;
+}
+
+
+export interface DataNftPlayer {
+    isRaiding: boolean;
+    ownerAddress: string;
+    tokenId: number | string;
+    dataDetailNft: DataDetailNft[];
+}
+
+export interface DataDetailNft {
+    evolveLevel: number;
+    specialSkillLevel: number;
+    rankInfoId: number;
+    characterName: string;
+    imgHero: string;
+    characterId: number;
+    level: number;
+    attack: number;
+    energy: number;
+    hp: number;
+    rankName: string;
+    speed: number;
+    battlePower: number;
 }

@@ -30,7 +30,7 @@ const BoxInfoInGame = (props: DataInfoProps) => {
                     <BoxInfoStoryMode dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Danh sách Hero" key="2">
-                    <BoxInfoHero />
+                    <BoxInfoHero dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Vật phẩm trong game" key="3">
                     <BoxInfoItemIngame />

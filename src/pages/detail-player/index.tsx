@@ -19,7 +19,6 @@ function DetailPlayer() {
     // get id user
     const { id } = useParams<string>();
     const [dataPlayer, setDataPlayer] = useState<DataPlayer>();
-    console.log("🚀 ~ file: BoxInfoBasic.tsx ~ line 16 ~ BoxInfoBasic ~ dataUser", dataPlayer)
     useEffect(() => {
         const getData = async () => {
             if (!id) return
