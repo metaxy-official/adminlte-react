@@ -173,3 +173,15 @@ export const createNewUser = async (user: UserI) => {
     const response = await axios.post(url, user);
     return response.data;
 };
+
+export const deleteUser = async (idUser: string) => {
+    const url = `users/${idUser}`;
+    const response = await axios.delete(url);
+    return response.data;
+};
+
+export const resetPassword = async (idUser: string, password: string) => {
+    const url = `users/reset-password/${idUser}`;
+    const response = await axios.put(url, { newPassword: password });
+    return response.data;
+};
