@@ -66,6 +66,17 @@ export const getUserById = async (id: string = "") => {
         throw new Error(error.message);
     }
 };
+export interface IEditUser {
+    fullName: string;
+    roles: string[];
+    phoneNumber: string;
+    note?: string;
+}
+export const editNewUser = async (id: string = "", user: IEditUser) => {
+    const url = `users/${id}`;
+    const response = await axios.put(url, user);
+    return response.data;
+};
 
 export const getRoles = async (
     page: string = "1",

@@ -4,7 +4,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
 import {ContentHeader} from "@app/components";
-import {createNewUser, UserI} from "@app/utils";
+import {createNewUser} from "@app/utils";
 import {ApplicationRootState, OptionRole} from "@app/utils/types";
 import {Button, Input, Select} from "antd";
 import TextArea from "antd/lib/input/TextArea";
@@ -21,7 +21,7 @@ function CreateUser() {
     newUser.roles = [value];
   }
 
-  const newUser: UserI = {
+  const newUser: any = {
     fullName: "",
     email: "",
     password: "",
@@ -35,20 +35,8 @@ function CreateUser() {
   );
 
   const handleInputDataUser = (type: string, e: any) => {
-    switch (type) {
-      case "fullName":
-        return (newUser.fullName = e.target.value);
-      case "email":
-        return (newUser.email = e.target.value);
-      case "phoneNumber":
-        return (newUser.phoneNumber = e.target.value);
-      case "password":
-        return (newUser.password = e.target.value);
-      case "note":
-        return (newUser.note = e.target.value);
-      default:
-        return newUser;
-    }
+    const {value} = e.target;
+    newUser[type] = value;
   };
 
   const handleCreateUser = async () => {

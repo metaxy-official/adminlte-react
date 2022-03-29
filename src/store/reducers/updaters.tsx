@@ -9,7 +9,6 @@ export default function Updater(): null {
 
   useEffect(() => {
     const getAllData = async () => {
-        debugger;
       const dataRoles = await getRoles();
       dispatch(setUserRoles(dataRoles));
     };
