@@ -92,7 +92,7 @@ export interface DataUser {
     fullName: string;
     isActive: string;
     phoneNumber: string;
-    role: [];
+    roles: [];
     note: string;
 }
 export interface DataPlayer {
