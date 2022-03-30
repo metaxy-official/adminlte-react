@@ -37,6 +37,20 @@
             }
         }
     }
+
+    .pagination-table {
+        margin: 20px 0;
+        display: flex;
+        justify-content: flex-end;
+
+        .ant-pagination-total-text {
+            display: none;
+        }
+
+        .ant-pagination-options {
+            display: none;
+        }
+    }
 }
 
 .total-record {

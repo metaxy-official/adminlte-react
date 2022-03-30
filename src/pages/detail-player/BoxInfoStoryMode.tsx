@@ -21,7 +21,6 @@ const BoxInfoStoryMode = (props: DataInfoProps) => {
     const address = dataInfo?.address
 
     const [dataStoryMode, setDataStoryMode] = useState<DataPlayerStoryMode[]>([]);
-    console.log("🚀 ~ file: BoxInfoStoryMode.tsx ~ line 22 ~ BoxInfoStoryMode ~ dataStoryMode", dataStoryMode)
 
 
     useEffect(() => {
@@ -91,7 +90,7 @@ const BoxInfoStoryMode = (props: DataInfoProps) => {
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách level người chơi đã chơi</h3>
                 <div className="table-filter">
-                    <div className="table-filter__search my-3">
+                    <div className="table-filter__search my-3 ">
                         <SearchBox placeholder="Nhập level của người chơi" />
                     </div>
                     <div className="table-filter__date my-3">

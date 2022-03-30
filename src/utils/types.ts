@@ -1,4 +1,3 @@
-import ExportTypography from "antd/lib/typography/Typography";
 
 export interface ItemRole {
     name: string;
@@ -172,4 +171,55 @@ export interface DataDetailNft {
     rankName: string;
     speed: number;
     battlePower: number;
+}
+
+export interface DataItemInGame {
+    imgHero: string;
+    characterName: string;
+    level: number;
+    number: number;
+}
+
+export interface DataOrderHistory {
+    nftToken: string;
+    event: string;
+    tokenId: number;
+    quantities: number;
+    baseFeePercent: number;
+    createdTime: string;
+    expiredTime: string;
+    targetPrice: number;
+    priorityFee: number;
+    transactionHash: string;
+    createdAt: string;
+    updatedAt: string;
+    seller: string;
+    dataDetailOrdderHistory: DataDetailOrderHistory[];
+}
+
+export interface DataDetailOrderHistory {
+    evolveLevel: number;
+    specialSkillLevel: number;
+    characterName: string;
+    characterId: number;
+    rankInfoId: number;
+    rankName: string;
+    level: number;
+    battlePower: number;
+    attack: number;
+    hp: number;
+    speed: number;
+    energy: number;
+    imgHero: string;
+}
+
+export interface DataClaimHistory {
+    address: string,
+    transactionHash: string,
+    totalToken: number,
+    event: string,
+    assetType: string,
+    isDone: boolean,
+    createdAt: string,
+    updatedAt: string,
 }

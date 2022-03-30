@@ -6,18 +6,15 @@ import { DataDetailNft, DataNftPlayer, DataPlayer } from '@app/utils/types';
 import { getDataHeroes } from '@app/utils';
 import TableCustom from '@app/components/table/Table';
 
-
 interface DataInfoProps {
     dataInfo?: DataPlayer
 }
-
 
 const BoxInfoHero = (props: DataInfoProps) => {
 
     const { dataInfo } = props
 
     const [dataNft, setDataNft] = useState<DataNftPlayer[]>([]);
-    console.log("🚀 ~ file: BoxInfoHero.tsx ~ line 20 ~ BoxInfoHero ~ dataNft", dataNft)
 
     const address = dataInfo?.address
 
@@ -159,7 +156,7 @@ const BoxInfoHero = (props: DataInfoProps) => {
         ]
     return (
         <div className="detail-box-player">
-            <BoxComponent title='Thông tin Hero của người dùng' listInfo={fakeDataInfoHero} />
+            <BoxComponent title='Thông tin Hero của người dùng (BE chua co)' listInfo={fakeDataInfoHero} />
             <div className="table-detail">
                 <h3 className="table-title my-3">Danh sách hero của người chơi</h3>
                 <div className="table-filter">

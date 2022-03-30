@@ -1,56 +1,31 @@
 import BoxComponent, { Info } from '@app/components/boxComponent'
+import { getDataItemIngame } from '@app/utils'
+import { DataItemInGame, DataPlayer } from '@app/utils/types'
 import { Table } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
+interface DataInfoProps {
+    dataInfo?: DataPlayer
+}
 
+const BoxInfoItemIngame = (props: DataInfoProps) => {
 
-const BoxInfoItemIngame = () => {
+    const { dataInfo } = props
 
-    const dataSource = [
-        {
-            key: '1',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-        {
-            key: '2',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-        {
-            key: '3',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-        {
-            key: '4',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-        {
-            key: '5',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-        {
-            key: '6',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-        {
-            key: '7',
-            itemName: 'Soul',
-            level: '1',
-            amount: '10',
-        },
-    ];
+    const [dataItemInGame, setDataItemInGame] = useState<DataItemInGame[]>([]);
+
+    const address = dataInfo?.address
+
+    useEffect(() => {
+        const getDataItemInGame = async () => {
+            const data = await getDataItemIngame(address);
+            setDataItemInGame(data.docs);
+        }
+        getDataItemInGame()
+    }, [])
+
+    const dataSource = dataItemInGame
 
     const columns = [
         {

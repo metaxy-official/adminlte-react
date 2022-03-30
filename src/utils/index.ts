@@ -91,15 +91,16 @@ export const getRoleUserById = async (id: string = '') => {
         throw new Error(error.message);
     }
 }
-export const getListPlayer = async (page: string = '1', pageSize: string = '10', sortBy: string = 'createdAt%3Aasc') => {
-    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`
+export const getListPlayer = async (page?: number, pageSize?: number, sortBy: string = 'createdAt%3Aasc', keyword?: string) => {
+    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}&keyword=${keyword}`
     try {
         const response = await axios.get(url);
-        return response.data.docs;
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
 }
+
 
 export const getPlayerById = async (id: string = '') => {
     const url = `player/${id}`
@@ -144,4 +145,30 @@ export const createNewUser = async (user: UserI) => {
     const url = `users/create`
     const response = await axios.post(url, user);
     return response.data;
+}
+
+export const getDataItemIngame = async (address?: string, page: number = 1, pageSize: number = 10) => {
+    try {
+        const response = await axios.get(`/player/${address}/game/souls?page=${page}&pageSize=${pageSize}`)
+        return response.data
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
+
+export const getDataOrderHistory = async (address?: string, page: number = 1, pageSize: number = 10) => {
+    try {
+        const response = await axios.get(`/player/${address}/game/order-history?page=${page}&pageSize=${pageSize}`)
+        return response.data
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
+export const getDataClaimHistory = async (address?: string, page: number = 1, pageSize: number = 10) => {
+    try {
+        const response = await axios.get(`/player/${address}/game/mxy-history?page=${page}&pageSize=${pageSize}`)
+        return response.data
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
 }

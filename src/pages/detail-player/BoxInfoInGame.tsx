@@ -33,13 +33,13 @@ const BoxInfoInGame = (props: DataInfoProps) => {
                     <BoxInfoHero dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Vật phẩm trong game" key="3">
-                    <BoxInfoItemIngame />
+                    <BoxInfoItemIngame dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Lịch sử giao dịch" key="4">
-                    <BoxInfoHistory />
+                    <BoxInfoHistory dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Lịch sử claim" key="5">
-                    <BoxHistoryClaim />
+                    <BoxHistoryClaim dataInfo={dataInfo} />
                 </TabPane>
                 <TabPane tab="Nghi vấn vi phạm" key="6">
                     <BoxDetectError />

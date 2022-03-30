@@ -1,74 +1,34 @@
 import BoxComponent, { Info } from '@app/components/boxComponent'
-import { DatePicker, Table } from 'antd'
-import React from 'react'
+import TableCustom from '@app/components/table/Table';
+import { formatTime, getDataOrderHistory, shortAddress } from '@app/utils';
+import { DataDetailOrderHistory, DataOrderHistory, DataPlayer } from '@app/utils/types';
+import { DatePicker } from 'antd'
+import React, { useEffect, useState } from 'react'
 
+interface DataInfoProps {
+    dataInfo?: DataPlayer
+}
 
 const { RangePicker } = DatePicker;
 
-const BoxInfoHistory = () => {
+const BoxInfoHistory = (props: DataInfoProps) => {
 
-    const dataSource = [
-        {
-            key: '1',
-            event: 'buy',
-            itemName: 'Deluxe Chest',
-            codeHero: '',
-            level: '',
-            price: '250 BUSD',
-            from: '0x7ca7e8...5e08f33f',
-            to: '0x7ca7e8...5e08f33f',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '2',
-            event: 'buy',
-            itemName: 'Starter Chest',
-            codeHero: '',
-            level: '',
-            price: '250 BUSD',
-            from: '0x7ca7e8...5e08f33f',
-            to: '0x7ca7e8...5e08f33f',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '3',
-            event: 'buy',
-            itemName: 'Zigu',
-            codeHero: '#1001',
-            level: '10',
-            price: '250 BUSD',
-            from: '0x7ca7e8...5e08f33f',
-            to: '0x7ca7e8...5e08f33f',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '4',
-            event: 'sell',
-            itemName: 'Zogu',
-            codeHero: '#1001',
-            level: '10',
-            price: '250 BUSD',
-            from: '0x7ca7e8...5e08f33f',
-            to: '0x7ca7e8...5e08f33f',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '5',
-            event: 'claim',
-            itemName: '',
-            codeHero: '',
-            level: '',
-            price: '250 MXY',
-            from: '0x7ca7e8...5e08f33f',
-            to: '0x7ca7e8...5e08f33f',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-    ];
+    const { dataInfo } = props
+
+    const [dataOrderHistory, setDataOrderHistory] = useState<DataOrderHistory[]>([]);
+    console.log("🚀 ~ file: BoxInfoHistory.tsx ~ line 18 ~ BoxInfoHistory ~ dataOrderHistory", dataOrderHistory)
+
+    const address = dataInfo?.address
+
+    useEffect(() => {
+        const getDataNft = async () => {
+            const data = await getDataOrderHistory(address);
+            setDataOrderHistory(data.docs);
+        }
+        getDataNft()
+    }, [])
+
+    const dataSource = dataOrderHistory
 
     const columns = [
         {
@@ -76,10 +36,13 @@ const BoxInfoHistory = () => {
             dataIndex: 'event',
             key: 'event',
             render: (event: string) => {
-                if (event === 'buy') {
+                if (event === 'Listing') {
                     return <div className="status-actived">Mua</div>
-                } if (event === 'sell') {
+                } if (event === 'Sale') {
                     return <div className="status-not-active">Bán</div>
+                }
+                if (event === 'Cancel Listing') {
+                    return <div className="status-error">Hủy</div>
                 }
                 return <div className="status-not-active">Claim</div>
 
@@ -87,43 +50,62 @@ const BoxInfoHistory = () => {
         },
         {
             title: 'Vật Phẩm',
-            dataIndex: 'itemName',
-            key: 'itemName',
+            dataIndex: 'metadata',
+            key: 'characterName',
+            render: (metadata: DataDetailOrderHistory) => (
+                <>
+                    <p>{metadata?.characterName}</p>
+                </>
+            )
         },
         {
             title: 'Mã Hero',
-            dataIndex: 'codeHero',
-            key: 'codeHero',
+            dataIndex: 'metadata',
+            key: 'characterId',
+            render: (metadata: DataDetailOrderHistory) => (
+                <>
+                    <p>{metadata?.characterId}</p>
+                </>
+            )
         },
         {
             title: 'Level',
-            dataIndex: 'level',
+            dataIndex: 'metadata',
             key: 'level',
+            render: (metadata: DataDetailOrderHistory) => (
+                <>
+                    <p>{metadata?.level}</p>
+                </>
+            )
         },
         {
             title: 'Giá',
-            dataIndex: 'price',
-            key: 'price',
+            dataIndex: 'targetPrice',
+            key: 'targetPrice',
         },
         {
             title: 'Từ',
-            dataIndex: 'from',
-            key: 'from',
+            dataIndex: 'creator',
+            key: 'creator',
+            render: (transactionHash: string) => <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
         },
         {
             title: 'Đến',
-            dataIndex: 'to',
-            key: 'to',
+            dataIndex: 'seller',
+            key: 'seller',
+            render: (transactionHash: string) => <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
         },
         {
             title: 'Mã Giao Dịch',
             dataIndex: 'transactionHash',
             key: 'transactionHash',
+            render: (transactionHash: string) => <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
         },
         {
             title: 'Ngày',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (date: string) => <p>{formatTime(date)}</p>
         },
     ];
 
@@ -142,7 +124,7 @@ const BoxInfoHistory = () => {
                         <RangePicker />
                     </div>
                     <div className="table-custom my-5">
-                        <Table dataSource={dataSource} columns={columns} />
+                        <TableCustom data={dataSource} columns={columns} />
                     </div>
                 </div>
             </div>

@@ -1,49 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import { DatePicker, Table } from 'antd'
+import { DataClaimHistory, DataPlayer } from '@app/utils/types';
+import { formatTime, getDataClaimHistory, shortAddress } from '@app/utils';
 
 
 const { RangePicker } = DatePicker;
+interface DataInfoProps {
+    dataInfo?: DataPlayer
+}
 
-const BoxHistoryClaim = () => {
+const BoxHistoryClaim = (props: DataInfoProps) => {
 
-    const dataSource = [
-        {
-            key: '1',
-            event: 'Deposit',
-            totalToken: '250 MXY',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '2',
-            event: 'Deposit',
-            totalToken: '250 MXY',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '3',
-            event: 'Deposit',
-            totalToken: '250 MXY',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '4',
-            event: 'Claim',
-            totalToken: '250 MXY',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-        {
-            key: '5',
-            event: 'Claim',
-            totalToken: '250 MXY',
-            transactionHash: '0x7ca7e8...572af33f',
-            date: '13:00 - 01/01/2022'
-        },
-    ];
+    const { dataInfo } = props
+
+    const [dataClaimHistory, setDataClaimHistory] = useState<DataClaimHistory[]>([]);
+
+    console.log("🚀 ~ file: BoxInfoHistory.tsx ~ line 18 ~ BoxInfoHistory ~ dataOrderHistory", dataClaimHistory)
+
+    const address = dataInfo?.address
+
+    useEffect(() => {
+        const getDataNft = async () => {
+            const data = await getDataClaimHistory(address);
+            setDataClaimHistory(data.docs);
+        }
+        getDataNft()
+    }, [])
+
+    const dataSource = dataClaimHistory
 
     const columns = [
         {
@@ -67,11 +52,13 @@ const BoxHistoryClaim = () => {
             title: 'Mã Giao Dịch',
             dataIndex: 'transactionHash',
             key: 'transactionHash',
+            render: (transactionHash: string) => <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
         },
         {
             title: 'Ngày',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (date: string) => <p>{formatTime(date)}</p>
         },
     ];
 
