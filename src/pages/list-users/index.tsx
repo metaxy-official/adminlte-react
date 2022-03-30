@@ -1,25 +1,25 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import { ContentHeader } from "@components";
+import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
 import BtnCreate from "@app/components/btnCreate";
-import { DataListUserProp, ItemRole } from "@app/utils/types";
-import { Select } from "antd";
-import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
-import { useNavigate } from "react-router-dom";
+import {DataListUserProp, ItemRole} from "@app/utils/types";
+import {Select} from "antd";
+import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
+import {useNavigate} from "react-router-dom";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
-import { useEffect, useState } from "react";
-import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
-import { formatTime, getListUsers } from "@app/utils";
+import {useEffect, useState} from "react";
+import {deleteUser, formatTime, getListUsers, resetPassword} from "@app/utils";
+import {toast} from "react-toastify";
+import ConfirmChangePassModal from "@app/components/modal/ConfirmChangePassword";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
-import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import resetPassIcon from "../../static/icon/reset-pass.svg";
 import changeStatusIcon from "../../static/icon/change-status.svg";
 
-const { Option } = Select;
+const {Option} = Select;
 
 const ListUser = () => {
   const navigate = useNavigate();
@@ -36,23 +36,46 @@ const ListUser = () => {
   const handleOpenModal = (value?: string) => {
     setIsShowModal(value);
   };
-  const handleOk = () => {
-    setIsShowModal("");
+  const handleResetPassword = async (value: string) => {
+    if (!value) return alert("please fill the data!");
+    try {
+      const user = await resetPassword(id, value);
+      toast.success(
+        `Thay đổi mật khẩu người dùng ${user.fullName} thành công!`
+      );
+      return setIsShowModal("");
+    } catch (error: any) {
+      toast.error("Thay đổi mật khẩu thất bại! Vui lòng thử lại");
+      setIsShowModal("");
+      throw new Error(error.message);
+    }
   };
   const handleCancel = () => {
     setIsShowModal("");
+  };
+  const handleDeleteUser = async () => {
+    try {
+      const data = await deleteUser(id);
+      toast.success(`Xóa người dùng ${data.fullName} thành công!`);
+      getDataUsers();
+      handleCancel();
+    } catch (error: any) {
+      toast.error("Xóa người dùng thất bại!");
+      handleCancel();
+      console.log(error.message);
+    }
   };
   // get data users
   const [dataUsers, setDataUsers] = useState<DataListUserProp[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const getDataUsers = async () => {
+    setLoading(true);
+    const data = await getListUsers();
+    setDataUsers(data);
+    setLoading(false);
+  };
   useEffect(() => {
-    const getDataUsers = async () => {
-      setLoading(true)
-      const data = await getListUsers();
-      setDataUsers(data);
-      setLoading(false)
-    };
     getDataUsers();
   }, []);
 
@@ -63,14 +86,6 @@ const ListUser = () => {
       icon: watchmoreIcon,
       onClick: () => {
         navigate(`/nguoi-dung/chi-tiet-nguoi-dung/${id}`);
-      }
-    },
-    {
-      key: "editInfo",
-      name: "Chỉnh sửa",
-      icon: editIcon,
-      onClick: () => {
-        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
     {
@@ -86,7 +101,7 @@ const ListUser = () => {
         navigate("/nguoi-dung/chi-tiet-nguoi-dung");
       }
     },
-    { key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal }
+    {key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal}
   ];
   const columns = [
     {
@@ -103,7 +118,7 @@ const ListUser = () => {
       title: "Vai trò",
       dataIndex: "roles",
       render: (role: ItemRole[]) =>
-        role.map((item: ItemRole) => <p key="fullName">{item.name}</p>)
+        role.map((item: ItemRole) => <p key={item.id}>{item.name}</p>)
     },
     {
       title: "Ngày tham gia",
@@ -135,13 +150,14 @@ const ListUser = () => {
     <div className="list-user-page">
       <ContentHeader title="Danh sách người dùng" />
       <DeleteUserModal
+        description="Bạn có muốn xóa người dùng này không?"
         isModalVisible={isShowModal === "delete"}
-        handleOk={handleOk}
+        handleOk={handleDeleteUser}
         handleCancel={handleCancel}
       />
-      <WarningChangePassModal
+      <ConfirmChangePassModal
         isModalVisible={isShowModal === "resetPass"}
-        handleOk={handleOk}
+        handleOk={handleResetPassword}
         handleCancel={handleCancel}
       />
       <section className="content">
@@ -162,7 +178,7 @@ const ListUser = () => {
             <div className="box-filter__left">
               <Select
                 defaultValue="Vai trò người dùng"
-                style={{ width: 180 }}
+                style={{width: 180}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -173,7 +189,7 @@ const ListUser = () => {
             <div className="box-filter__right">
               <Select
                 defaultValue="Trạng thái"
-                style={{ width: 120 }}
+                style={{width: 120}}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -183,7 +199,12 @@ const ListUser = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={dataUsers} columns={columns} dataSelection loading={loading} />
+            <TableCustom
+              data={dataUsers}
+              columns={columns}
+              dataSelection
+              loading={loading}
+            />
           </div>
         </div>
       </section>

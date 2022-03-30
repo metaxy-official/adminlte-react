@@ -69,6 +69,8 @@ const App = () => {
               path="/nguoi-dung/chi-tiet-nguoi-dung/:id"
               element={<DetailUser />}
             />
+            <Route path="/chinh-sua-nguoi-dung/:id" element={<EditUser />} />
+
             <Route
               path="/kieu-nguoi-dung/tao-nguoi-dung"
               element={<CreateUser />}
@@ -117,7 +119,6 @@ const App = () => {
             />
             <Route path="/" element={<ListUser />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/chinh-sua-nguoi-dung" element={<EditUser />} />
           </Route >
         </Route >
       </Routes >
