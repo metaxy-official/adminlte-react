@@ -58,7 +58,7 @@ const interceptAuth = (config: AxiosRequestConfig) => {
             if (error.response.status === 401) {
 
 
-                window.location.href = '/?showAuthPopup=true';
+                // window.location.href = '/?showAuthPopup=true';
 
             } else if (error.response.status === 400) {
                 if (error.response.data && error.response.data.code) {

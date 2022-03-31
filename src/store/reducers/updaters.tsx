@@ -1,8 +1,8 @@
 /* eslint-disable no-debugger */
-import { getRoles } from "@app/utils";
+import { getPermissions, getRoles } from "@app/utils";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setUserRoles } from "./user";
+import { setUserRoles, setPermissions } from "./user";
 
 export default function Updater(): null {
   const dispatch = useDispatch();
@@ -10,7 +10,9 @@ export default function Updater(): null {
   useEffect(() => {
     const getAllData = async () => {
       const dataRoles = await getRoles();
+      const dataPermission = await getPermissions();
       dispatch(setUserRoles(dataRoles));
+      dispatch(setPermissions(dataPermission));
     };
     getAllData();
   }, [dispatch]);

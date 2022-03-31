@@ -4,7 +4,7 @@ import {ContentHeader} from "@app/components";
 import {Button, Input, Select, Spin} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {useNavigate, useParams} from "react-router-dom";
-import {DataUser, OptionRole} from "@app/utils/types";
+import {ApplicationRootState, DataUser, OptionRole} from "@app/utils/types";
 import {editNewUser, getUserById} from "@app/utils";
 import {useSelector} from "react-redux";
 import {toast} from "react-toastify";
@@ -17,8 +17,9 @@ const EditUser = () => {
   const {id} = useParams<string>();
   const [dataUser, setDataUser] = useState<DataUser>();
   const [loading, setLoading] = useState<boolean>(false);
-  // const [editUser, setEditUser] = useState<IEditUser>();
-  const dataRoleUser = useSelector((state: any) => state.user.dataRoles);
+  const dataRoleUser = useSelector(
+    (state: ApplicationRootState) => state.user.dataRoles
+  );
   const userEdit: any = {
     fullName: dataUser?.fullName,
     roles: dataUser?.roles,
@@ -55,10 +56,12 @@ const EditUser = () => {
       return alert("please fill the data!");
     try {
       const user = await editNewUser(id, userEdit);
-      toast.success(`Cập nhật thông tin người dùng ${user.fullName} thành công!`);
+      toast.success(
+        `Cập nhật thông tin người dùng ${user.fullName} thành công!`
+      );
       return navigate(`/nguoi-dung/chi-tiet-nguoi-dung/${user.id}`);
     } catch (error: any) {
-      toast.error("Cập nhật thông tin người dùng thất bại!Vui lòng thử lại");
+      toast.error("Cập nhật thông tin người dùng thất bại! Vui lòng thử lại");
       throw new Error(error.message);
     }
   };

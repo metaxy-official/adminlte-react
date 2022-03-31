@@ -12,7 +12,6 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import Updater from './store/reducers/updaters';
 
 toast.configure({
   autoClose: 3000,
@@ -29,7 +28,6 @@ Gatekeeper.initialize('08401b7e-da7e-4bf3-a9bf-6f594ae5fb02');
 
 ReactDOM.render(
   <Provider store={store}>
-    <Updater/>
     <App />
   </Provider>,
   document.getElementById('root')

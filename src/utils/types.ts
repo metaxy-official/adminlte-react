@@ -130,6 +130,7 @@ export interface AutoRaidProps {
 }
 
 export interface DataRolesUser {
+    note: string;
     fullAccess: boolean;
     permissions: [];
     id: string;
@@ -138,14 +139,14 @@ export interface DataRolesUser {
     createdAt: string;
 }
 
-export interface PermissionProp {
+export interface PermissionI {
     feature: string;
     id: string;
 }
 export interface DataRoleUser {
     note: string;
     fullAccess: boolean;
-    permissions: PermissionProp[];
+    permissions: PermissionI[];
     name: string;
     createdBy: string;
     id: string;
@@ -247,4 +248,24 @@ export interface DataProfile {
     createdAt: string,
     updatedAt: string,
     id: string,
+}
+export interface IEditUser {
+    fullName: string;
+    roles: string[];
+    phoneNumber: string;
+    note?: string;
+}
+export interface UserI {
+    fullName: string;
+    email: string;
+    password: string;
+    roles: string[];
+    phoneNumber: string;
+    note: string;
+}
+export interface permissionRoleUserI {
+    name: string;
+    permissions: string[];
+    fullAccess: boolean;
+    note: string;
 }
