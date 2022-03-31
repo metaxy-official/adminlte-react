@@ -1,8 +1,8 @@
 /* eslint-disable no-debugger */
-import {getPermissions, getRoles} from "@app/utils";
-import {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {setUserRoles, setPermissions} from "./user";
+import { getPermissions, getRoles } from "@app/utils";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUserRoles, setPermissions } from "./user";
 
 export default function Updater(): null {
   const dispatch = useDispatch();
