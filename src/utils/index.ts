@@ -2,6 +2,7 @@
 import { axios } from "@app/services/auth";
 import { DateTime } from "luxon";
 import format from "date-fns/format";
+import { IEditUser, permissionRoleUserI, UserI } from "./types";
 
 export const showTime = (time: Date | number) => {
     let datetime;
@@ -66,12 +67,7 @@ export const getUserById = async (id: string = "") => {
         throw new Error(error.message);
     }
 };
-export interface IEditUser {
-    fullName: string;
-    roles: string[];
-    phoneNumber: string;
-    note?: string;
-}
+
 export const editNewUser = async (id: string = "", user: IEditUser) => {
     const url = `users/${id}`;
     const response = await axios.put(url, user);
@@ -157,14 +153,7 @@ export const getDataHeroes = async (
         throw new Error(error.message);
     }
 };
-export interface UserI {
-    fullName: string;
-    email: string;
-    password: string;
-    roles: string[];
-    phoneNumber: string;
-    note: string;
-}
+
 export const createNewUser = async (user: UserI) => {
     const url = `users/create`;
     const response = await axios.post(url, user);
@@ -215,3 +204,14 @@ export const getDataProfile = async () => {
     const response = await axios.get(url);
     return response.data;
 };
+export const getPermissions = async () => {
+    const url = `permissions`;
+    const response = await axios.get(url);
+    return response.data;
+};
+
+export const createNewRole = async (newRole: permissionRoleUserI) => {
+    const url = `roles`;
+    const response = await axios.post(url, newRole);
+    return response.data;
+}

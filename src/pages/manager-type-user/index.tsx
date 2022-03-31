@@ -15,7 +15,6 @@ import BtnCreateNewUser from "@app/components/btnCreate";
 import {ApplicationRootState} from "@app/utils/types";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
-import editIcon from "../../static/icon/edit.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
 import {formatTime} from "@app/utils";
@@ -42,13 +41,6 @@ const ManagerTypeUser = () => {
       icon: watchmoreIcon,
       onClick: () => {
         navigate(`/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung/${idUser}`);
-      }
-    },
-    {
-      name: "Chỉnh sửa",
-      icon: editIcon,
-      onClick: () => {
-        navigate("/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung");
       }
     },
     {name: "Xóa", icon: deleteIcon, onClick: handleOpenModalDelete}

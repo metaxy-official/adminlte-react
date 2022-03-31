@@ -1,24 +1,24 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import React, { useEffect, useState } from "react";
-import BoxComponent, { Info } from "@app/components/boxComponent";
-import { useNavigate, useParams } from "react-router-dom";
-import { formatTimeByDay, getUserById } from "@app/utils";
-import { DataUser } from "@app/utils/types";
+import React, {useEffect, useState} from "react";
+import BoxComponent, {Info} from "@app/components/boxComponent";
+import {useNavigate, useParams} from "react-router-dom";
+import {formatTimeByDay, getUserById} from "@app/utils";
+import {DataUser} from "@app/utils/types";
 
 function DetailUser() {
   // get id user
-  const { id } = useParams<string>();
+  const {id} = useParams<string>();
   const [dataUser, setDataUser] = useState<DataUser>();
 
   useEffect(() => {
     const getData = async () => {
-      if (!id) return
+      if (!id) return;
       const data = await getUserById(id);
       setDataUser(data);
-    }
-    getData()
-  }, [id])
+    };
+    getData();
+  }, [id]);
 
   const dataInfo: Info[] = [
     {
@@ -41,7 +41,7 @@ function DetailUser() {
   const dataNotificationBasic: Info[] = [
     {
       name: "Trạng thái:",
-      value: dataUser?.isActive ? 'Đang hoạt động' : 'Chua hoạt động'
+      value: dataUser?.isActive ? "Đang hoạt động" : "Chua hoạt động"
     },
     {
       name: "Ghi chú:",
@@ -49,11 +49,11 @@ function DetailUser() {
     },
     {
       name: "Ngày tham gia:",
-      value: dataUser?.createdAt ? formatTimeByDay(dataUser?.createdAt) : ''
+      value: dataUser?.createdAt ? formatTimeByDay(dataUser?.createdAt) : ""
     }
   ];
   const naviagte = useNavigate();
-  const handleEdit = () => naviagte(`/chinh-sua-nguoi-dung/${id}`)
+  const handleEdit = () => naviagte(`/chinh-sua-nguoi-dung/${id}`);
   return (
     <div className="container-fuild">
       <BoxComponent
@@ -61,7 +61,7 @@ function DetailUser() {
         handleEdit={handleEdit}
         listInfo={dataInfo}
       />
-      <BoxComponent title="Thông tin cơ bản" listInfo={dataNotificationBasic}  />
+      <BoxComponent title="Thông tin cơ bản" listInfo={dataNotificationBasic} />
     </div>
   );
 }
