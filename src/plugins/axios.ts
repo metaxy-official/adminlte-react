@@ -54,6 +54,25 @@ const interceptAuth = (config: AxiosRequestConfig) => {
         (response) => {
             return response;
         },
+        (error) => {
+            if (error.response.status === 401) {
+
+
+                // window.location.href = '/?showAuthPopup=true';
+
+            } else if (error.response.status === 400) {
+                if (error.response.data && error.response.data.code) {
+                    switch (Number(error.response.data.code)) {
+                        case 42:
+                            window.location.href = '/page-not-found';
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            return Promise.reject(error);
+        },
     );
     return instance;
 };
