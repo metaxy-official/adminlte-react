@@ -234,3 +234,17 @@ export interface ApplicationRootState {
     ui: UiState,
     user: UserState
 }
+
+
+export interface DataProfile {
+    firstLogin: boolean,
+    note: string,
+    phoneNumber: string,
+    isActive: boolean,
+    verified: boolean,
+    email: string,
+    fullName: string,
+    createdAt: string,
+    updatedAt: string,
+    id: string,
+}

@@ -1,45 +1,57 @@
-import React, { } from 'react';
+import React, { useEffect, useState } from 'react';
 import BoxComponent, { Info } from '@app/components/boxComponent';
 import { useNavigate, } from 'react-router-dom';
+import { DataProfile } from '@app/utils/types';
+import { formatTimeByDay, getDataProfile } from '@app/utils';
 
 const Profile = () => {
 
+  const [dataProfile, setDataProfile] = useState<DataProfile>()
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getDataProfile();
+      setDataProfile(data);
+    }
+    getData()
+  }, [])
 
   const dataInfo: Info[] = [
     {
-      name: 'Địa chỉ ví:',
-      value: '0x7ef6c419ecabcmdksc9ee'
+      name: 'Số điện thoại:',
+      value: dataProfile?.phoneNumber
     },
     {
-      name: 'Quốc gia:',
-      value: 'Việt Nam'
+      name: 'Email:',
+      value: dataProfile?.email
     },
     {
       name: 'Vai trò:',
-      value: 'Người chơi'
+      value: dataProfile?.note
     },
 
   ]
   const dataBasicInfo: Info[] = [
     {
-      name: 'Địa chỉ ví:',
-      value: '0x7ef6c419ecabcmdksc9ee'
+      name: 'Trạng thái:',
+      value: dataProfile?.isActive ? 'Đang hoạt động' : 'Chua hoạt động'
     },
     {
-      name: 'Quốc gia:',
-      value: 'Việt Nam'
+      name: 'Ghi chú:',
+      value: dataProfile?.note
     },
     {
-      name: 'Vai trò:',
-      value: 'Người chơi'
+      name: 'Ngày tham gia:',
+      value: dataProfile?.createdAt ? formatTimeByDay(dataProfile?.createdAt) : ''
     },
 
   ]
 
 
   const changeProfile = () => {
-    navigate('/chinh-sua-nguoi-dung');
+    navigate('/chinh-sua-ca-nhan');
   }
 
   return (

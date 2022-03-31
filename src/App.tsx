@@ -35,6 +35,7 @@ import NotificationUsers from "./pages/notification-manager/users/users";
 import CreateNotification from "./pages/create-notification";
 import DetailNotificationInGame from "./pages/notification-manager/in-game/details-notification";
 import DetailTypeUser from "./pages/detail-type-user";
+import EditProfile from "./pages/profile/EditProfile";
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -119,6 +120,7 @@ const App = () => {
             />
             <Route path="/" element={<ListUser />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/chinh-sua-ca-nhan" element={<EditProfile />} />
           </Route >
         </Route >
       </Routes >

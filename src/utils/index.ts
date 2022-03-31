@@ -208,3 +208,10 @@ export const resetPassword = async (idUser: string, password: string) => {
     const response = await axios.put(url, { newPassword: password });
     return response.data;
 };
+
+
+export const getDataProfile = async () => {
+    const url = `me/profile`;
+    const response = await axios.get(url);
+    return response.data;
+};
