@@ -7,12 +7,19 @@
         input {
             min-width: 350px !important;
         }
+
+        .ant-input-group {
+            display: flex;
+        }
+
         .ant-input-affix-wrapper {
             border-radius: 8px !important;
         }
+
         button {
             border-radius: 8px !important;
             background-color: #2d7ff9;
+            margin-left: 15px;
         }
     }
 }
@@ -30,6 +37,7 @@
         color: #000000;
     }
 }
+
 .ant-picker .ant-picker-range {
     border-radius: 8px !important;
 }

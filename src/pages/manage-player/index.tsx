@@ -16,6 +16,13 @@ const ManagePlayer = () => {
     const navigate = useNavigate();
     // state for modal detail
     const [isShowModal, setIsShowModal] = useState<string>();
+    const [searchItems, setSearchItems] = useState('')
+    const [dataPlayer, setDataPlayer] = useState<DataListPlayerProp[]>([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
+    const [totalDocs, setTotalDocs] = useState<number>()
+    const filterSort = 'createdAt%3Aasc'
+
     const handleOpenModal = (value?: string) => {
         setIsShowModal(value);
     };
@@ -25,15 +32,22 @@ const ManagePlayer = () => {
     const handleCancel = () => {
         setIsShowModal('');
     };
-    const [dataPlayer, setDataPlayer] = useState<DataListPlayerProp[]>([])
+
+
+    const onSearch = (value: string) => {
+        setSearchItems(value.trim())
+        setCurrentPage(1)
+    }
 
     useEffect(() => {
         const getDataPlayer = async () => {
-            const data = await getListPlayer();
-            setDataPlayer(data)
+            const data = await getListPlayer(currentPage, pageSize, filterSort, searchItems);
+            setDataPlayer(data.docs)
+            setPageSize(data?.limit)
+            setTotalDocs(data?.totalDocs)
         }
         getDataPlayer();
-    }, [])
+    }, [currentPage, searchItems])
 
 
     const listItem: ItemMoreOption[] = [
@@ -116,12 +130,18 @@ const ManagePlayer = () => {
                     <div className="header-box__search">
                         <SearchBox
                             placeholder="Nhập tên trong game hoặc địa chỉ ví của người dùng"
-
+                            onSearch={onSearch}
                         />
                     </div>
                 </div>
                 <div className="table-custom my-5">
-                    <TableCustom data={dataPlayer.map((item, index) => { return { ...item, key: index } })} columns={columns} />
+                    <TableCustom
+                        data={dataPlayer.map((item, index) => { return { ...item, key: index } })}
+                        totalData={totalDocs}
+                        columns={columns}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
                 </div>
             </div>
         </section>
