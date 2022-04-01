@@ -1,13 +1,14 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
 import {ContentHeader} from "@app/components";
-import {setUserRoles} from "@app/store/reducers/user";
-import {createNewRole, getRoles, getRoleUserById} from "@app/utils";
+import {updateUserRoles} from "@app/store/reducers/user";
+import {createNewRole, getRoles, getRoleUserById, updateRole} from "@app/utils";
 import {
   ApplicationRootState,
-  DataRolesUser,
   PermissionI,
-  permissionRoleUserI
+  IPermissionRoleUser
 } from "@app/utils/types";
 import {Button, Checkbox, Input} from "antd";
 import TextArea from "antd/lib/input/TextArea";
@@ -19,40 +20,52 @@ import {toast} from "react-toastify";
 function CreateTypeUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const roleUser: permissionRoleUserI = {
+
+  const {id} = useParams<string>();
+  const [roleUser, setUserRoles] = useState<IPermissionRoleUser>({
     name: "",
     permissions: [],
     fullAccess: false,
     note: ""
-  };
-  // create type user
-  function onChange(checkedValues: any) {
-    roleUser.permissions = checkedValues;
-  }
+  });
+
   const dataPermissions: PermissionI[] = useSelector(
     (state: ApplicationRootState) => state.user.dataPermissions
   );
 
-  const hanldeNameRole = (e: any) => {
-    roleUser.name = e.target.value;
+  // create type user
+
+  function onChange(checkedValues: any[]) {
+    setUserRoles({...roleUser, permissions: checkedValues});
+  }
+  const handleNameRole = (e: any) => {
+    setUserRoles({...roleUser, name: e.target.value});
   };
-  const hanldeNoteRole = (e: any) => {
-    roleUser.name = e.target.value;
+  const handleNoteRole = (e: any) => {
+    setUserRoles({...roleUser, note: e.target.value});
   };
   const handleCreateNewRoleUser = async () => {
     if (!roleUser.name || roleUser.permissions.length === 0) {
       return alert("please fill the data!");
     }
     try {
-      const user = await createNewRole(roleUser);
-      toast.success(`Tạo kiểu người dùng ${roleUser.name} thành công!`);
+      const user = id
+        ? await updateRole(roleUser, id)
+        : await createNewRole(roleUser);
+      toast.success(
+        `${id ? "Cập nhật" : "Tạo kiểu"} người dùng ${
+          roleUser.name
+        } thành công!`
+      );
+      navigate(`/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung/${id || user.id}`);
       getRoles();
-      const dataRoles = await getRoles();
-      dispatch(setUserRoles(dataRoles));
-      return navigate(`/kieu-nguoi-dung/chi-tiet-kieu-nguoi-dung/${user.id}`);
+      const a = await getRoles();
+      dispatch(updateUserRoles(a));
     } catch (error: any) {
       toast.error(
-        `Tạo kiểu người dùng ${roleUser.name} thất bại! Vui lòng thử lại`
+        `${id ? "Chỉnh sửa" : "Tạo"} kiểu người dùng ${
+          roleUser.name
+        } thất bại! Vui lòng thử lại`
       );
       throw new Error(error.message);
     }
@@ -64,33 +77,31 @@ function CreateTypeUser() {
   }));
 
   // edit type user
-  const {id} = useParams<string>();
-  const [dataRoleUser, setDataRoleUser] = useState<DataRolesUser>();
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 69 ~ CreateTypeUser ~ dataRoleUser",
-    dataRoleUser
-  );
   useEffect(() => {
     const getData = async () => {
       if (!id) return;
       const data = await getRoleUserById(id);
-      setDataRoleUser(data);
+      setUserRoles({
+        ...data,
+        permissions: data.permissions.map((item: any) => item.id)
+      });
     };
     getData();
   }, [id]);
-  const defaultOptions = dataPermissions.map((item: PermissionI) => item.id);
 
   return (
     <div className="container-type-user">
-      <ContentHeader title="Tạo kiểu người dùng" />
+      <ContentHeader
+        title={`${id ? "Chỉnh sửa kiểu người dùng" : "Tạo kiểu người dùng"}`}
+      />
       <section className="content">
         <div className="name-user-box">
           <label htmlFor="name">
             Tên kiểu người dùng <span>(*)</span>
           </label>
           <Input
-            defaultValue="aaaa"
-            onChange={hanldeNameRole}
+            value={roleUser.name}
+            onChange={handleNameRole}
             id="name"
             placeholder="Nhập tên kiểu người dùng"
           />
@@ -98,8 +109,8 @@ function CreateTypeUser() {
         <div className="note-box">
           <label htmlFor="note">Ghi chú</label>
           <TextArea
-            defaultValue={dataRoleUser?.note}
-            onChange={hanldeNoteRole}
+            value={roleUser.note}
+            onChange={handleNoteRole}
             rows={4}
             id="note"
             placeholder="Nhập ghi chú..."
@@ -111,7 +122,7 @@ function CreateTypeUser() {
           </p>
           <Checkbox.Group
             options={dataOptions}
-            defaultValue={defaultOptions}
+            value={roleUser.permissions}
             onChange={onChange}
           />
         </div>
@@ -125,7 +136,7 @@ function CreateTypeUser() {
             shape="round"
             type="primary"
           >
-            Tạo kiểu người dùng
+            {id ? "Cập nhật" : "Tạo kiểu người dùng"}
           </Button>
         </div>
       </section>

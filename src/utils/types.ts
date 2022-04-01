@@ -216,14 +216,14 @@ export interface DataDetailOrderHistory {
 }
 
 export interface DataClaimHistory {
-    address: string,
-    transactionHash: string,
-    totalToken: number,
-    event: string,
-    assetType: string,
-    isDone: boolean,
-    createdAt: string,
-    updatedAt: string,
+    address: string;
+    transactionHash: string;
+    totalToken: number;
+    event: string;
+    assetType: string;
+    isDone: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 export interface OptionRole {
     name: string;
@@ -231,23 +231,22 @@ export interface OptionRole {
 }
 
 export interface ApplicationRootState {
-    auth: AuthState,
-    ui: UiState,
-    user: UserState
+    auth: AuthState;
+    ui: UiState;
+    user: UserState;
 }
 
-
 export interface DataProfile {
-    firstLogin: boolean,
-    note: string,
-    phoneNumber: string,
-    isActive: boolean,
-    verified: boolean,
-    email: string,
-    fullName: string,
-    createdAt: string,
-    updatedAt: string,
-    id: string,
+    firstLogin: boolean;
+    note: string;
+    phoneNumber: string;
+    isActive: boolean;
+    verified: boolean;
+    email: string;
+    fullName: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
 }
 export interface IEditUser {
     fullName: string;
@@ -263,7 +262,7 @@ export interface UserI {
     phoneNumber: string;
     note: string;
 }
-export interface permissionRoleUserI {
+export interface IPermissionRoleUser {
     name: string;
     permissions: string[];
     fullAccess: boolean;
