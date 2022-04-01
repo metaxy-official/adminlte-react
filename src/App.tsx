@@ -10,7 +10,7 @@ import {calculateWindowSize} from "@app/utils/helpers";
 import {useDispatch, useSelector} from "react-redux";
 import {setWindowSize} from "@app/store/reducers/ui";
 // import Dashboard from "@pages/Dashboard";
-import ListUser from "@app/pages/list-users";
+import ManagerUser from "@app/pages/list-users";
 import Profile from "@pages/profile/Profile";
 import ItemManager from "./pages/gameInfo-manager/ItemManager";
 import RankManager from "./pages/gameInfo-manager/RankManager";
@@ -62,7 +62,7 @@ const App = () => {
         </Route>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Main />}>
-            <Route path="/nguoi-dung" element={<ListUser />} />
+            <Route path="/nguoi-dung" element={<ManagerUser />} />
             <Route path="/kieu-nguoi-dung" element={<ManagerTypeUser />} />
             <Route
               path="/nguoi-dung/chi-tiet-nguoi-dung/:id"
@@ -123,7 +123,7 @@ const App = () => {
               path="/quan-li-bao-cao-loi/xem-chi-tiet"
               element={<BugDetailsReport />}
             />
-            <Route path="/" element={<ListUser />} />
+            <Route path="/" element={<ManagerUser />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/chinh-sua-ca-nhan" element={<EditProfile />} />
           </Route >

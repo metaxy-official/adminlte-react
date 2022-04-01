@@ -241,3 +241,9 @@ export const updateRole = async (newRole: IPermissionRoleUser, id: string) => {
     const response = await axios.put(url, newRole);
     return response.data;
 };
+
+export const deleteRoleUser = async (idUser: string) => {
+    const url = `roles/${idUser}`;
+    const response = await axios.delete(url);
+    return response.data;
+};

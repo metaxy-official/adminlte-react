@@ -17,19 +17,20 @@ import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 import deleteIcon from "../../static/icon/delete.svg";
 import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
-import {formatTime} from "@app/utils";
-import {useSelector} from "react-redux";
+import {deleteRoleUser, formatTime, getRoles} from "@app/utils";
+import {useDispatch, useSelector} from "react-redux";
+import { toast } from "react-toastify";
+import { updateUserRoles } from "@app/store/reducers/user";
 
 const ManagerTypeUser = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // state for modal detail
   const [isShowModalDelete, setIsShowModalDelete] = useState<boolean>(false);
   const handleOpenModalDelete = () => {
     setIsShowModalDelete(true);
   };
-  const handleOk = () => {
-    setIsShowModalDelete(false);
-  };
+
   const handleCancel = () => {
     setIsShowModalDelete(false);
   };
@@ -45,6 +46,21 @@ const ManagerTypeUser = () => {
     },
     {name: "Xóa", icon: deleteIcon, onClick: handleOpenModalDelete}
   ];
+  const handleDeleteRoleUser = async () => {
+    try {
+      const data = await deleteRoleUser(idUser);
+      console.log("🚀 ~ file: index.tsx ~ line 52 ~ handleDeleteRoleUser ~ data", data)
+      const dataRoles = await getRoles();
+      dispatch(updateUserRoles(dataRoles));
+      toast.success(`Xóa kiểu người ${data.name} dùng thành công!`);
+      // getDataUsers();
+      handleCancel();
+    } catch (error: any) {
+      toast.error(`Xóa kiểu người dùng thất bại!`);
+      handleCancel();
+      console.log(error.message);
+    }
+  }
 
   const columns = [
     {
@@ -69,16 +85,22 @@ const ManagerTypeUser = () => {
       )
     }
   ];
-
+// state for modal delete type user
   const dataRoleUser = useSelector(
     (state: ApplicationRootState) => state.user.dataRoles
   );
+  // const dataOptionsRole: OptionRole[] = dataRoleUser.filter(item => item.id !== idUser).map((item: any) => ({
+  //   name: item.name,
+  //   value: item.id
+  // }));
+  const dataOptionsRole: any = dataRoleUser.filter(item => item.id === idUser)[0]?.name
   return (
     <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />
       <DeleteUserTypeModal
+        dataOptionsRole={dataOptionsRole}
         isModalVisible={isShowModalDelete}
-        handleOk={handleOk}
+        handleOk={handleDeleteRoleUser}
         handleCancel={handleCancel}
       />
       <section className="content">

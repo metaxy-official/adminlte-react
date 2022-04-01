@@ -1,23 +1,25 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import {Select, Modal, Button} from "antd";
+import { Modal, Button} from "antd";
+import { OptionRole } from "@app/utils/types";
 
-const {Option} = Select;
+// const {Option} = Select;
 interface DeleteTypeModalProps {
   isModalVisible: boolean;
   handleOk?: () => void;
   handleCancel?: () => void;
+  dataOptionsRole: OptionRole[];
 }
 const DeleteUserTypeModal = (props: DeleteTypeModalProps) => {
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  // const handleChange = (value: string) => {
+  //   console.log(`selected ${value}`);
+  // };
 
-  const {isModalVisible, handleOk, handleCancel} = props;
+  const {isModalVisible, handleOk, handleCancel, dataOptionsRole} = props;
   return (
     <Modal
       className="modal-delete-type-user"
-      title="Thay đổi thay thế kiểu người dùng"
+      title="Xoá kiểu người dùng"
       visible={isModalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -26,20 +28,22 @@ const DeleteUserTypeModal = (props: DeleteTypeModalProps) => {
     >
       <div className="modal-delete-type-user__body">
         <p>
-          Kiểu người dùng thay thế <span>(*)</span>
+        Bạn có muốn xoá kiểu người dùng <span>{dataOptionsRole}</span>
         </p>
-        <Select
-          defaultValue="lucy"
+        {/* <Select
+          defaultValue=""
           style={{width: "100%"}}
           onChange={handleChange}
         >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="Yiminghe">yiminghe</Option>
-        </Select>
+              {dataOptionsRole.map((item) => (
+                <Option key={item.value} value={item.value}>
+                  {item.name}
+                </Option>
+              ))}
+        </Select> */}
         <div className="btn-control">
-          <Button className="mr-2">Huỷ</Button>
-          <Button className="ml-2" type="primary">
+          <Button onClick={handleCancel} className="mr-2">Huỷ</Button>
+          <Button onClick={handleOk} className="ml-2" type="primary">
             Lưu
           </Button>
         </div>
