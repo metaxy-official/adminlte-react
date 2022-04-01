@@ -10,8 +10,9 @@ export default function Updater(): null {
   useEffect(() => {
     const getAllData = async () => {
       const dataRoles = await getRoles();
-      const dataPermission = await getPermissions();
       dispatch(updateUserRoles(dataRoles));
+      
+      const dataPermission = await getPermissions();
       dispatch(updatePermissions(dataPermission));
     };
     getAllData();
