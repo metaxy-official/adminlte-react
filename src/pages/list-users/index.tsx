@@ -142,7 +142,7 @@ const ListUser = () => {
       title: "",
       dataIndex: "id",
       render: (id: string) => (
-        <ThreeDot onChangeID={handleChangeId} listItem={listItem} id={id} />
+        <ThreeDot onChangeID={() => handleChangeId(id)} listItem={listItem} />
       )
     }
   ];

@@ -19,8 +19,8 @@ import deleteIcon from "../../static/icon/delete.svg";
 import DeleteUserTypeModal from "@app/components/modal/DeleteTypeUser";
 import {deleteRoleUser, formatTime, getRoles} from "@app/utils";
 import {useDispatch, useSelector} from "react-redux";
-import { toast } from "react-toastify";
-import { updateUserRoles } from "@app/store/reducers/user";
+import {toast} from "react-toastify";
+import {updateUserRoles} from "@app/store/reducers/user";
 
 const ManagerTypeUser = () => {
   const navigate = useNavigate();
@@ -49,7 +49,10 @@ const ManagerTypeUser = () => {
   const handleDeleteRoleUser = async () => {
     try {
       const data = await deleteRoleUser(idUser);
-      console.log("🚀 ~ file: index.tsx ~ line 52 ~ handleDeleteRoleUser ~ data", data)
+      console.log(
+        "🚀 ~ file: index.tsx ~ line 52 ~ handleDeleteRoleUser ~ data",
+        data
+      );
       const dataRoles = await getRoles();
       dispatch(updateUserRoles(dataRoles));
       toast.success(`Xóa kiểu người ${data.name} dùng thành công!`);
@@ -60,7 +63,7 @@ const ManagerTypeUser = () => {
       handleCancel();
       console.log(error.message);
     }
-  }
+  };
 
   const columns = [
     {
@@ -81,11 +84,11 @@ const ManagerTypeUser = () => {
       title: "",
       dataIndex: "id",
       render: (id: string) => (
-        <ThreeDot onChangeID={handleChangeId} id={id} listItem={listItem} />
+        <ThreeDot onChangeID={() => handleChangeId(id)} listItem={listItem} />
       )
     }
   ];
-// state for modal delete type user
+  // state for modal delete type user
   const dataRoleUser = useSelector(
     (state: ApplicationRootState) => state.user.dataRoles
   );
@@ -93,7 +96,9 @@ const ManagerTypeUser = () => {
   //   name: item.name,
   //   value: item.id
   // }));
-  const dataOptionsRole: any = dataRoleUser.filter(item => item.id === idUser)[0]?.name
+  const dataOptionsRole: any = dataRoleUser.filter(
+    (item) => item.id === idUser
+  )[0]?.name;
   return (
     <div className="manager-user">
       <ContentHeader title="Danh sách kiểu người dùng" />

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, {useRef, useState} from "react";
+import React, {useRef, memo, useState} from "react";
 import useOnClickOutside from "@app/hooks/useClickOutside";
 import threeDotIcon from "../../static/icon/threedot.svg";
 
@@ -13,19 +13,18 @@ export interface ItemMoreOption {
   onClick: (value?: any) => void;
 }
 interface Props {
-  id?: string;
   listItem: ItemMoreOption[];
-  onChangeID: (value?: string) => void;
+  onChangeID: () => void;
 }
 
 function ThreeDot(props: Props) {
-  const {listItem, id = "", onChangeID} = props;
+  const {listItem, onChangeID} = props;
 
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsShowModal(false));
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const handleGetIDRecord = () => {
-    onChangeID(id);
+    onChangeID();
     setIsShowModal(true);
   };
 
@@ -48,4 +47,4 @@ function ThreeDot(props: Props) {
   );
 }
 
-export default ThreeDot;
+export default memo(ThreeDot);
