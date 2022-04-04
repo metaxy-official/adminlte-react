@@ -35,7 +35,7 @@ const TableCustom = (props: TableCustomProps) => {
   return (
     <>
       {data && data.length > 0 ? (
-        <div className="table-custom">
+        <div className="">
           <Table
             tableLayout="fixed"
             className="table-ant"

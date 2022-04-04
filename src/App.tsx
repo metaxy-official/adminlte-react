@@ -126,10 +126,10 @@ const App = () => {
             <Route path="/" element={<ManagerUser />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/chinh-sua-ca-nhan" element={<EditProfile />} />
-          </Route >
-        </Route >
-      </Routes >
-    </BrowserRouter >
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
