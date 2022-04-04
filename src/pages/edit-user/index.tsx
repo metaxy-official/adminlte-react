@@ -34,7 +34,6 @@ const EditUser = () => {
   // handle select for getRoles
   function handleChangeSelect(value: string[]) {
     userEdit.roles = value;
-    console.log(`selected ${value}`);
   }
   useEffect(() => {
     const getData = async () => {

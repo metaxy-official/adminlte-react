@@ -1,8 +1,14 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable consistent-return */
 import { axios } from "@app/services/auth";
 import { DateTime } from "luxon";
 import format from "date-fns/format";
-import { changePasswordProps, IEditUser, permissionRoleUserI, UserI } from "./types";
+import {
+    changePasswordProps,
+    IEditUser,
+    IPermissionRoleUser,
+    UserI
+} from "./types";
 
 export const showTime = (time: Date | number) => {
     let datetime;
@@ -96,9 +102,14 @@ export const getRoleUserById = async (id: string = "") => {
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
-export const getListPlayer = async (page?: number, pageSize?: number, sortBy: string = 'createdAt%3Aasc', keyword?: string) => {
-    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}&keyword=${keyword}`
+};
+export const getListPlayer = async (
+    page?: number,
+    pageSize?: number,
+    sortBy: string = "createdAt%3Aasc",
+    keyword?: string
+) => {
+    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}&keyword=${keyword}`;
     try {
         const response = await axios.get(url);
         return response.data;
@@ -107,9 +118,8 @@ export const getListPlayer = async (page?: number, pageSize?: number, sortBy: st
     }
 };
 
-
-export const getPlayerById = async (id: string = '') => {
-    const url = `player/${id}`
+export const getPlayerById = async (id: string = "") => {
+    const url = `player/${id}`;
     try {
         const response = await axios.get(url);
         return response.data;
@@ -158,33 +168,51 @@ export const createNewUser = async (user: UserI) => {
     const url = `users/create`;
     const response = await axios.post(url, user);
     return response.data;
-}
+};
 
-export const getDataItemIngame = async (address?: string, page: number = 1, pageSize: number = 10) => {
+export const getDataItemIngame = async (
+    address?: string,
+    page: number = 1,
+    pageSize: number = 10
+) => {
     try {
-        const response = await axios.get(`/player/${address}/game/souls?page=${page}&pageSize=${pageSize}`)
-        return response.data
+        const response = await axios.get(
+            `/player/${address}/game/souls?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
+};
 
-export const getDataOrderHistory = async (address?: string, page: number = 1, pageSize: number = 10) => {
+export const getDataOrderHistory = async (
+    address?: string,
+    page: number = 1,
+    pageSize: number = 10
+) => {
     try {
-        const response = await axios.get(`/player/${address}/game/order-history?page=${page}&pageSize=${pageSize}`)
-        return response.data
+        const response = await axios.get(
+            `/player/${address}/game/order-history?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
-export const getDataClaimHistory = async (address?: string, page: number = 1, pageSize: number = 10) => {
+};
+export const getDataClaimHistory = async (
+    address?: string,
+    page: number = 1,
+    pageSize: number = 10
+) => {
     try {
-        const response = await axios.get(`/player/${address}/game/mxy-history?page=${page}&pageSize=${pageSize}`)
-        return response.data
+        const response = await axios.get(
+            `/player/${address}/game/mxy-history?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
-}
+};
 
 export const deleteUser = async (idUser: string) => {
     const url = `users/${idUser}`;
@@ -197,7 +225,6 @@ export const resetPassword = async (idUser: string, password: string) => {
     const response = await axios.put(url, { newPassword: password });
     return response.data;
 };
-
 
 export const getDataProfile = async () => {
     const url = `me/profile`;
@@ -223,8 +250,19 @@ export const getPermissions = async () => {
     return response.data;
 };
 
-export const createNewRole = async (newRole: permissionRoleUserI) => {
+export const createNewRole = async (newRole: IPermissionRoleUser) => {
     const url = `roles`;
     const response = await axios.post(url, newRole);
     return response.data;
-}
+};
+export const updateRole = async (newRole: IPermissionRoleUser, id: string) => {
+    const url = `roles/${id}`;
+    const response = await axios.put(url, newRole);
+    return response.data;
+};
+
+export const deleteRoleUser = async (idUser: string) => {
+    const url = `roles/${idUser}`;
+    const response = await axios.delete(url);
+    return response.data;
+};

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from "react";
 import { Pagination, Spin, Table } from "antd";
 import EmptyData from "../emptyData";
@@ -13,17 +14,29 @@ interface TableCustomProps {
 }
 
 const TableCustom = (props: TableCustomProps) => {
-  const { data = [], columns, dataSelection, loading, currentPage, setCurrentPage, totalData } = props;
-  console.log("🚀 ~ file: Table.tsx ~ line 17 ~ TableCustom ~ totalData", totalData)
+  const {
+    data = [],
+    columns,
+    dataSelection,
+    loading,
+    currentPage,
+    setCurrentPage,
+    totalData
+  } = props;
 
   const handleOnChange = (page: number) => {
-    setCurrentPage(page)
-  }
-  if (loading) return <div className="d-flex justify-content-center mt-2"><Spin size="large" /></div>
+    setCurrentPage(page);
+  };
+  if (loading)
+    return (
+      <div className="d-flex justify-content-center mt-2">
+        <Spin size="large" />
+      </div>
+    );
   return (
     <>
       {data && data.length > 0 ? (
-        <div className="table-custom">
+        <div className="">
           <Table
             tableLayout="fixed"
             className="table-ant"
@@ -42,10 +55,12 @@ const TableCustom = (props: TableCustomProps) => {
             total={100}
             current={currentPage}
             onChange={handleOnChange}
-            showTotal={(total, range) => `Showing ${range[0]}-${range[1]} of ${total} items`}
+            showTotal={(total, range) =>
+              `Showing ${range[0]}-${range[1]} of ${total} items`
+            }
           />
           <p className="total-record">
-            Tổng:&nbsp;&nbsp;<span>{data.length} người chơi</span>
+            Tổng:&nbsp;&nbsp;<span>{totalData} người chơi</span>
           </p>
         </div>
       ) : (
