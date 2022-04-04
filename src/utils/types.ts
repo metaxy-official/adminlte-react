@@ -248,12 +248,18 @@ export interface DataProfile {
     createdAt: string,
     updatedAt: string,
     id: string,
+    roles: [],
 }
 export interface IEditUser {
     fullName: string;
     roles: string[];
     phoneNumber: string;
     note?: string;
+}
+
+export interface changePasswordProps {
+    newPassword: string;
+    oldPassword: string
 }
 export interface UserI {
     fullName: string;

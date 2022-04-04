@@ -7,6 +7,7 @@ import { formatTimeByDay, getDataProfile } from '@app/utils';
 const Profile = () => {
 
   const [dataProfile, setDataProfile] = useState<DataProfile>()
+  console.log("🚀 ~ file: Profile.tsx ~ line 10 ~ Profile ~ dataProfile", dataProfile)
 
   const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper">
-      <BoxComponent title="Trần Thanh Long" handleEdit={changeProfile} listInfo={dataInfo} />
+      <BoxComponent title={dataProfile?.fullName} handleEdit={changeProfile} listInfo={dataInfo} />
       <BoxComponent title="Thông tin cơ bản" listInfo={dataBasicInfo} />
     </div>
   );

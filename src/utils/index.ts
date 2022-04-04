@@ -2,7 +2,7 @@
 import { axios } from "@app/services/auth";
 import { DateTime } from "luxon";
 import format from "date-fns/format";
-import { IEditUser, permissionRoleUserI, UserI } from "./types";
+import { changePasswordProps, IEditUser, permissionRoleUserI, UserI } from "./types";
 
 export const showTime = (time: Date | number) => {
     let datetime;
@@ -204,6 +204,19 @@ export const getDataProfile = async () => {
     const response = await axios.get(url);
     return response.data;
 };
+
+export const editDataProfile = async (user: IEditUser) => {
+    const url = `me/update-profile`;
+    const response = await axios.put(url, user);
+    return response.data;
+};
+
+export const changePassword = async (password: changePasswordProps) => {
+    const url = `me/change-password`;
+    const response = await axios.put(url, password);
+    return response.data;
+};
+
 export const getPermissions = async () => {
     const url = `permissions`;
     const response = await axios.get(url);

@@ -14,6 +14,7 @@ interface TableCustomProps {
 
 const TableCustom = (props: TableCustomProps) => {
   const { data = [], columns, dataSelection, loading, currentPage, setCurrentPage, totalData } = props;
+  console.log("🚀 ~ file: Table.tsx ~ line 17 ~ TableCustom ~ totalData", totalData)
 
   const handleOnChange = (page: number) => {
     setCurrentPage(page)
@@ -44,7 +45,7 @@ const TableCustom = (props: TableCustomProps) => {
             showTotal={(total, range) => `Showing ${range[0]}-${range[1]} of ${total} items`}
           />
           <p className="total-record">
-            Tổng:&nbsp;&nbsp;<span>{totalData} người chơi</span>
+            Tổng:&nbsp;&nbsp;<span>{data.length} người chơi</span>
           </p>
         </div>
       ) : (

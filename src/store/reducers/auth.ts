@@ -5,13 +5,19 @@ export interface AuthState {
   isLoggedIn: boolean;
   token: string | null;
   currentUser: any;
+  user: any;
 }
+
+const user = JSON.parse(localStorage.getItem('user') || '{}');
+console.log("🚀 ~ file: auth.ts ~ line 12 ~ user", user)
 
 const initialState: AuthState = {
   isLoggedIn: !!localStorage.getItem('token'),
   token: localStorage.getItem('token'),
+  user: localStorage.getItem('user'),
+
   currentUser: {
-    email: 'mail@example.com',
+    email: user?.user.email,
     picture: null
   }
 };

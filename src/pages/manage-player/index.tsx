@@ -136,7 +136,7 @@ const ManagePlayer = () => {
                 </div>
                 <div className="table-custom my-5">
                     <TableCustom
-                        data={dataPlayer.map((item, index) => { return { ...item, key: index } })}
+                        data={dataPlayer}
                         totalData={totalDocs}
                         columns={columns}
                         currentPage={currentPage}
