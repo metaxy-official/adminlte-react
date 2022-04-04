@@ -9,7 +9,7 @@ export interface UserState {
 
 const initialState: UserState = {
     dataRoles: [],
-    dataPermissions: []
+    dataPermissions: [],
 };
 
 export const userSlice = createSlice({
@@ -21,7 +21,7 @@ export const userSlice = createSlice({
         },
         updatePermissions: (state, { payload }) => {
             state.dataPermissions = payload
-        }
+        },
     }
 });
 

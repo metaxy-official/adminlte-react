@@ -104,6 +104,8 @@ const ListTypeNotification = () => {
         isModalVisible={isShowModal}
         handleOk={handleOk}
         handleCancel={handleCancel}
+        namePopup="thong bao"
+        data={[]}
       />
       <section className="content">
         <div className="container-fluid">

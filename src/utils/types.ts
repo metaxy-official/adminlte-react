@@ -76,15 +76,6 @@ export interface ListDataNotification {
     note: string;
     createdAt: string;
 }
-export interface DataListNotifyUser {
-    key: number | string;
-    title: string;
-    type: string;
-    address: string;
-    reporter: string;
-    from: string;
-    createdAt: string;
-}
 
 export interface DataUser {
     email: string;
@@ -267,4 +258,23 @@ export interface IPermissionRoleUser {
     permissions: string[];
     fullAccess: boolean;
     note: string;
+}
+
+export interface ITypeAction {
+    key: string;
+    name: string;
+    id: string;
+}
+export interface INotification {
+    readed: boolean;
+    blockNumber: string;
+    eventType: string;
+    address: string;
+    timeUTC: string;
+    data: string;
+    platform: string;
+    createdAt: string;
+    updatedAt: string;
+    type: ITypeAction;
+    id: string;
 }
