@@ -1,8 +1,14 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable consistent-return */
 import { axios } from "@app/services/auth";
 import { DateTime } from "luxon";
 import format from "date-fns/format";
-import { IEditUser, IPermissionRoleUser, UserI } from "./types";
+import {
+    changePasswordProps,
+    IEditUser,
+    IPermissionRoleUser,
+    UserI
+} from "./types";
 
 export const showTime = (time: Date | number) => {
     let datetime;
@@ -133,29 +139,21 @@ export const getPlayerStoryMode = async (
     endDate?: string,
     keyword?: string
 ) => {
-    try {
-        const response = await axios.get(
-            `/player/${address}/game/story-mode?page=${1}&pageSize=${10}&startDate=${"2021-12-24T10%3A15%3A26.658Z"}&endDate=${"2022-07-24T10:15:26.658Z"}&keyword=${keyword}`
-        );
-        return response.data;
-    } catch (error: any) {
-        throw new Error(error.message);
-    }
+    const params: any = { page, pageSize, startDate, endDate, keyword }
+    const response = await axios.get(`/player/${address}/game/story-mode`, { params })
+    return response.data
 };
+
 
 export const getDataHeroes = async (
     address?: string,
-    page: number = 1,
-    pageSize: number = 10
+    page?: number,
+    pageSize?: number,
+    keyword?: string
 ) => {
-    try {
-        const response = await axios.get(
-            `/player/${address}/game/nfts?page=${page}&pageSize=${pageSize}`
-        );
-        return response.data;
-    } catch (error: any) {
-        throw new Error(error.message);
-    }
+    const params: any = { page, pageSize, keyword }
+    const response = await axios.get(`/player/${address}/game/nfts`, { params })
+    return response.data
 };
 
 export const createNewUser = async (user: UserI) => {
@@ -182,16 +180,13 @@ export const getDataItemIngame = async (
 export const getDataOrderHistory = async (
     address?: string,
     page: number = 1,
-    pageSize: number = 10
+    pageSize?: number,
+    keyword?: string,
 ) => {
-    try {
-        const response = await axios.get(
-            `/player/${address}/game/order-history?page=${page}&pageSize=${pageSize}`
-        );
-        return response.data;
-    } catch (error: any) {
-        throw new Error(error.message);
-    }
+    const params: any = { page, pageSize, keyword }
+    const response = await axios.get(`/player/${address}/game/nfts/`, { params })
+    const data: any = await response
+    return data
 };
 export const getDataClaimHistory = async (
     address?: string,
@@ -225,6 +220,19 @@ export const getDataProfile = async () => {
     const response = await axios.get(url);
     return response.data;
 };
+
+export const editDataProfile = async (user: IEditUser) => {
+    const url = `me/update-profile`;
+    const response = await axios.put(url, user);
+    return response.data;
+};
+
+export const changePassword = async (password: changePasswordProps) => {
+    const url = `me/change-password`;
+    const response = await axios.put(url, password);
+    return response.data;
+};
+
 export const getPermissions = async () => {
     const url = `permissions`;
     const response = await axios.get(url);

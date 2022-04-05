@@ -5,6 +5,7 @@ import SearchBox from '@app/components/searchbox/SearchBox'
 import { DataDetailNft, DataNftPlayer, DataPlayer } from '@app/utils/types';
 import { getDataHeroes } from '@app/utils';
 import TableCustom from '@app/components/table/Table';
+import { Select } from 'antd';
 
 interface DataInfoProps {
     dataInfo?: DataPlayer
@@ -13,31 +14,42 @@ interface DataInfoProps {
 const BoxInfoHero = (props: DataInfoProps) => {
 
     const { dataInfo } = props
-
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
     const [dataNft, setDataNft] = useState<DataNftPlayer[]>([]);
+    console.log("🚀 ~ file: BoxInfoHero.tsx ~ line 19 ~ BoxInfoHero ~ dataNft", dataNft)
+    const [setSearchItems, setSetSearchItems] = useState<string>('')
+    const [totalDocs, setTotalDocs] = useState<number>()
+    const { Option } = Select;
+
+    const onSearch = (value: string) => {
+        setSetSearchItems(value.trim())
+        setCurrentPage(1)
+    }
+
+    function handleChange(value: string) {
+        console.log(`selected ${value}`);
+    }
 
     const address = dataInfo?.address
 
     useEffect(() => {
         const getDataNft = async () => {
-            const data = await getDataHeroes(address);
-            setDataNft(data.docs);
+            const data = await getDataHeroes(address, currentPage, pageSize, setSearchItems);
+            setDataNft(data?.docs)
+            setPageSize(10)
+            setTotalDocs(data?.totalDocs)
         }
         getDataNft()
-    }, [])
+    }, [setSearchItems])
 
     const dataSource = dataNft
 
     const columns = [
         {
             title: 'Hero ID',
-            dataIndex: 'metadata',
-            key: 'rankInfoId',
-            render: (metadata: DataDetailNft) => (
-                <>
-                    <p>{metadata?.rankInfoId}</p>
-                </>
-            )
+            dataIndex: 'tokenId',
+            key: 'tokenId',
         },
         {
             title: 'Hero',
@@ -161,13 +173,27 @@ const BoxInfoHero = (props: DataInfoProps) => {
                 <h3 className="table-title my-3">Danh sách hero của người chơi</h3>
                 <div className="table-filter">
                     <div className="table-filter__search my-3">
-                        <SearchBox placeholder="Nhập ID của hero " />
+                        <SearchBox placeholder="Nhập ID của hero " onSearch={onSearch} />
                     </div>
                     <div className="table-filter__select my-3">
-                        <p>abc</p>
+                        <Select
+                            defaultValue="Chọn nhân vật"
+                            style={{ width: 180 }}
+                            onChange={handleChange}
+                        >
+                            <Option value="jack">Jack</Option>
+                            <Option value="lucy">Lucy</Option>
+                            <Option value="Yiminghe">yiminghe</Option>
+                        </Select>
                     </div>
                     <div className="table-custom my-5">
-                        <TableCustom data={dataSource} columns={columns} />
+                        <TableCustom
+                            data={dataSource}
+                            columns={columns}
+                            totalData={totalDocs}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </div>
                 </div>
             </div>

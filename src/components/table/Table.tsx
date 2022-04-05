@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React from "react";
-import {Pagination, Spin, Table} from "antd";
+import { Pagination, Spin, Table } from "antd";
 import EmptyData from "../emptyData";
 
 interface TableCustomProps {
@@ -43,7 +44,7 @@ const TableCustom = (props: TableCustomProps) => {
             columns={columns}
             dataSource={data.map((item, index) => {
               if (item.key) return item;
-              return {...item, key: index};
+              return { ...item, key: index };
             })}
             pagination={false}
           />
@@ -51,12 +52,9 @@ const TableCustom = (props: TableCustomProps) => {
             className="pagination-table"
             defaultCurrent={1}
             pageSize={10}
-            total={100}
+            total={totalData}
             current={currentPage}
             onChange={handleOnChange}
-            showTotal={(total, range) =>
-              `Showing ${range[0]}-${range[1]} of ${total} items`
-            }
           />
           <p className="total-record">
             Tổng:&nbsp;&nbsp;<span>{totalData} người chơi</span>

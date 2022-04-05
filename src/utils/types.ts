@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { AuthState } from "@app/store/reducers/auth";
 import { UiState } from "@app/store/reducers/ui";
 import { UserState } from "@app/store/reducers/user";
@@ -153,7 +154,7 @@ export interface DataNftPlayer {
 export interface DataDetailNft {
     evolveLevel: number;
     specialSkillLevel: number;
-    rankInfoId: number;
+    tokenId: number;
     characterName: string;
     imgHero: string;
     characterId: number;
@@ -238,12 +239,18 @@ export interface DataProfile {
     createdAt: string;
     updatedAt: string;
     id: string;
+    roles: [];
 }
 export interface IEditUser {
     fullName: string;
     roles: string[];
     phoneNumber: string;
     note?: string;
+}
+
+export interface changePasswordProps {
+    newPassword: string;
+    oldPassword: string;
 }
 export interface UserI {
     fullName: string;
