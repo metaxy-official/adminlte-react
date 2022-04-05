@@ -70,13 +70,6 @@ export interface DataNotificationInGame {
     createdAt: string;
     status: boolean;
 }
-export interface ListDataNotification {
-    id: string;
-    type: string;
-    description: string;
-    note: string;
-    createdAt: string;
-}
 
 export interface DataUser {
     email: string;
@@ -284,4 +277,17 @@ export interface INotification {
     updatedAt: string;
     type: ITypeAction;
     id: string;
+}
+export interface INotificationType {
+    key: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}
+export interface INotificationTypeReq {
+    key: string;
+    name: string;
+    description: string;
+    note: string;
 }
