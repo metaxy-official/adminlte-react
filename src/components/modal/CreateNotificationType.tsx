@@ -16,7 +16,6 @@ const CreateNotificationType = (props: Props) => {
       className="modal-create-notification-type"
       title="Tạo thể loại thông báo"
       visible={isModalVisible}
-      onOk={handleOk}
       onCancel={handleCancel}
       footer={null}
       width={550}
@@ -38,8 +37,10 @@ const CreateNotificationType = (props: Props) => {
         </div>
       </div>
       <div className="btn-control">
-        <Button className="mr-2">Huỷ</Button>
-        <Button className="ml-2" type="primary">
+        <Button onClick={handleCancel} className="mr-2">
+          Huỷ
+        </Button>
+        <Button onClick={handleOk} className="ml-2" type="primary">
           Tạo thể loại
         </Button>
       </div>
