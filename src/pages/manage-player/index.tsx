@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { ContentHeader } from '@app/components'
-import SearchBox from '@app/components/searchbox/SearchBox'
-import { useNavigate } from 'react-router-dom';
-import ThreeDot, { ItemMoreOption } from '@app/components/btnThreeDot';
-import ChangeStatusModal from '@app/components/modal/ChangeStatusPlayer';
-import { formatTime, getListPlayer, shortAddress } from '@app/utils';
-import { DataListPlayerProp } from '@app/utils/types';
-import TableCustom from '@app/components/table/Table';
+import React, { useEffect, useState } from "react";
+import { ContentHeader } from "@app/components";
+import SearchBox from "@app/components/searchbox/SearchBox";
+import { useNavigate } from "react-router-dom";
+import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
+import ChangeStatusModal from "@app/components/modal/ChangeStatusPlayer";
+import { formatTime, getListPlayer, shortAddress } from "@app/utils";
+import { DataListPlayerProp } from "@app/utils/types";
+import TableCustom from "@app/components/table/Table";
 import changeStatusIcon from "../../static/icon/change-status.svg";
 import watchmoreIcon from "../../static/icon/watch-more.svg";
 
@@ -16,91 +16,103 @@ const ManagePlayer = () => {
     const navigate = useNavigate();
     // state for modal detail
     const [isShowModal, setIsShowModal] = useState<string>();
-    const [searchItems, setSearchItems] = useState('')
-    const [dataPlayer, setDataPlayer] = useState<DataListPlayerProp[]>([])
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pageSize, setPageSize] = useState(10)
-    const [totalDocs, setTotalDocs] = useState<number>()
-    const filterSort = 'createdAt%3Aasc'
+    const [searchItems, setSearchItems] = useState("");
+    const [dataPlayer, setDataPlayer] = useState<DataListPlayerProp[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalDocs, setTotalDocs] = useState<number>();
+    const filterSort = "createdAt%3Aasc";
 
     const handleOpenModal = (value?: string) => {
         setIsShowModal(value);
     };
     const handleOk = () => {
-        setIsShowModal('');
+        setIsShowModal("");
     };
     const handleCancel = () => {
-        setIsShowModal('');
+        setIsShowModal("");
     };
 
-
     const onSearch = (value: string) => {
-        setSearchItems(value.trim())
-        setCurrentPage(1)
-    }
+        setSearchItems(value.trim());
+        setCurrentPage(1);
+    };
 
     useEffect(() => {
         const getDataPlayer = async () => {
-            const data = await getListPlayer(currentPage, pageSize, filterSort, searchItems);
-            setDataPlayer(data.docs)
-            setPageSize(data?.limit)
-            setTotalDocs(data?.totalDocs)
-        }
+            const data = await getListPlayer(
+                currentPage,
+                pageSize,
+                filterSort,
+                searchItems
+            );
+            setDataPlayer(data.docs);
+            setPageSize(data?.limit);
+            setTotalDocs(data?.totalDocs);
+        };
         getDataPlayer();
-    }, [currentPage, searchItems])
-
+    }, [currentPage, searchItems]);
 
     const listItem: ItemMoreOption[] = [
         {
-            key: 'detailInfo', name: 'Xem chi tiết', icon: watchmoreIcon, onClick: () => {
-                navigate(`/nguoi-choi/chi-tiet-nguoi-choi/${id}`)
+            key: "detailInfo",
+            name: "Xem chi tiết",
+            icon: watchmoreIcon,
+            onClick: () => {
+                navigate(`/nguoi-choi/chi-tiet-nguoi-choi/${id}`);
             }
         },
-        { key: 'changeStatus', name: 'Đổi Trạng thái', icon: changeStatusIcon, onClick: handleOpenModal }
-    ]
+        {
+            key: "changeStatus",
+            name: "Đổi Trạng thái",
+            icon: changeStatusIcon,
+            onClick: handleOpenModal
+        }
+    ];
 
     const columns = [
         {
-            title: 'Địa chí ví',
-            dataIndex: 'address',
-            key: 'address',
-            render: (transactionHash: string) => <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
+            title: "Địa chí ví",
+            dataIndex: "address",
+            key: "address",
+            render: (transactionHash: string) => (
+                <a href={`${transactionHash}`}>{shortAddress(transactionHash)}</a>
+            )
         },
         {
-            title: 'Tên trong game',
-            dataIndex: 'name',
-            key: 'name',
+            title: "Tên trong game",
+            dataIndex: "name",
+            key: "name"
         },
         {
-            title: 'Quốc Gia',
-            dataIndex: 'regionId',
-            key: 'regionId',
+            title: "Quốc Gia",
+            dataIndex: "regionId",
+            key: "regionId"
         },
         {
-            title: 'Level Cao nhất',
-            dataIndex: 'highestLevel',
-            key: 'highestLevel',
+            title: "Level Cao nhất",
+            dataIndex: "highestLevel",
+            key: "highestLevel"
         },
         {
-            title: 'Lần Hoạt động gần nhất',
-            dataIndex: 'updatedAt',
-            key: 'updatedAt',
+            title: "Lần Hoạt động gần nhất",
+            dataIndex: "updatedAt",
+            key: "updatedAt",
             render: (date: string) => <p>{formatTime(date)}</p>
         },
         {
-            title: 'Ngày tham gia',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
+            title: "Ngày tham gia",
+            dataIndex: "createdAt",
+            key: "createdAt",
             render: (date: string) => <p>{formatTime(date)}</p>
         },
         {
-            title: 'Trạng thái',
-            dataIndex: 'banned',
-            key: 'banned',
+            title: "Trạng thái",
+            dataIndex: "banned",
+            key: "banned",
             render: (status: boolean) => (
                 <>
                     {status ? (
-
                         <div className="status-not-active">Dừng hoạt động</div>
                     ) : (
                         <div className="status-actived">Đang hoạt động</div>
@@ -112,10 +124,10 @@ const ManagePlayer = () => {
             title: "",
             dataIndex: "id",
             render: (id: string) => (
-                <ThreeDot onChangeID={handleChangeId} listItem={listItem} id={id} />
+                <ThreeDot onChangeID={() => handleChangeId(id)} listItem={listItem} />
             )
         }
-    ]
+    ];
 
     return (
         <section className="content">

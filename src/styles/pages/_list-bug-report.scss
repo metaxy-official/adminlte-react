@@ -1,22 +1,17 @@
 .list-bug-report {
-    &__header {
+    .box-filter {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
-        .box-filter {
-            display: flex;
-            align-items: center;
 
-            &__date {
-                margin-left: 10px;
-            }
-            &__type-bug {
-                margin-left: 10px;
-            }
-            &__status {
-                margin-left: 10px;
-            }
+        &__date {
+            margin-left: 10px;
+        }
+        &__type-bug {
+            margin-left: 10px;
+        }
+        &__status {
+            margin-left: 10px;
         }
     }
 }

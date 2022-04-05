@@ -255,3 +255,21 @@ export const deleteRoleUser = async (idUser: string) => {
     const response = await axios.delete(url);
     return response.data;
 };
+
+export const getNotifications = async (
+    page: string = "1",
+    pageSize: string = "10",
+    fromDate: string = "2022-03-22T11%3A17%3A26.755Z",
+    toDate: string = "2022-03-23T11%3A17%3A26.762Z",
+    sortBy: string = "createdAt%3Aasc"
+) => {
+    const url = `notifications?page=${page}&pageSize=${pageSize}&fromDate=${fromDate}&toDate=${toDate}&sortBy=${sortBy}`;
+    const response = await axios.get(url);
+    return response.data.docs;
+};
+
+export const getDetailNotification = async (id: string) => {
+    const url = `notifications/${id}`;
+    const response = await axios.get(url);
+    return response.data;
+};

@@ -4,18 +4,18 @@
 import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
-import {DataListNotifyUser} from "@app/utils/types";
+import {INotification, ITypeAction} from "@app/utils/types";
 import {Select, DatePicker} from "antd";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
-import {useNavigate} from "react-router-dom";
-import DeleteUserModal from "@app/components/modal/DeleteUser";
-import {useState} from "react";
-import WarningChangePassModal from "@app/components/modal/WarningChangePassword";
+import {useEffect, useState} from "react";
+import {
+  formatTime,
+  getDetailNotification,
+  getNotifications,
+  shortAddress
+} from "@app/utils";
+import DetailsNotify, {dataRow} from "@app/components/modal/Details-notify";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
-import editIcon from "../../../static/icon/edit.svg";
-import deleteIcon from "../../../static/icon/delete.svg";
-import resetPassIcon from "../../../static/icon/reset-pass.svg";
-import changeStatusIcon from "../../../static/icon/change-status.svg";
 
 const {Option} = Select;
 const {RangePicker} = DatePicker;
@@ -23,38 +23,23 @@ const NotificationUsers = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
+  const [dataNotifications, setNotifications] = useState<INotification[]>();
+  const [detailNotification, setDetailNotification] = useState<INotification>();
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      const data = await getNotifications();
+      setNotifications(data);
+      setLoading(false);
+    };
+    getData();
+  }, []);
 
-  const data: DataListNotifyUser[] = [
-    {
-      key: "1",
-      title: "bản cập nhật mới",
-      type: "Cập Nhật",
-      address: "0x28890a71...afd8feba4d",
-      reporter: "Ltrannn",
-      from: "CMS",
-      createdAt: "13:00 - 01/01/2022"
-    },
-    {
-      key: "2",
-      title: "bản cập nhật mới",
-      type: "Cập Nhật",
-      address: "0x28890a71...afd8feba4d",
-      reporter: "Ltrannn",
-      from: "CMS",
-      createdAt: "13:00 - 01/01/2022"
-    },
-    {
-      key: "3",
-      title: "bản cập nhật mới",
-      type: "Cập Nhật",
-      address: "0x28890a71...afd8feba4d",
-      reporter: "Ltrannn",
-      from: "CMS",
-      createdAt: "13:00 - 01/01/2022"
-    }
-  ];
-
-  const navigate = useNavigate();
+  const setIdAndGetDetailNotification = async (id: string) => {
+    const data: INotification = await getDetailNotification(id);
+    setDetailNotification(data);
+  };
   // state for modal detail
   const [isShowModal, setIsShowModal] = useState<string>();
   const handleOpenModal = (value?: string) => {
@@ -72,77 +57,93 @@ const NotificationUsers = () => {
       key: "detailInfo",
       name: "Xem chi tiết",
       icon: watchmoreIcon,
-      onClick: () => {
-        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
-      }
-    },
-    {
-      key: "editInfo",
-      name: "Chỉnh sửa",
-      icon: editIcon,
-      onClick: () => {
-        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
-      }
-    },
-    {
-      key: "resetPass",
-      name: "Cấp mật khẩu",
-      icon: resetPassIcon,
       onClick: handleOpenModal
-    },
-    {
-      name: "Đổi Trạng thái",
-      icon: changeStatusIcon,
-      onClick: () => {
-        navigate("/nguoi-dung/chi-tiet-nguoi-dung");
-      }
-    },
-    {key: "delete", name: "Xóa", icon: deleteIcon, onClick: handleOpenModal}
+    }
   ];
   const columns = [
     {
       title: "Tiêu đề",
-      dataIndex: "title",
-      render: (text: string) => <p>{text}</p>
+      dataIndex: "data",
+      render: (data: any) => JSON.parse(data).title
     },
     {
       title: "Thể loại Thông báo",
-      dataIndex: "type"
+      dataIndex: "type",
+      render: (type: ITypeAction) => type?.name
     },
     {
       title: "Địa chỉ ví",
-      dataIndex: "address"
+      dataIndex: "address",
+      render: (address: string) => shortAddress(address)
     },
     {
       title: "Người đăng",
-      dataIndex: "reporter"
+      dataIndex: "id",
+      render: (id: string) => shortAddress(id)
     },
     {
       title: "Đến từ",
-      dataIndex: "from"
+      dataIndex: "platform"
     },
     {
       title: "Thời gian tạo",
-      dataIndex: "createdAt"
+      dataIndex: "createdAt",
+      render: (date: string) => <p>{formatTime(date)}</p>
     },
     {
       title: "",
-      dataIndex: "key",
-      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
+      dataIndex: "id",
+      render: (id: string) => (
+        <ThreeDot
+          onChangeID={() => setIdAndGetDetailNotification(id)}
+          listItem={listItem}
+        />
+      )
+    }
+  ];
+  const dataNoti: dataRow[] = [
+    {
+      title: "Tiêu đề:",
+      value: detailNotification && JSON.parse(detailNotification.data).title
+    },
+    {
+      title: "Thể loại thông báo:",
+      value:
+        detailNotification &&
+        detailNotification.type &&
+        detailNotification.type?.name
+    },
+    {
+      title: "Địa chỉ ví:",
+      value: detailNotification?.address
+    },
+    {
+      title: "Đến từ:",
+      value: detailNotification?.platform
+    },
+    {
+      title: "Mô tả:",
+      value:
+        detailNotification && JSON.parse(detailNotification.data).description
+    },
+    {
+      title: "Trạng thái:",
+      value: detailNotification?.readed ? "Đã đọc" : "Chưa đọc"
+    },
+    {
+      title: "Thời gian tạo:",
+      value: detailNotification && formatTime(detailNotification?.timeUTC)
     }
   ];
   return (
     <div className="list-user-page">
       <ContentHeader title="Danh sách người dùng" />
-      <DeleteUserModal
-        isModalVisible={isShowModal === "delete"}
+      <DetailsNotify
+        isModalVisible={isShowModal === "detailInfo"}
         handleOk={handleOk}
         handleCancel={handleCancel}
-      />
-      <WarningChangePassModal
-        isModalVisible={isShowModal === "resetPass"}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
+        namePopup="Chi tiết thể loại thông báo"
+        data={dataNoti}
       />
       <section className="content">
         <div className="container-fluid">
@@ -190,7 +191,11 @@ const NotificationUsers = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={data} columns={columns} />
+            <TableCustom
+              data={dataNotifications}
+              columns={columns}
+              loading={loading}
+            />
           </div>
         </div>
       </section>
