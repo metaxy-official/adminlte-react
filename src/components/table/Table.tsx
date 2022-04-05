@@ -52,12 +52,9 @@ const TableCustom = (props: TableCustomProps) => {
             className="pagination-table"
             defaultCurrent={1}
             pageSize={10}
-            total={100}
+            total={totalData}
             current={currentPage}
             onChange={handleOnChange}
-            showTotal={(total, range) =>
-              `Showing ${range[0]}-${range[1]} of ${total} items`
-            }
           />
           <p className="total-record">
             Tổng:&nbsp;&nbsp;<span>{totalData} người chơi</span>

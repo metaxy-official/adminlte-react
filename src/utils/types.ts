@@ -163,7 +163,7 @@ export interface DataNftPlayer {
 export interface DataDetailNft {
     evolveLevel: number;
     specialSkillLevel: number;
-    rankInfoId: number;
+    tokenId: number;
     characterName: string;
     imgHero: string;
     characterId: number;
