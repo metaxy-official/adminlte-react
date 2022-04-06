@@ -75,7 +75,7 @@ export interface DataUser {
     email: string;
     createdAt: string;
     fullName: string;
-    isActive: string;
+    isActive: boolean;
     phoneNumber: string;
     roles: [];
     note: string;
@@ -134,6 +134,7 @@ export interface DataRoleUser {
     permissions: PermissionI[];
     name: string;
     createdBy: string;
+    createdAt: string;
     id: string;
 }
 
@@ -284,10 +285,11 @@ export interface INotificationType {
     createdAt: string;
     updatedAt: string;
     id: string;
+    note: string;
+    description: string;
 }
 export interface INotificationTypeReq {
     key: string;
-    name: string;
     description: string;
     note: string;
 }

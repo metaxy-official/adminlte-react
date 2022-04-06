@@ -1,20 +1,44 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable prettier/prettier */
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Modal, Button, Input} from "antd";
+import {INotificationType, INotificationTypeReq} from "@app/utils/types";
 
 interface Props {
-  isModalVisible: boolean;
-  handleOk?: () => void;
+  isEditModal?: boolean;
+  isModalVisible?: boolean;
+  handleOk: (notify: INotificationTypeReq) => void;
   handleCancel?: () => void;
+  dataEdit?: INotificationType;
 }
-const CreateNotificationType = (props: Props) => {
-  const {isModalVisible, handleOk, handleCancel} = props;
+const CreateAndUpdateNotificationType = (props: Props) => {
+  const {isModalVisible, handleOk, handleCancel, isEditModal, dataEdit} = props;
 
+  const [notify, setNotify] = useState<any>();
+
+  useEffect(() => {
+    setNotify(dataEdit);
+  }, [dataEdit]);
+
+  const handleInput = (type: string, e: any) => {
+    const {value} = e.target;
+    setNotify({...notify, [type]: value});
+  };
+  const handleCreateNotify = () => {
+    if (!notify?.key || !notify?.description || !notify?.note) {
+      alert("Please fill data");
+    } else {
+      handleOk(notify);
+      setNotify({});
+    }
+  };
   return (
     <Modal
       className="modal-create-notification-type"
-      title="Tạo thể loại thông báo"
+      title={
+        isEditModal ? "Chỉnh sửa thể loại thông báo" : "Tạo thể loại thông báo"
+      }
       visible={isModalVisible}
       onCancel={handleCancel}
       footer={null}
@@ -25,27 +49,47 @@ const CreateNotificationType = (props: Props) => {
           <label htmlFor="notification-type">
             Thể loại thông báo <span>(*)</span>
           </label>
-          <Input id="notification-type" placeholder="Nhập thể loại thông báo" />
+          <Input
+            value={notify?.key || ""}
+            onChange={(e: any) => handleInput("key", e)}
+            id="notification-type"
+            placeholder="Nhập thể loại thông báo"
+          />
         </div>
         <div className="modal-create-notification-type__body--des">
           <label htmlFor="notification-des">Mô tả</label>
-          <Input id="notification-des" placeholder="Nhập mô tả" />
+          <Input
+            value={notify?.description || ""}
+            onChange={(e: any) => handleInput("description", e)}
+            id="notification-des"
+            placeholder="Nhập mô tả"
+          />
         </div>
         <div className="modal-create-notification-type__body--note">
           <label htmlFor="notification-note">Ghi chú</label>
-          <Input id="notification-note" placeholder="Nhập ghi chú" />
+          <Input
+            value={notify?.note || ""}
+            onChange={(e: any) => handleInput("note", e)}
+            id="notification-note"
+            placeholder="Nhập ghi chú"
+          />
         </div>
       </div>
       <div className="btn-control">
-        <Button onClick={handleCancel} className="mr-2">
+        <Button shape="round" onClick={handleCancel} className="mr-2">
           Huỷ
         </Button>
-        <Button onClick={handleOk} className="ml-2" type="primary">
-          Tạo thể loại
+        <Button
+          shape="round"
+          onClick={handleCreateNotify}
+          className="ml-2"
+          type="primary"
+        >
+          {isEditModal ? "Cập nhật" : "Tạo thể loại"}
         </Button>
       </div>
     </Modal>
   );
 };
 
-export default CreateNotificationType;
+export default CreateAndUpdateNotificationType;

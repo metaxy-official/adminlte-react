@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 /* eslint-disable react/jsx-no-bind */
 import React, {useEffect, useState} from "react";
 import {ContentHeader} from "@app/components";
@@ -24,10 +26,15 @@ const EditUser = () => {
     fullName: dataUser?.fullName,
     roles: dataUser?.roles,
     phoneNumber: dataUser?.phoneNumber,
-    note: dataUser?.note
+    note: dataUser?.note,
+    isActive: dataUser?.isActive
   };
   // func edit user
   const handleInputDataUser = (type: string, e: any) => {
+    if (type === "isActive") {
+      if (e === "1") return (userEdit[type] = true);
+      return (userEdit[type] = false);
+    }
     const {value} = e.target;
     userEdit[type] = value;
   };
@@ -117,9 +124,12 @@ const EditUser = () => {
             <p className="title">
               Trạng thái <span>(*)</span>
             </p>
-            <Select defaultValue="1">
+            <Select
+              onChange={(e) => handleInputDataUser("isActive", e)}
+              defaultValue={dataUser?.isActive ? "1" : "0"}
+            >
               <Option value="1">Đang hoạt động</Option>
-              <Option value="2">Không hoạt động</Option>
+              <Option value="0">Không hoạt động</Option>
             </Select>
           </div>
         </div>

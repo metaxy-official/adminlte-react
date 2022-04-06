@@ -49,10 +49,6 @@ const ManagerTypeUser = () => {
   const handleDeleteRoleUser = async () => {
     try {
       const data = await deleteRoleUser(idUser);
-      console.log(
-        "🚀 ~ file: index.tsx ~ line 52 ~ handleDeleteRoleUser ~ data",
-        data
-      );
       const dataRoles = await getRoles();
       dispatch(updateUserRoles(dataRoles));
       toast.success(`Xóa kiểu người ${data.name} dùng thành công!`);
@@ -73,7 +69,8 @@ const ManagerTypeUser = () => {
     },
     {
       title: "Người tạo",
-      dataIndex: "createdBy"
+      dataIndex: "createdBy",
+      render: (person: any) => <p>{person?.fullName}</p>
     },
     {
       title: "Ngày tạo",
@@ -88,14 +85,10 @@ const ManagerTypeUser = () => {
       )
     }
   ];
-  // state for modal delete type user
   const dataRoleUser = useSelector(
     (state: ApplicationRootState) => state.user.dataRoles
   );
-  // const dataOptionsRole: OptionRole[] = dataRoleUser.filter(item => item.id !== idUser).map((item: any) => ({
-  //   name: item.name,
-  //   value: item.id
-  // }));
+
   const dataOptionsRole: any = dataRoleUser.filter(
     (item) => item.id === idUser
   )[0]?.name;
