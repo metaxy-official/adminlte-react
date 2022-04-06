@@ -64,7 +64,7 @@ const BoxHistoryClaim = (props: DataInfoProps) => {
 
     const fakeDataInfoHero: Info[] =
         [
-            { name: 'Tổng giao dịch thực hiện:', value: '506 lần' },
+            { name: 'Tổng giao dịch thực hiện:', value: '5106 lần' },
             { name: 'Khối lượng giao dịch:', value: '1000 MXY' },
         ]
     return (

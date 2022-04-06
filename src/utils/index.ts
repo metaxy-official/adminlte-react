@@ -51,18 +51,21 @@ export const shortAddress = (address: string) => {
 
 // function manager list uses and roles
 export const getListUsers = async (
-    page: string = "1",
-    pageSize: string = "10",
-    sortBy: string = "createdAt%3Aasc"
+    page?: number,
+    pageSize?: number,
+    sortBy: string = "createdAt%3Aasc",
+    keyword?: string,
+
 ) => {
-    const url = `users/list?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`;
+    const url = `/users/list?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}&keyword=${keyword}`;
     try {
         const response = await axios.get(url);
-        return response.data.docs;
+        return response.data;
     } catch (error: any) {
         throw new Error(error.message);
     }
 };
+
 
 export const getUserById = async (id: string = "") => {
     const url = `users/${id}`;
@@ -149,9 +152,12 @@ export const getDataHeroes = async (
     address?: string,
     page?: number,
     pageSize?: number,
+    isSelling?: boolean,
+    characterIds?: number[],
+    rankIds?: number[],
     keyword?: string
 ) => {
-    const params: any = { page, pageSize, keyword }
+    const params: any = { page, pageSize, isSelling, characterIds, rankIds, keyword }
     const response = await axios.get(`/player/${address}/game/nfts`, { params })
     return response.data
 };
@@ -270,6 +276,18 @@ export const getNotifications = async (
 
 export const getDetailNotification = async (id: string) => {
     const url = `notifications/${id}`;
+    const response = await axios.get(url);
+    return response.data;
+};
+
+export const getNftCharacter = async () => {
+    const url = `/nfts/characters`;
+    const response = await axios.get(url);
+    return response.data;
+};
+
+export const getNftRRank = async () => {
+    const url = `/nfts/ranks`;
     const response = await axios.get(url);
     return response.data;
 };

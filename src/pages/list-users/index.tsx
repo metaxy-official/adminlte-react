@@ -30,9 +30,21 @@ const ListUser = () => {
   const [id, setId] = useState<string>("");
   const handleChangeId = (id: string = "") => setId(id);
   // const [textSearch, setTextSearch] = useState<string>();
-  const handleSearch = (value: String) => console.log(value);
-  // state for modal detail
+  const [searchItems, setSearchItems] = useState("");
   const [isShowModal, setIsShowModal] = useState<string>();
+  const [totalDocs, setTotalDocs] = useState<number>()
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(2);
+  const sortData = "createdAt%3Aasc"
+
+
+  const handleSearch = (value: String) => {
+    setSearchItems(value.trim());
+    setCurrentPage(1);
+  };
+
+
+
   const handleOpenModal = (value?: string) => {
     setIsShowModal(value);
   };
@@ -73,13 +85,15 @@ const ListUser = () => {
 
   const getDataUsers = async () => {
     setLoading(true);
-    const data = await getListUsers();
-    setDataUsers(data);
+    const data = await getListUsers(currentPage, pageSize, sortData, searchItems);
+    setDataUsers(data.docs);
     setLoading(false);
+    setPageSize(data?.limit);
+    setTotalDocs(data.totalDocs)
   };
   useEffect(() => {
     getDataUsers();
-  }, []);
+  }, [searchItems]);
 
   const listItem: ItemMoreOption[] = [
     {
@@ -206,6 +220,9 @@ const ListUser = () => {
               columns={columns}
               dataSelection
               loading={loading}
+              totalData={totalDocs}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         </div>

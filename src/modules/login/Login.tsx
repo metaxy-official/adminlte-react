@@ -26,9 +26,10 @@ const Login = () => {
     try {
       setAuthLoading(true);
       const response = await AuthService.login(email, password);
+      console.log("🚀 ~ file: Login.tsx ~ line 29 ~ login ~ response", response)
       toast.success('Login is succeed!');
       setAuthLoading(false);
-      dispatch(loginUser(response?.data.tokens.access.token));
+      dispatch(loginUser(response));
       navigate('/');
     } catch (error: any) {
       setAuthLoading(false);

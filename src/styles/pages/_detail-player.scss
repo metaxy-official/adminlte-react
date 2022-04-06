@@ -20,6 +20,36 @@
                     margin-left: 15px;
                 }
             }
+
+            .table-filter {
+                &__select {
+                    display: flex;
+
+                    .select__item {
+                        margin-right: 15px;
+                        width: 250px;
+
+                        .ant-select-multiple {
+                            width: 100% !important;
+                        }
+                    }
+
+                    .multi-item {
+                        .ant-select-selection-item {
+                            background: #2D7FF9;
+
+                            &-content {
+                                color: #FFFFFF;
+
+                            }
+
+                            &-remove {
+                                color: #FFFFFF;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

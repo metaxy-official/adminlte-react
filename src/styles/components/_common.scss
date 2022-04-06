@@ -16,6 +16,12 @@
             border-radius: 8px !important;
         }
 
+        .ant-input-group-addon {
+            &:last-child {
+                left: 0 !important;
+            }
+        }
+
         button {
             border-radius: 8px !important;
             background-color: #2d7ff9;

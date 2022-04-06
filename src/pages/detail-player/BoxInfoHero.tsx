@@ -1,9 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react'
 import BoxComponent, { Info } from '@app/components/boxComponent'
 import SearchBox from '@app/components/searchbox/SearchBox'
-import { DataDetailNft, DataNftPlayer, DataPlayer } from '@app/utils/types';
-import { getDataHeroes } from '@app/utils';
+import { DataDetailNft, DataNftCharacter, DataNftPlayer, DataPlayer, DataRankNft } from '@app/utils/types';
+import { getDataHeroes, getNftCharacter, getNftRRank } from '@app/utils';
 import TableCustom from '@app/components/table/Table';
 import { Select } from 'antd';
 
@@ -17,31 +18,61 @@ const BoxInfoHero = (props: DataInfoProps) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
     const [dataNft, setDataNft] = useState<DataNftPlayer[]>([]);
-    console.log("🚀 ~ file: BoxInfoHero.tsx ~ line 19 ~ BoxInfoHero ~ dataNft", dataNft)
     const [setSearchItems, setSetSearchItems] = useState<string>('')
     const [totalDocs, setTotalDocs] = useState<number>()
     const { Option } = Select;
+    const [dataNftCharacter, setDataNftCharacter] = useState<DataNftCharacter[]>([]);
+    const [dataRankNft, setDataRankNft] = useState<DataRankNft[]>([]);
+    const [isSelling, setIsSelling] = useState<boolean>()
+    const [characterSelected, setCharacterSelected] = useState<number[]>([])
+    const [rankSelected, setRankSelected] = useState<number[]>([])
 
     const onSearch = (value: string) => {
         setSetSearchItems(value.trim())
         setCurrentPage(1)
     }
 
-    function handleChange(value: string) {
-        console.log(`selected ${value}`);
+    function handleSelectCharacter(value: any) {
+        setCharacterSelected(value)
     }
+
+    function handleSelectRank(value: any) {
+        setRankSelected(value)
+    }
+
+    const handleChangeStatus = (value: boolean) => {
+        setIsSelling(value)
+    }
+
+
 
     const address = dataInfo?.address
 
     useEffect(() => {
         const getDataNft = async () => {
-            const data = await getDataHeroes(address, currentPage, pageSize, setSearchItems);
+            const data = await getDataHeroes(address, currentPage, pageSize, isSelling, characterSelected, rankSelected, setSearchItems);
             setDataNft(data?.docs)
             setPageSize(10)
             setTotalDocs(data?.totalDocs)
         }
         getDataNft()
-    }, [setSearchItems])
+    }, [isSelling, characterSelected, rankSelected, setSearchItems])
+
+    useEffect(() => {
+        const getCharacterNft = async () => {
+            const data = await getNftCharacter();
+            setDataNftCharacter(data)
+        }
+        getCharacterNft()
+    }, [])
+
+    useEffect(() => {
+        const getRankNft = async () => {
+            const data = await getNftRRank();
+            setDataRankNft(data)
+        }
+        getRankNft()
+    }, [])
 
     const dataSource = dataNft
 
@@ -176,15 +207,48 @@ const BoxInfoHero = (props: DataInfoProps) => {
                         <SearchBox placeholder="Nhập ID của hero " onSearch={onSearch} />
                     </div>
                     <div className="table-filter__select my-3">
-                        <Select
-                            defaultValue="Chọn nhân vật"
-                            style={{ width: 180 }}
-                            onChange={handleChange}
-                        >
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="Yiminghe">yiminghe</Option>
-                        </Select>
+                        <div className="select__item multi-item">
+                            <Select
+                                allowClear
+                                mode="multiple"
+                                placeholder="Chọn nhân vật"
+                                style={{ width: 180 }}
+                                onChange={handleSelectCharacter}
+                            >
+                                {dataNftCharacter.map((item) => (
+                                    <Option key={item?.characterId} value={item?.characterId} >
+                                        {item?.characterName}
+                                    </Option>
+                                ))}
+                            </Select>
+                        </div>
+                        <div className="select__item multi-item">
+                            <Select
+                                allowClear
+                                mode="multiple"
+                                placeholder="Chọn Rank nhân vật"
+                                style={{ width: 180 }}
+                                onChange={handleSelectRank}
+                            >
+                                {dataRankNft.map((item, index) => (
+                                    <Option key={index} value={item.rankId} >
+                                        {item.rankName}
+                                    </Option>
+                                ))}
+                            </Select>
+                        </div>
+                        <div className="select__item">
+                            <Select
+                                placeholder="Chọn trạng thái"
+                                style={{ width: 180 }}
+                                onChange={handleChangeStatus}
+                            >
+
+                                <Option value>Đang chơi</Option>
+                                <Option value={false}>Đang bán</Option>
+
+                            </Select>
+                        </div>
                     </div>
                     <div className="table-custom my-5">
                         <TableCustom
