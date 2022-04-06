@@ -8,16 +8,19 @@ import {Select} from "antd";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import BtnCreate from "@app/components/btnCreate";
 import {useEffect, useState} from "react";
-import {INotificationType} from "@app/utils/types";
+import {INotificationType, INotificationTypeReq} from "@app/utils/types";
 import {
+  createNewNotificationType,
   deleteNotificationType,
   formatTime,
   getDetailNotificationType,
-  getNotificationTypes
+  getNotificationTypes,
+  updateNotificationType
 } from "@app/utils";
 import DeleteUserModal from "@app/components/modal/DeleteUser";
 import DetailsNotify from "@app/components/modal/Details-notify";
 import {toast} from "react-toastify";
+import CreateAndUpdateNotificationType from "@app/components/modal/CreateNotificationType";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
 import deleteIcon from "../../../static/icon/delete.svg";
 
@@ -34,14 +37,48 @@ const ListTypeNotification = () => {
   const [idNotify, setIdNotify] = useState<string>("");
   // state for modal detail
   const [isShowModal, setIsShowModal] = useState<string>("");
+  const [isShowModalCreate, setIsShowModalCreate] = useState<boolean>();
+  const [isEditModal, setIsEditModal] = useState<boolean>();
   const handleOpenModal = (key: string) => {
     setIsShowModal(key);
   };
-  const handleOk = () => {
-    setIsShowModal("");
-  };
   const handleCancel = () => {
     setIsShowModal("");
+  };
+  // state for popup create notification or update notifications
+  const handleCloseModal = () => setIsShowModalCreate(false);
+  const showModalCreateNotify = (type: string) => {
+    if (type === "edit") {
+      setIsEditModal(true);
+    } else {
+      setIsEditModal(false);
+    }
+    handleCancel();
+    setIsShowModalCreate(true);
+  };
+  const createNotificationType = async (notify: INotificationTypeReq) => {
+    try {
+      const data = await createNewNotificationType(notify);
+      toast.success(`Tạo thể loại thông báo ${data.key} thành công`);
+      getDataNotify();
+      handleCancel();
+    } catch (error: any) {
+      toast.error("Tạo thể loại thông báo thất bại! Vui lòng thử lại");
+      handleCancel();
+    }
+    setIsShowModalCreate(false);
+  };
+  const handleUpdateNotificationType = async (notify: INotificationTypeReq) => {
+    try {
+      const data = await updateNotificationType(notify, idNotify);
+      toast.success(`Chỉnh sửa thể loại thông báo ${data?.key} thành công`);
+      getDataNotify();
+      handleCancel();
+    } catch (error: any) {
+      toast.error("Chỉnh sửa thể loại thông báo thất bại! Vui lòng thử lại");
+      handleCancel();
+    }
+    setIsShowModalCreate(false);
   };
 
   const setIdAndGetDetailNotificationType = async (id: string) => {
@@ -61,11 +98,11 @@ const ListTypeNotification = () => {
   const handleDeleteUser = async () => {
     try {
       const data = await deleteNotificationType(idNotify);
-      toast.success(`Xóa thể loại thông báo ${data.name} thành công`);
+      toast.success(`Xóa thể loại thông báo ${data?.key} thành công`);
       getDataNotify();
       handleCancel();
     } catch (error: any) {
-      toast.error("Tạo thể loại thông báo thất bại! Vui lòng thử lại");
+      toast.error("Xóa thể loại thông báo thất bại! Vui lòng thử lại");
       handleCancel();
     }
   };
@@ -86,12 +123,12 @@ const ListTypeNotification = () => {
   const columns = [
     {
       title: "Thể loại thông báo",
-      dataIndex: "name",
+      dataIndex: "key",
       render: (text: string) => <p>{text}</p>
     },
     {
       title: "Mô tả",
-      dataIndex: "name"
+      dataIndex: "description"
     },
     {
       title: "Ghi chú",
@@ -116,15 +153,15 @@ const ListTypeNotification = () => {
   const dataNoti: any[] = [
     {
       title: "Thể loại thông báo:",
-      value: detailNotificationType?.name
-    },
-    {
-      title: "Mô tả:",
-      value: detailNotificationType?.name
-    },
-    {
-      title: "Mô tả:",
       value: detailNotificationType?.key
+    },
+    {
+      title: "Mô tả:",
+      value: detailNotificationType?.description
+    },
+    {
+      title: "Ghi chú:",
+      value: detailNotificationType?.note
     },
     {
       title: "Thời gian tạo:",
@@ -138,7 +175,7 @@ const ListTypeNotification = () => {
       <ContentHeader title="Danh sách thể loại thông báo" />
       <DetailsNotify
         isModalVisible={isShowModal === "detail"}
-        handleOk={handleOk}
+        handleOk={() => showModalCreateNotify("edit")}
         handleCancel={handleCancel}
         namePopup="Chi tiết thể loại thông báo"
         data={dataNoti}
@@ -149,6 +186,15 @@ const ListTypeNotification = () => {
         isModalVisible={isShowModal === "delete"}
         handleOk={handleDeleteUser}
         handleCancel={handleCancel}
+      />
+      <CreateAndUpdateNotificationType
+        isEditModal={isEditModal}
+        isModalVisible={isShowModalCreate}
+        handleOk={
+          isEditModal ? handleUpdateNotificationType : createNotificationType
+        }
+        handleCancel={handleCloseModal}
+        dataEdit={detailNotificationType}
       />
       <section className="content">
         <div className="container-fluid">
@@ -165,7 +211,10 @@ const ListTypeNotification = () => {
               </Select>
             </div>
             <div>
-              <BtnCreate path="/" content="Tạo thể loại thông báo" />
+              <BtnCreate
+                onClick={() => showModalCreateNotify("create")}
+                content="Tạo thể loại thông báo"
+              />
             </div>
           </div>
           <div className="mt-2">

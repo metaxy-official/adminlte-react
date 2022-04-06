@@ -17,7 +17,7 @@ const initialState: AuthState = {
   user: localStorage.getItem('user'),
 
   currentUser: {
-    email: user?.user.email,
+    email: user?.user?.email,
     picture: null
   }
 };

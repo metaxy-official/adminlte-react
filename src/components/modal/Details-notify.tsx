@@ -29,10 +29,9 @@ const DetailsNotify = (props: propsDeleteModal) => {
       className="modal-detail-notify"
       title={namePopup}
       visible={isModalVisible}
-      onOk={handleOk}
-      onCancel={handleCancel}
       footer={null}
       width={550}
+      onCancel={handleCancel}
     >
       <div className="modal-detail-notify__header">
         <p>Thông tin cơ bản</p>
@@ -47,8 +46,10 @@ const DetailsNotify = (props: propsDeleteModal) => {
       </div>
       {isShowbtn && (
         <div className="btn-control">
-          <Button className="mr-2">Huỷ</Button>
-          <Button className="ml-2" type="primary">
+          <Button onClick={handleCancel} className="mr-2">
+            Huỷ
+          </Button>
+          <Button onClick={handleOk} className="ml-2" type="primary">
             Chỉnh sửa
           </Button>
         </div>

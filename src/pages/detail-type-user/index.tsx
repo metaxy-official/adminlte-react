@@ -4,7 +4,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-bind */
 import {ContentHeader} from "@app/components";
-import {getRoleUserById} from "@app/utils";
+import {formatTimeByDay, getRoleUserById} from "@app/utils";
 import {DataRoleUser} from "@app/utils/types";
 import {Button} from "antd";
 import React, {useEffect, useState} from "react";
@@ -15,10 +15,6 @@ function DetailTypeUser() {
   // get id user
   const {id} = useParams<string>();
   const [dataRoleUser, setDataRoleUser] = useState<DataRoleUser>();
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 18 ~ DetailTypeUser ~ dataRoleUser",
-    dataRoleUser
-  );
   const navigate = useNavigate();
   useEffect(() => {
     const getData = async () => {
@@ -50,7 +46,10 @@ function DetailTypeUser() {
           </div>
           <div className="infor-body-box">
             <p className="infor-body-box__title">Ngày tạo:</p>
-            <p className="infor-body-box__des">01/01/2022</p>
+            <p className="infor-body-box__des">
+              {dataRoleUser?.createdAt &&
+                formatTimeByDay(dataRoleUser.createdAt)}
+            </p>
           </div>
         </div>
       </div>
