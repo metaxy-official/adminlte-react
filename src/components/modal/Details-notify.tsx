@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable prettier/prettier */
 import React from "react";
 import {Modal, Button} from "antd";
@@ -37,8 +38,8 @@ const DetailsNotify = (props: propsDeleteModal) => {
         <p>Thông tin cơ bản</p>
       </div>
       <div className="modal-detail-notify__body">
-        {data.map((item) => (
-          <div className="modal-detail-notify__body--box">
+        {data.map((item, index) => (
+          <div key={index} className="modal-detail-notify__body--box">
             <p className="title">{item.title}</p>
             <p className="value">{item.value}</p>
           </div>

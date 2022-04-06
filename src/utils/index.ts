@@ -5,9 +5,9 @@ import { DateTime } from "luxon";
 import format from "date-fns/format";
 import {
     changePasswordProps,
-    IEditUser,
     IPermissionRoleUser,
     UserI
+    , IEditUser, INotificationTypeReq
 } from "./types";
 
 export const showTime = (time: Date | number) => {
@@ -291,3 +291,34 @@ export const getNftRRank = async () => {
     const response = await axios.get(url);
     return response.data;
 };
+export const getNotificationTypes = async (
+    page: string = "1",
+    pageSize: string = "10",
+    sortBy: string = "createdAt%3Aasc"
+) => {
+    const url = `notification-types?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`;
+    const response = await axios.get(url);
+    return response.data.docs;
+}
+export const getDetailNotificationType = async (id: string) => {
+    const url = `notification-types/${id}`;
+    const response = await axios.get(url);
+    return response.data;
+};
+export const deleteNotificationType = async (id: string) => {
+    const url = `notification-types/${id}`;
+    const response = await axios.delete(url);
+    return response.data;
+};
+export const createNewNotificationType = async (notificationType: INotificationTypeReq) => {
+    const url = `notification-types`;
+    const response = await axios.post(url, notificationType);
+    return response.data;
+};
+export const updateNotificationType = async (notificationType: INotificationTypeReq, id: string) => {
+    const url = `notification-types/${id}`;
+    const response = await axios.put(url, notificationType);
+    return response.data;
+};
+
+

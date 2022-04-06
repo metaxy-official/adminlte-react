@@ -15,6 +15,10 @@ function DetailTypeUser() {
   // get id user
   const {id} = useParams<string>();
   const [dataRoleUser, setDataRoleUser] = useState<DataRoleUser>();
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 18 ~ DetailTypeUser ~ dataRoleUser",
+    dataRoleUser
+  );
   const navigate = useNavigate();
   useEffect(() => {
     const getData = async () => {
