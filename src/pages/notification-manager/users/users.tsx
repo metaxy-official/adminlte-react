@@ -1,24 +1,24 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
-import {ContentHeader} from "@components";
+import { ContentHeader } from "@components";
 import TableCustom from "@app/components/table/Table";
 import SearchBox from "@app/components/searchbox/SearchBox";
-import {INotification, ITypeAction} from "@app/utils/types";
-import {Select, DatePicker} from "antd";
-import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
-import {useEffect, useState} from "react";
+import { INotification, ITypeAction } from "@app/utils/types";
+import { Select, DatePicker } from "antd";
+import ThreeDot, { ItemMoreOption } from "@app/components/btnThreeDot";
+import { useEffect, useState } from "react";
 import {
   formatTime,
   getDetailNotification,
   getNotifications,
   shortAddress
 } from "@app/utils";
-import DetailsNotify, {dataRow} from "@app/components/modal/Details-notify";
+import DetailsNotify, { dataRow } from "@app/components/modal/Details-notify";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
 
-const {Option} = Select;
-const {RangePicker} = DatePicker;
+const { Option } = Select;
+const { RangePicker } = DatePicker;
 const NotificationUsers = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
@@ -149,7 +149,10 @@ const NotificationUsers = () => {
         <div className="container-fluid">
           <div className="header-box">
             <div className="header-box__search">
-              <SearchBox placeholder="Nhập họ tên hoặc email của người dùng" />
+              <SearchBox
+                placeholder="Nhập họ tên hoặc email của người dùng"
+
+              />
             </div>
           </div>
           <div className="box-filter">
@@ -159,7 +162,7 @@ const NotificationUsers = () => {
             <div className="box-filter__left">
               <Select
                 placeholder="Nền tảng"
-                style={{width: 180, marginLeft: "20px"}}
+                style={{ width: 180, marginLeft: "20px" }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -170,7 +173,7 @@ const NotificationUsers = () => {
             <div className="box-filter__right">
               <Select
                 placeholder="Thể loại thông báo"
-                style={{width: 200}}
+                style={{ width: 200 }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>
@@ -181,7 +184,7 @@ const NotificationUsers = () => {
             <div className="box-filter__right">
               <Select
                 placeholder="Trạng thái"
-                style={{width: 120, marginLeft: "20px"}}
+                style={{ width: 120, marginLeft: "20px" }}
                 onChange={handleChange}
               >
                 <Option value="jack">Jack</Option>

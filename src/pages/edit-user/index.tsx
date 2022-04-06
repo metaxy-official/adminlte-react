@@ -1,34 +1,37 @@
 /* eslint-disable react/jsx-no-bind */
-import React, {useEffect, useState} from "react";
-import {ContentHeader} from "@app/components";
-import {Button, Input, Select, Spin} from "antd";
+import React, { useEffect, useState } from "react";
+import { ContentHeader } from "@app/components";
+import { Button, Input, Select, Spin } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import {useNavigate, useParams} from "react-router-dom";
-import {ApplicationRootState, DataUser, OptionRole} from "@app/utils/types";
-import {editNewUser, getUserById} from "@app/utils";
-import {useSelector} from "react-redux";
-import {toast} from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
+import { ApplicationRootState, DataUser, OptionRole } from "@app/utils/types";
+import { editNewUser, getUserById } from "@app/utils";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
-const {Option} = Select;
+const { Option } = Select;
 
 const EditUser = () => {
   const navigate = useNavigate();
   // get id user
-  const {id} = useParams<string>();
+  const { id } = useParams<string>();
   const [dataUser, setDataUser] = useState<DataUser>();
   const [loading, setLoading] = useState<boolean>(false);
   const dataRoleUser = useSelector(
     (state: ApplicationRootState) => state.user.dataRoles
   );
+  console.log("🚀 ~ file: index.tsx ~ line 23 ~ EditUser ~ dataRoleUser", dataRoleUser)
   const userEdit: any = {
     fullName: dataUser?.fullName,
     roles: dataUser?.roles,
     phoneNumber: dataUser?.phoneNumber,
     note: dataUser?.note
   };
+  console.log("🚀 ~ file: index.tsx ~ line 30 ~ EditUser ~ userEdit", userEdit)
+
   // func edit user
   const handleInputDataUser = (type: string, e: any) => {
-    const {value} = e.target;
+    const { value } = e.target;
     userEdit[type] = value;
   };
   // handle select for getRoles
@@ -101,7 +104,7 @@ const EditUser = () => {
             <Select
               mode="multiple"
               allowClear
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               placeholder="Please select roles"
               defaultValue={dataUser?.roles?.map((item: any) => item.id)}
               onChange={handleChangeSelect}

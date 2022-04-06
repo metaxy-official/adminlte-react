@@ -56,11 +56,8 @@ const interceptAuth = (config: AxiosRequestConfig) => {
         },
         (error) => {
             if (error.response.status === 401) {
-
                 localStorage.removeItem('token');
                 window.location.href = '/login';
-
-
             } else if (error.response.status === 400) {
                 if (error.response.data && error.response.data.code) {
                     switch (Number(error.response.data.code)) {

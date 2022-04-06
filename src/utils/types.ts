@@ -151,6 +151,19 @@ export interface DataNftPlayer {
     dataDetailNft: DataDetailNft[];
 }
 
+export interface DataNftCharacter {
+    characterId: number,
+    characterName: string,
+    imgCharacter: string,
+    id: string,
+}
+
+export interface DataRankNft {
+    imgRank: string,
+    rankId: number,
+    rankName: string,
+    id: string,
+}
 export interface DataDetailNft {
     evolveLevel: number;
     specialSkillLevel: number;
@@ -221,7 +234,6 @@ export interface OptionRole {
     name: string;
     value: string;
 }
-
 export interface ApplicationRootState {
     auth: AuthState;
     ui: UiState;
