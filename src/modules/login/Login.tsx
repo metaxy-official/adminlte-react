@@ -1,19 +1,19 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useFormik } from 'formik';
-import { loginUser } from '@store/reducers/auth';
-import { Checkbox, Button } from '@components';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import { setWindowClass } from '@app/utils/helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as Yup from 'yup';
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import {useFormik} from "formik";
+import {loginUser} from "@store/reducers/auth";
+import {Checkbox, Button} from "@components";
+import {faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
+import {setWindowClass} from "@app/utils/helpers";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import * as Yup from "yup";
 
-import { Form, InputGroup } from 'react-bootstrap';
-import MetaxyLogo from '../../static/images/logo_metaxy.svg';
-import * as AuthService from '../../services/auth';
+import {Form, InputGroup} from "react-bootstrap";
+import MetaxyLogo from "../../static/images/logo_metaxy.svg";
+import * as AuthService from "../../services/auth";
 
 const Login = () => {
   const [isAuthLoading, setAuthLoading] = useState(false);
@@ -26,34 +26,36 @@ const Login = () => {
     try {
       setAuthLoading(true);
       const response = await AuthService.login(email, password);
-      toast.success('Login is succeed!');
+      toast.success("Login is succeed!");
       setAuthLoading(false);
-      dispatch(loginUser(response?.data.tokens.access.token));
-      navigate('/');
+      dispatch(loginUser(response));
+      navigate("/");
     } catch (error: any) {
       setAuthLoading(false);
-      toast.error(error.message || 'Failed');
+      toast.error(error.message || "Failed");
     }
   };
 
-  const { handleChange, values, handleSubmit, touched, errors } = useFormik({
+  const {handleChange, values, handleSubmit, touched, errors} = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('Email của bạn không đúng định dạng. Vui lòng thử lại !').required('Vui lòng nhập email của bạn!'),
+      email: Yup.string()
+        .email("Email của bạn không đúng định dạng. Vui lòng thử lại !")
+        .required("Vui lòng nhập email của bạn!"),
       password: Yup.string()
-        .min(5, 'Must be 5 characters or more')
-        .max(30, 'Must be 30 characters or less')
-        .required('Vui lòng nhập mật khẩu của bạn!')
+        .min(5, "Must be 5 characters or more")
+        .max(30, "Must be 30 characters or less")
+        .required("Vui lòng nhập mật khẩu của bạn!")
     }),
     onSubmit: (values) => {
       login(values.email, values.password);
     }
   });
 
-  setWindowClass('hold-transition login-page');
+  setWindowClass("hold-transition login-page");
 
   return (
     <div className="login-box">
