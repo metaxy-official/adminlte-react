@@ -19,6 +19,10 @@ export const showTime = (time: Date | number) => {
     }
     return datetime?.toRelative();
 };
+export const isEmptyObject = (obj: any) => {
+    return JSON.stringify(obj) === '{}';
+}
+export const checkPermission = (arr: string[], permission: string) => Boolean(arr.find((x) => x === permission));
 
 export const toFormatTime = (time: Date | number, format: string) => {
     let datetime: any;
@@ -256,6 +260,7 @@ export const deleteRoleUser = async (idUser: string) => {
     return response.data;
 };
 
+// manage notifications
 export const getNotifications = async (
     page: string = "1",
     pageSize: string = "10",
@@ -302,5 +307,4 @@ export const updateNotificationType = async (notificationType: INotificationType
     const response = await axios.put(url, notificationType);
     return response.data;
 };
-
 

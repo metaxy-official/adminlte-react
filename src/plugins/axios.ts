@@ -36,7 +36,6 @@ const interceptAuth = (config: AxiosRequestConfig) => {
     const instance = axios.create(config);
     instance.interceptors.request.use(
         (config: any) => {
-
             const token = localStorage.getItem('token')
 
             if (token) {
@@ -58,6 +57,7 @@ const interceptAuth = (config: AxiosRequestConfig) => {
             if (error.response.status === 401) {
 
                 localStorage.removeItem('token');
+                localStorage.removeItem('user');
                 window.location.href = '/login';
 
 

@@ -9,8 +9,6 @@ export interface AuthState {
 }
 
 const user = JSON.parse(localStorage.getItem('user') || '{}');
-console.log("🚀 ~ file: auth.ts ~ line 12 ~ user", user)
-
 const initialState: AuthState = {
   isLoggedIn: !!localStorage.getItem('token'),
   token: localStorage.getItem('token'),
@@ -27,22 +25,24 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, { payload }) => {
-      localStorage.setItem('token', payload);
       state.isLoggedIn = true;
-      state.token = payload;
+      state.token = payload?.data.tokens.access.token;
+      state.currentUser = {
+        email: payload?.data.user.email,
+        picture: null
+      };
     },
     logoutUser: (state) => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       state.currentUser = {};
       state.isLoggedIn = false;
       state.token = null;
     },
-    loadUser: (state, { payload }) => {
-      state.currentUser = payload;
-    }
+
   }
 });
 
-export const { loginUser, logoutUser, loadUser } = authSlice.actions;
+export const { loginUser, logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;
