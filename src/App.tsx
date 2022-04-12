@@ -103,7 +103,7 @@ const App = () => {
               element={<NotificationInGame />}
             />
             <Route
-              path="/quan-li-thong-bao/trong-game/chi-tiet-thong-bao"
+              path="/quan-li-thong-bao/trong-game/chi-tiet-thong-bao/:id"
               element={<DetailNotificationInGame />}
             />
             <Route

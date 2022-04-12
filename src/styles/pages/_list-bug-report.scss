@@ -1,4 +1,8 @@
 .list-bug-report {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
     .box-filter {
         display: flex;
         align-items: center;

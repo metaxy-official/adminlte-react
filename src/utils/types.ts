@@ -60,16 +60,6 @@ export interface DataHeaderInfo1 {
     nation: string;
     role: string;
 }
-export interface DataNotificationInGame {
-    id: string;
-    title: string;
-    type: string;
-    to: string;
-    reporter: string;
-    note: string;
-    createdAt: string;
-    status: boolean;
-}
 
 export interface DataUser {
     email: string;
@@ -293,3 +283,29 @@ export interface INotificationTypeReq {
     description: string;
     note: string;
 }
+
+// notificationsCMS
+export interface IUser {
+    fullName: string;
+    id: string;
+}
+export interface INotificationCMS {
+    to: string;
+    title: string;
+    eventType: string;
+    description: string;
+    status: string | number;
+    createdBy: IUser;
+    createdAt: string;
+    updatedAt: string;
+    type: string;
+    id: string;
+}
+export interface INotificationReqCMS {
+    title: string;
+    eventType: string;
+    to: string[];
+    description: string;
+    note: string;
+    isDraft: boolean;
+} 

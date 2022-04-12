@@ -1,41 +1,67 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/alt-text */
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BoxComponent, {Info} from "@app/components/boxComponent";
 import EditBugReportModal from "@app/components/modal/EditBugReport";
+import {formatTime, getNotificationByIdCMS} from "@app/utils";
+import {INotificationCMS} from "@app/utils/types";
+import {useParams} from "react-router-dom";
 
 function DetailNotificationInGame() {
+  const {id} = useParams<string>();
+  const [dataNotificationsCMS, setDataNotificationsCMS] =
+    useState<INotificationCMS>();
+
+  useEffect(() => {
+    const getData = async () => {
+      if (!id) return;
+      const data = await getNotificationByIdCMS(id);
+      console.log(
+        "🚀 ~ file: details-notification.tsx ~ line 19 ~ getData ~ data",
+        data
+      );
+      setDataNotificationsCMS(data);
+    };
+    getData();
+  }, [id]);
   const dataInfo: Info[] = [
     {
       name: "Tiêu đề:",
-      value: "What’s new in Metaxy v1.0"
+      value: dataNotificationsCMS?.title
     },
     {
       name: "Thể loại:",
-      value: "Cập nhật"
+      value: dataNotificationsCMS?.eventType
     },
     {
       name: "Trạng thái:",
-      value: "Bản nháp"
+      value:
+        dataNotificationsCMS?.status === 0 ? (
+          <p style={{color: "#FCB06A", fontWeight: "bold"}}>Bản nháp</p>
+        ) : dataNotificationsCMS?.status === 1 ? (
+          <p style={{color: "#FFDC61", fontWeight: "bold"}}>Đang gửi</p>
+        ) : (
+          <p style={{color: "#93E088", fontWeight: "bold"}}>Đã gửi</p>
+        )
     },
     {
       name: "Ghi chú:",
-      value: "Chưa cập nhật"
+      value: dataNotificationsCMS?.description
     }
   ];
   const dataNotificationBasic: Info[] = [
     {
       name: "Người nhận:",
-      value: "Tất cả người chơi"
+      value: dataNotificationsCMS?.to
     },
     {
       name: "Nội dung:",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      value: dataNotificationsCMS?.description
     },
     {
       name: "Ngày đăng tải:",
-      value: "01/01/2022"
+      value: dataNotificationsCMS && formatTime(dataNotificationsCMS?.createdAt)
     }
   ];
   // status modal

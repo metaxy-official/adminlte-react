@@ -7,7 +7,7 @@ import {
     changePasswordProps,
     IPermissionRoleUser,
     UserI
-    , IEditUser, INotificationTypeReq
+    , IEditUser, INotificationTypeReq, INotificationReqCMS
 } from "./types";
 
 export const showTime = (time: Date | number) => {
@@ -308,3 +308,40 @@ export const updateNotificationType = async (notificationType: INotificationType
     return response.data;
 };
 
+// api CMS notifications
+export const getNotificationsCMS = async (
+    page: string = "1",
+    pageSize: string = "10",
+    fromDate: string = "2022-03-22T11%3A17%3A26.755Z",
+    toDate: string = "2022-03-23T11%3A17%3A26.762Z",
+    eventType: string = "",
+    status: string = "",
+    sortBy: string = "createdAt%3Aasc",
+    keyword: string = "",
+) => {
+    const url = `notifications-cms?page=${page}&pageSize=${pageSize}&fromDate=${fromDate}&toDate=${toDate}&sortBy=${sortBy}&eventType=${eventType}&status=${status}&keyword=${keyword}`;
+    const response = await axios.get(url);
+    return response.data.docs;
+}
+
+export const createNewNotificationCMS = async (notify: INotificationReqCMS) => {
+    const url = `notifications-cms`;
+    const response = await axios.post(url, notify);
+    return response.data;
+};
+
+export const getNotificationByIdCMS = async (idNotify: string) => {
+    const url = `notifications-cms/${idNotify}`;
+    const response = await axios.get(url);
+    return response.data;
+};
+export const updateNotificationCMS = async (idNotify: string, notify: INotificationReqCMS) => {
+    const url = `notifications-cms/${idNotify}`;
+    const response = await axios.put(url, notify);
+    return response.data;
+};
+export const deleteNotificationCMS = async (idNotify: string) => {
+    const url = `notifications-cms/${idNotify}`;
+    const response = await axios.delete(url);
+    return response.data;
+};
