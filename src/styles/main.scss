@@ -28,7 +28,17 @@ ul li {
     padding: 5px 10px;
     text-align: center;
 }
-
+.status-doing {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 13px;
+    color: #8e4604;
+    background: #fcb06a;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-align: center;
+}
 .status-not-active {
     font-style: normal;
     font-weight: bold;
@@ -46,8 +56,8 @@ ul li {
     font-weight: bold;
     font-size: 10px;
     line-height: 13px;
-    color: #7C330A;
-    background: #FF7875;
+    color: #7c330a;
+    background: #ff7875;
     border-radius: 20px;
     padding: 5px 10px;
     text-align: center;

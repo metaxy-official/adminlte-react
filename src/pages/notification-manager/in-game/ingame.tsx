@@ -1,13 +1,16 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-bind */
 import {ContentHeader} from "@components";
 import TableCustom from "@app/components/table/Table";
-import {DataNotificationInGame} from "@app/utils/types";
+import {INotificationReqCMS, IUser} from "@app/utils/types";
 import {DatePicker, Input, Select} from "antd";
 import ThreeDot, {ItemMoreOption} from "@app/components/btnThreeDot";
 import {useNavigate} from "react-router-dom";
 import BtnCreate from "@app/components/btnCreate";
+import {useEffect, useState} from "react";
+import {formatTimeByDay, getNotificationsCMS, shortAddress} from "@app/utils";
 import watchmoreIcon from "../../../static/icon/watch-more.svg";
 
 const {Option} = Select;
@@ -15,39 +18,23 @@ const NotificationInGame = () => {
   function handleChange(value: string) {
     console.log(`selected ${value}`);
   }
+  // state and functions for getID
+  const [id, setId] = useState<string>("");
+  const handleChangeId = (id: string = "") => setId(id);
 
-  const data: DataNotificationInGame[] = [
-    {
-      id: "1",
-      title: "Bản cập nhật mới",
-      type: "Cập Nhật",
-      to: "Tất cả",
-      reporter: "Ltrannn",
-      note: "",
-      createdAt: "13:00 - 01/01/2022",
-      status: true
-    },
-    {
-      id: "2",
-      title: "Bản cập nhật mới",
-      type: "Cập Nhật",
-      to: "Tất cả",
-      reporter: "Ltrannn",
-      note: "",
-      createdAt: "13:00 - 01/01/2022",
-      status: false
-    },
-    {
-      id: "3",
-      title: "Bản cập nhật mới",
-      type: "Cập Nhật",
-      to: "Tất cả",
-      reporter: "Ltrannn",
-      note: "",
-      createdAt: "13:00 - 01/01/2022",
-      status: true
-    }
-  ];
+  const [dataNotificationsCMS, setDataNotificationsCMS] =
+    useState<INotificationReqCMS[]>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getDataNotificationCMS = async () => {
+      setLoading(true);
+      const data = await getNotificationsCMS();
+      setDataNotificationsCMS(data);
+      setLoading(false);
+    };
+    getDataNotificationCMS();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -57,7 +44,7 @@ const NotificationInGame = () => {
       name: "Xem chi tiết",
       icon: watchmoreIcon,
       onClick: () => {
-        navigate("/quan-li-thong-bao/trong-game/chi-tiet-thong-bao");
+        navigate(`/quan-li-thong-bao/trong-game/chi-tiet-thong-bao/${id}`);
       }
     }
   ];
@@ -69,41 +56,48 @@ const NotificationInGame = () => {
     },
     {
       title: "Thể loại Thông báo",
-      dataIndex: "type"
+      dataIndex: "eventType"
     },
     {
       title: "Tới",
-      dataIndex: "to"
+      dataIndex: "to",
+      render: (to: string) => <p>{shortAddress(to[0])}</p>
     },
     {
       title: "Người đăng",
-      dataIndex: "reporter"
+      dataIndex: "createdBy",
+      render: (user: IUser) => <p>{user.fullName}</p>
     },
     {
       title: "Ghi chú",
-      dataIndex: "note"
+      dataIndex: "description"
     },
     {
       title: "Thời gian tạo",
-      dataIndex: "createdAt"
+      dataIndex: "createdAt",
+      render: (date: string) => formatTimeByDay(date)
     },
     {
       title: "Trạng thái",
       dataIndex: "status",
-      render: (status: boolean) => (
+      render: (status: number) => (
         <>
-          {status ? (
-            <div className="status-actived">Đã xử lí</div>
+          {status === 0 ? (
+            <div className="status-doing">Bản nháp</div>
+          ) : status === 2 ? (
+            <div className="status-actived">Đã gửi</div>
           ) : (
-            <div className="status-not-active">Chưa xử lí</div>
+            <div className="status-not-active">Đang gửi</div>
           )}
         </>
       )
     },
     {
       title: "",
-      dataIndex: "key",
-      render: () => <ThreeDot onChangeID={() => {}} listItem={listItem} />
+      dataIndex: "id",
+      render: (id: string) => (
+        <ThreeDot onChangeID={() => handleChangeId(id)} listItem={listItem} />
+      )
     }
   ];
   return (
@@ -152,7 +146,11 @@ const NotificationInGame = () => {
             </div>
           </div>
           <div className="mt-2">
-            <TableCustom data={data} columns={columns} />
+            <TableCustom
+              loading={loading}
+              data={dataNotificationsCMS}
+              columns={columns}
+            />
           </div>
         </div>
       </section>
