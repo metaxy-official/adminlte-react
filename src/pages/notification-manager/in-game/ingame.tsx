@@ -142,7 +142,7 @@ const NotificationInGame = () => {
               </div>
             </div>
             <div>
-              <BtnCreate path="/" content="Tạo thông báo" />
+              <BtnCreate path="/quan-li-thong-bao/tao-thong-bao" content="Tạo thông báo" />
             </div>
           </div>
           <div className="mt-2">

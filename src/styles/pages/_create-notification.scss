@@ -52,6 +52,9 @@
                     font-size: 16px;
                     line-height: 20px;
                     color: #404b50;
+                    span {
+                        color: red;
+                    }
                 }
             }
             &__note {

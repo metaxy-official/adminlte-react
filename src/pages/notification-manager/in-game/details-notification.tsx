@@ -17,10 +17,6 @@ function DetailNotificationInGame() {
     const getData = async () => {
       if (!id) return;
       const data = await getNotificationByIdCMS(id);
-      console.log(
-        "🚀 ~ file: details-notification.tsx ~ line 19 ~ getData ~ data",
-        data
-      );
       setDataNotificationsCMS(data);
     };
     getData();

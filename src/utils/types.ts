@@ -283,6 +283,12 @@ export interface INotificationTypeReq {
     description: string;
     note: string;
 }
+export interface IPlayer {
+    page?: number,
+    pageSize?: number,
+    sortBy?: string,
+    keyword?: string
+}
 
 // notificationsCMS
 export interface IUser {

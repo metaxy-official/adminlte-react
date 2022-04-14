@@ -27,11 +27,11 @@ import DetailPlayer from "./pages/detail-player";
 import CreateUser from "./pages/create-user";
 import ListBugReport from "./pages/list-bug-report";
 import BugDetailsReport from "./pages/bug-details-report";
-import NotificationInGame from "./pages/notification-manager/in-game/ingame";
+import NotificationInGameCMS from "./pages/notification-manager/in-game/ingame";
 import NotificationType from "./pages/notification-manager/list-type-notify/list-type";
 import NotificationUsers from "./pages/notification-manager/users/users";
 import CreateNotification from "./pages/create-notification";
-import DetailNotificationInGame from "./pages/notification-manager/in-game/details-notification";
+import DetailNotificationCMS from "./pages/notification-manager/in-game/details-notification";
 import DetailTypeUser from "./pages/detail-type-user";
 import EditProfile from "./pages/profile/EditProfile";
 
@@ -100,11 +100,11 @@ const App = () => {
             />
             <Route
               path="/quan-li-thong-bao/trong-game"
-              element={<NotificationInGame />}
+              element={<NotificationInGameCMS />}
             />
             <Route
               path="/quan-li-thong-bao/trong-game/chi-tiet-thong-bao/:id"
-              element={<DetailNotificationInGame />}
+              element={<DetailNotificationCMS />}
             />
             <Route
               path="/quan-li-thong-bao/the-loai"

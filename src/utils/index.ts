@@ -7,7 +7,7 @@ import {
     changePasswordProps,
     IPermissionRoleUser,
     UserI
-    , IEditUser, INotificationTypeReq, INotificationReqCMS
+    , IEditUser, INotificationTypeReq, INotificationReqCMS, IPlayer
 } from "./types";
 
 export const showTime = (time: Date | number) => {
@@ -107,15 +107,11 @@ export const getRoleUserById = async (id: string = "") => {
         throw new Error(error.message);
     }
 };
-export const getListPlayer = async (
-    page?: number,
-    pageSize?: number,
-    sortBy: string = "createdAt%3Aasc",
-    keyword?: string
-) => {
-    const url = `player?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}&keyword=${keyword}`;
+
+export const getListPlayer = async (player: IPlayer) => {
+    const url = `player`;
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, { params: player });
         return response.data;
     } catch (error: any) {
         throw new Error(error.message);
