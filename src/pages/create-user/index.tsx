@@ -52,7 +52,7 @@ function CreateUser() {
       toast.success(`Tạo người dùng ${user.fullName} thành công!`);
       return navigate(`/nguoi-dung/chi-tiet-nguoi-dung/${user.id}`);
     } catch (error: any) {
-      toast.error("Tạo người dùng thất bại!Vui lòng thử lại");
+      toast.error("Tạo người dùng thất bại! Vui lòng thử lại");
       throw new Error(error.message);
     }
   };

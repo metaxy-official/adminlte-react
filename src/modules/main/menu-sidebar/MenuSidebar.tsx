@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable prettier/prettier */
 import React from "react";
 import {useSelector} from "react-redux";
@@ -203,8 +204,8 @@ const MenuSidebar = () => {
             }${menuChildIndent ? " nav-child-indent" : ""}`}
             role="menu"
           >
-            {MENU.map((menuItem: IMenuItem) => (
-              <MenuItem key={menuItem.name} menuItem={menuItem} />
+            {MENU.map((menuItem: IMenuItem, index: any) => (
+              <MenuItem key={index} menuItem={menuItem} />
             ))}
           </ul>
         </nav>
