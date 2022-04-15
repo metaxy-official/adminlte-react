@@ -3,16 +3,14 @@
 
 import React, {useEffect, useState} from "react";
 import BoxComponent, {Info} from "@app/components/boxComponent";
-import EditBugReportModal from "@app/components/modal/EditBugReport";
 import {formatTime, getNotificationByIdCMS} from "@app/utils";
 import {INotificationCMS} from "@app/utils/types";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function DetailNotificationInGame() {
   const {id} = useParams<string>();
   const [dataNotificationsCMS, setDataNotificationsCMS] =
     useState<INotificationCMS>();
-
   useEffect(() => {
     const getData = async () => {
       if (!id) return;
@@ -60,19 +58,10 @@ function DetailNotificationInGame() {
       value: dataNotificationsCMS && formatTime(dataNotificationsCMS?.createdAt)
     }
   ];
-  // status modal
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const navigate = useNavigate();
   const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
+    navigate(`/quan-li-thong-bao/tao-thong-bao/${id}`);
   };
 
   return (
@@ -83,11 +72,6 @@ function DetailNotificationInGame() {
         listInfo={dataInfo}
       />
       <BoxComponent title="Thông tin cơ bản" listInfo={dataNotificationBasic} />
-      <EditBugReportModal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
     </div>
   );
 }

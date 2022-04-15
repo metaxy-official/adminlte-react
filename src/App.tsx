@@ -118,6 +118,10 @@ const App = () => {
               path="/quan-li-thong-bao/tao-thong-bao"
               element={<CreateNotification />}
             />
+            <Route
+              path="/quan-li-thong-bao/tao-thong-bao/:id"
+              element={<CreateNotification />}
+            />
             <Route path="/quan-li-bao-cao-loi" element={<ListBugReport />} />
             <Route
               path="/quan-li-bao-cao-loi/xem-chi-tiet"

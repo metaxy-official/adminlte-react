@@ -10,30 +10,42 @@ import {ContentHeader} from "@app/components";
 import {
   createNewNotificationCMS,
   getListPlayer,
-  shortAddress
+  getNotificationByIdCMS,
+  shortAddress,
+  updateNotificationCMS
 } from "@app/utils";
 import {INotificationReqCMS, IPlayer} from "@app/utils/types";
 import {Button, Input, Select} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 
 const {Option} = Select;
-
+const DEFAULT_VALUE = {
+  title: "",
+  eventType: "",
+  to: [],
+  description: "",
+  note: "",
+  isDraft: false
+};
 function CreateNotification() {
+  // get data notify detailNotificationType
+  // get id user
+  const {id} = useParams<string>();
+
   // handle get list players
   const [players, setPlayers] = useState<any[]>([]);
-  const [keyword, setKeyword] = useState<string>();
-  const req: IPlayer = {
+  const [request, setRequest] = useState<IPlayer>({
     page: 1,
     pageSize: 10,
     sortBy: "createdAt:asc",
     keyword: ""
-  };
+  });
 
   const getPlayers = async () => {
-    const response = await getListPlayer({...req, keyword});
+    const response = await getListPlayer(request);
     const data: any[] = await response.docs.map((item: any) => ({
       name: item.name,
       address: item.address
@@ -42,31 +54,37 @@ function CreateNotification() {
   };
   useEffect(() => {
     getPlayers();
-  }, [keyword]);
+  }, [request]);
   // end
 
   const navigate = useNavigate();
-  const [notify, setNotify] = useState<INotificationReqCMS>({
-    title: "",
-    eventType: "",
-    to: [],
-    description: "",
-    note: "",
-    isDraft: false
-  });
+  const [notify, setNotify] = useState<INotificationReqCMS>(DEFAULT_VALUE);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (!id) return;
+      const data = await getNotificationByIdCMS(id);
+      setNotify({
+        title: data.title,
+        eventType: data.eventType,
+        to: data.to,
+        description: data.description,
+        note: data.note,
+        isDraft: false
+      });
+    };
+    getData();
+  }, [id]);
+
   function handleInputTakers(value: any) {
     const address = value.map((item: string) => item.split(" ")[0]);
     setNotify({...notify, to: address});
   }
   const handleChangeKeyword = (value: string) => {
-    setKeyword(value);
+    setRequest({...request, keyword: value});
   };
   function handleInputType(value: any) {
     setNotify({...notify, eventType: value});
-  }
-  const children = [];
-  for (let i = 1; i < 10; i++) {
-    children.push();
   }
 
   const handleInput = (type: string, e: any) => {
@@ -86,18 +104,24 @@ function CreateNotification() {
       return alert("please fill the data!");
     }
     try {
-      const noti = await createNewNotificationCMS(notify);
-      toast.success(`Tạo thông báo ${noti?.title} thành công`);
+      const noti = id
+        ? await updateNotificationCMS(id, notify)
+        : await createNewNotificationCMS(notify);
+      toast.success(
+        `${id ? "Chỉnh sửa" : "Tạo"} thông báo ${noti?.title} thành công`
+      );
       return navigate(`/quan-li-thong-bao/trong-game`);
     } catch (error: any) {
-      toast.error("Tạo thông báo thất bại! Vui lòng thử lại");
+      toast.error(
+        `${id ? "Chỉnh sửa" : "Tạo"} thông báo thất bại! Vui lòng thử lại`
+      );
       throw new Error(error.message);
     }
   };
 
   return (
     <div className="container-create-notification">
-      <ContentHeader title="Tạo thông báo" />
+      <ContentHeader title={id ? "Chỉnh sửa thông báo" : "Tạo thông báo"} />
       <section className="content">
         <div className="form">
           <div className="form__title">
@@ -105,6 +129,7 @@ function CreateNotification() {
               Tiêu đề <span>(*)</span>
             </label>
             <Input
+              value={notify.title}
               onChange={(e: any) => handleInput("title", e)}
               id="notification-title"
               placeholder="Nhập tiêu đề"
@@ -116,7 +141,7 @@ function CreateNotification() {
             </label>
             <Select
               id="notification-type"
-              defaultValue=""
+              value={notify.eventType}
               placeholder="Chọn thạng thái"
               onChange={handleInputType}
             >
@@ -135,6 +160,7 @@ function CreateNotification() {
             allowClear
             id="notification-takers"
             style={{width: "100%"}}
+            value={notify.to}
             placeholder="Nhập tên trong game hoặc địa chỉ ví của người chơi"
             onSearch={handleChangeKeyword}
             onChange={handleInputTakers}
@@ -152,6 +178,7 @@ function CreateNotification() {
             Nội dung <span>(*)</span>
           </label>
           <TextArea
+            value={notify.description}
             onChange={(e: any) => handleInput("description", e)}
             id="notification-content"
             rows={3}
@@ -161,6 +188,7 @@ function CreateNotification() {
         <div className="notification__note">
           <label htmlFor="notification-note">Ghi chú</label>
           <TextArea
+            value={notify.note}
             onChange={(e: any) => handleInput("note", e)}
             id="notification-note"
             rows={3}
@@ -185,7 +213,7 @@ function CreateNotification() {
             shape="round"
             type="primary"
           >
-            Tạo thông báo
+            {id ? "Chỉnh sửa thông báo" : "Tạo thông báo"}
           </Button>
         </div>
       </section>
