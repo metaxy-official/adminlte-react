@@ -306,6 +306,7 @@ export interface INotificationCMS {
     updatedAt: string;
     type: string;
     id: string;
+    note: string;
 }
 export interface INotificationReqCMS {
     title: string;
