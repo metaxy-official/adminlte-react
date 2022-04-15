@@ -127,7 +127,6 @@ const App = () => {
               path="/quan-li-bao-cao-loi/xem-chi-tiet"
               element={<BugDetailsReport />}
             />
-            <Route path="/" element={<ManagerUser />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/chinh-sua-ca-nhan" element={<EditProfile />} />
           </Route>

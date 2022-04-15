@@ -12,8 +12,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import * as Yup from "yup";
 
 import {Form, InputGroup} from "react-bootstrap";
+import {checkPermission, getDataProfile} from "@app/utils";
+import {PermissionI} from "@app/utils/types";
 import MetaxyLogo from "../../static/images/logo_metaxy.svg";
 import * as AuthService from "../../services/auth";
+import {MENU} from "../main/menu-sidebar/MenuSidebar";
 
 const Login = () => {
   const [isAuthLoading, setAuthLoading] = useState(false);
@@ -26,10 +29,30 @@ const Login = () => {
     try {
       setAuthLoading(true);
       const response = await AuthService.login(email, password);
+      console.log(
+        "🚀 ~ file: Login.tsx ~ line 29 ~ login ~ response",
+        response
+      );
       toast.success("Login is succeed!");
       setAuthLoading(false);
       dispatch(loginUser(response));
-      navigate("/");
+      // check permissions
+      // eslint-disable-next-line no-debugger
+      const data: any = await getDataProfile();
+      const dataPer: PermissionI[] = data?.roles
+        .map((item: any) => item.permissions)
+        .flat(2);
+      const arrPer = Array.from(new Set(dataPer)).map((item) => item.feature);
+      const menu = MENU.find((item: any) =>
+        checkPermission(arrPer, item.permission)
+      );
+      if (!menu || (!menu.path && !menu.children.length)) {
+        navigate("/");
+      } else if (menu.path) {
+        navigate(menu.path);
+      } else {
+        navigate(menu.children[0].path);
+      }
     } catch (error: any) {
       setAuthLoading(false);
       toast.error(error.message || "Failed");

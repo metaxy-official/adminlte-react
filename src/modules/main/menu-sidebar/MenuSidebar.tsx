@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable prettier/prettier */
 import React from "react";
 import {useSelector} from "react-redux";
@@ -22,7 +21,109 @@ export interface IMenuItem {
   logo?: React.ReactNode;
   children?: Array<IMenuItem>;
 }
+export const MENU: any = [
+  {
+    permission: permissions.USER_MANAGEMENT_FEATURE,
+    name: "Quản lí người dùng",
+    logo: <i className="nav-icon fas fa-users" />,
+    children: [
+      {
+        name: "Người dùng",
+        logo: <i className="ml-3 fas fa-user" />,
+        path: "/nguoi-dung"
+      },
 
+      {
+        name: "Kiểu người dùng",
+        logo: <i className="ml-3 fas fa-users" />,
+        path: "/kieu-nguoi-dung"
+      }
+    ]
+  },
+  {
+    permission: permissions.PLAYER_MANAGEMENT_FEATURE,
+    name: "Quản lí người chơi",
+    logo: <i className="nav-icon fas fa-users" />,
+    children: [
+      {
+        name: "Người chơi",
+        logo: <i className="ml-3 fas fa-user" />,
+        path: "/nguoi-choi"
+      },
+
+      {
+        name: "Nghi vấn vi phạm",
+        logo: <i className="ml-3 fas fa-exclamation-triangle" />,
+        path: "/Nghi-van-vi-pham"
+      }
+    ]
+  },
+  {
+    permission: permissions.GAME_MANAGEMENT_FEATURE,
+    name: "Quản lí thông tin game",
+    logo: <i className="nav-icon fas fa-wrench" />,
+    children: [
+      {
+        name: "Vật phẩm trong game",
+        logo: <img src={ItemIcon} alt="icon-notification" className="ml-3" />,
+        path: "/gameinfo-manager-sub1"
+      },
+
+      {
+        name: "Rank",
+        logo: <img src={Rank} alt="icon-notification" className="ml-3" />,
+        path: "/gameinfo-manager-sub2"
+      },
+      {
+        name: "Level Story",
+        logo: (
+          <img src={DeveloperBoard} alt="icon-notification" className="ml-3" />
+        ),
+        path: "/gameinfo-manager-sub3"
+      },
+      {
+        name: "Hero",
+        logo: <img src={User} alt="icon-notification" className="ml-3" />,
+        path: "/gameinfo-manager-sub4"
+      }
+    ]
+  },
+  {
+    permission: permissions.NOTIFICATION_MANAGEMENT_FEATURE,
+    name: "Quản lí thông báo",
+    logo: <i className="nav-icon fas fa-envelope" />,
+    children: [
+      {
+        name: "Thông báo trong game",
+        logo: (
+          <img src={NotiIngameIcon} alt="icon-notification" className="ml-3" />
+        ),
+        path: "/quan-li-thong-bao/trong-game"
+      },
+
+      {
+        name: "Thể loại thông báo",
+        logo: (
+          <img src={NotiTypeIcon} alt="icon-notification" className="ml-3" />
+        ),
+        path: "/quan-li-thong-bao/the-loai"
+      },
+      {
+        name: "Thông báo người chơi",
+        logo: (
+          <img src={NotiUserIcon} alt="icon-notification" className="ml-3" />
+        ),
+        path: "/quan-li-thong-bao/nguoi-choi"
+      }
+    ]
+  },
+  {
+    permission: permissions.BUG_REPORT_MANAGEMENT_FEATURE,
+    name: "Quản lí báo cáo lỗi",
+    logo: <img src={BugIcon} alt="icon-bug" className="mx-1" />,
+    path: "/quan-li-bao-cao-loi"
+  }
+];
 const MenuSidebar = () => {
   const user = useSelector(
     (state: ApplicationRootState) => state.auth.currentUser
@@ -40,138 +141,9 @@ const MenuSidebar = () => {
     (state: ApplicationRootState) => state.ui.menuChildIndent
   );
 
-  // check permissions
-  const managerUser = checkPermission(
-    arrPer,
-    permissions.USER_MANAGEMENT_FEATURE
-  )
-    ? {
-        name: "Quản lí người dùng",
-        logo: <i className="nav-icon fas fa-users" />,
-        children: [
-          {
-            name: "Người dùng",
-            logo: <i className="ml-3 fas fa-user" />,
-            path: "/nguoi-dung"
-          },
-
-          {
-            name: "Kiểu người dùng",
-            logo: <i className="ml-3 fas fa-users" />,
-            path: "/kieu-nguoi-dung"
-          }
-        ]
-      }
-    : {};
-  const MENU: any = [
-    // {
-    //   name: "Quản lí người dùng",
-    //   logo: <i className="nav-icon fas fa-users" />,
-    //   children: [
-    //     {
-    //       name: "Người dùng",
-    //       logo: <i className="ml-3 fas fa-user" />,
-    //       path: "/nguoi-dung"
-    //     },
-
-    //     {
-    //       name: "Kiểu người dùng",
-    //       logo: <i className="ml-3 fas fa-users" />,
-    //       path: "/kieu-nguoi-dung"
-    //     }
-    //   ]
-    // },
-    managerUser,
-    {
-      name: "Quản lí người chơi",
-      logo: <i className="nav-icon fas fa-users" />,
-      children: [
-        {
-          name: "Người chơi",
-          logo: <i className="ml-3 fas fa-user" />,
-          path: "/nguoi-choi"
-        },
-
-        {
-          name: "Nghi vấn vi phạm",
-          logo: <i className="ml-3 fas fa-exclamation-triangle" />,
-          path: "/Nghi-van-vi-pham"
-        }
-      ]
-    },
-    {
-      name: "Quản lí thông tin game",
-      logo: <i className="nav-icon fas fa-wrench" />,
-      children: [
-        {
-          name: "Vật phẩm trong game",
-          logo: <img src={ItemIcon} alt="icon-notification" className="ml-3" />,
-          path: "/gameinfo-manager-sub1"
-        },
-
-        {
-          name: "Rank",
-          logo: <img src={Rank} alt="icon-notification" className="ml-3" />,
-          path: "/gameinfo-manager-sub2"
-        },
-        {
-          name: "Level Story",
-          logo: (
-            <img
-              src={DeveloperBoard}
-              alt="icon-notification"
-              className="ml-3"
-            />
-          ),
-          path: "/gameinfo-manager-sub3"
-        },
-        {
-          name: "Hero",
-          logo: <img src={User} alt="icon-notification" className="ml-3" />,
-          path: "/gameinfo-manager-sub4"
-        }
-      ]
-    },
-    {
-      name: "Quản lí thông báo",
-      logo: <i className="nav-icon fas fa-envelope" />,
-      path: "/quan-li-thong-bao",
-      children: [
-        {
-          name: "Thông báo trong game",
-          logo: (
-            <img
-              src={NotiIngameIcon}
-              alt="icon-notification"
-              className="ml-3"
-            />
-          ),
-          path: "/quan-li-thong-bao/trong-game"
-        },
-
-        {
-          name: "Thể loại thông báo",
-          logo: (
-            <img src={NotiTypeIcon} alt="icon-notification" className="ml-3" />
-          ),
-          path: "/quan-li-thong-bao/the-loai"
-        },
-        {
-          name: "Thông báo người chơi",
-          logo: (
-            <img src={NotiUserIcon} alt="icon-notification" className="ml-3" />
-          ),
-          path: "/quan-li-thong-bao/nguoi-choi"
-        }
-      ]
-    },
-    {
-      name: "Quản lí báo cáo lỗi",
-      logo: <img src={BugIcon} alt="icon-bug" className="mx-1" />,
-      path: "/quan-li-bao-cao-loi"
-    }
-  ];
-
+  const menu = MENU.filter((item: any) =>
+    checkPermission(arrPer, item.permission)
+  );
   return (
     <aside className={`main-sidebar elevation-4 ${sidebarSkin}`}>
       <Link to="/" className="brand-link">
@@ -204,8 +176,8 @@ const MenuSidebar = () => {
             }${menuChildIndent ? " nav-child-indent" : ""}`}
             role="menu"
           >
-            {MENU.map((menuItem: IMenuItem, index: any) => (
-              <MenuItem key={index} menuItem={menuItem} />
+            {menu.map((menuItem: IMenuItem) => (
+              <MenuItem key={menuItem.name} menuItem={menuItem} />
             ))}
           </ul>
         </nav>

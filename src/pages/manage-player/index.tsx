@@ -21,7 +21,7 @@ const ManagePlayer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [totalDocs, setTotalDocs] = useState<number>();
-  const filterSort = "createdAt%3Aasc";
+  const filterSort = "createdAt:asc";
 
   const handleOpenModal = (value?: string) => {
     setIsShowModal(value);
