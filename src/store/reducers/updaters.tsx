@@ -28,13 +28,12 @@ export default function Updater(): null {
         const arrPer = Array.from(new Set(dataPer)).map((item) => item.feature);
         dispatch(updateDataProfile(arrPer));
         // check call api
-        if (currentUser.email) {
-          const dataPermission = await getPermissions();
-          dispatch(updatePermissions(dataPermission));
-        }
-
         if (checkPermission(arrPer, permissions.USER_MANAGEMENT_FEATURE)) {
-          const dataRoles = await getRoles();
+          const [dataPermission, dataRoles] = await Promise.all([
+            getPermissions(),
+            getRoles()
+          ]);
+          dispatch(updatePermissions(dataPermission));
           dispatch(updateUserRoles(dataRoles));
         }
       }
